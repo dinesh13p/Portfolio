@@ -1,0 +1,113 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #3a3a3a;
+    color: white;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff3c3c;
+    font-size: 2.5rem;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  nav ul li:hover {
+    color: #ff3c3c;
+  }
+  
+  /* Hamburger icon hidden by default */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 33px;
+  }
+  
+  /* Media query to handle dropdown visibility */
+  @media screen and (max-width: 800px) {
+    nav ul {
+      display: none;
+      /* Hide the default navbar */
+    }
+  
+    .hamburger {
+      display: block;
+      /* Show the hamburger icon */
+    }
+  
+    nav ul.open {
+      display: flex;
+      /* Show the dropdown when the hamburger is clicked */
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 30px;
+      background-color: #444;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  
+    nav ul.open li {
+      margin-left: 0;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  nav ul.open li {
+    width: 100%;
+  }
+  
+  nav ul.open li a {
+    display: block;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    color: white;
+    text-decoration: none;
+  }
+  
+  nav ul.open li a:hover {
+    background-color: #ff3c3c; 
+    color: white;
+    border-radius: 5px;
+  }
+  
+
+
+
+
+
+  nav ul.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000; /* Ensures it's above everything */
+    width: 200px;
+  }
+  
