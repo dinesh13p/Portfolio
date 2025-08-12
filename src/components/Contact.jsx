@@ -40,7 +40,7 @@ export default function Contact() {
 
       <div className="mt-6 text-gray-300">
         <p>Email: <a className="text-brand" href="mailto:dineshp4297501@gmail.com">dineshp4297501@gmail.com</a></p>
-        <p className="mt-2">Location: Nepal</p>
+        <p className="mt-2">Location: Butwal, Nepal</p>
       </div>
     </section>
   )

@@ -22,13 +22,13 @@ export default function Header() {
   return (
     <header className={`fixed w-full z-30 transition-colors ${scrolled ? 'backdrop-blur bg-black/60' : 'bg-transparent'}`}>
       <div className="container flex items-center justify-between py-4">
-        <a href="#home" className="text-2xl font-extrabold text-brand">Dinesh<span className="text-site-light">.</span></a>
+        <a href="#home" className="text-2xl font-extrabold text-brand">dinesh2004.com.np</a>
 
         <nav className="hidden md:flex items-center gap-6">
           {NAV.map((n) => (
             <a key={n.id} href={`#${n.id}`} className="hover:text-brand transition">{n.label}</a>
           ))}
-          <a className="ml-4 inline-block px-4 py-2 rounded-full bg-brand text-white font-medium" href="#contact">Contact</a>
+          {/* <a className="ml-4 inline-block px-4 py-2 rounded-full bg-brand text-white font-medium" href="#contact">Contact</a> */}
         </nav>
 
         <button className="md:hidden p-2" onClick={() => setOpen((s) => !s)} aria-label="Toggle menu">

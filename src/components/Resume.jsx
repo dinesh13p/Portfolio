@@ -6,14 +6,14 @@ export default function Resume() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold">Resume</h2>
-          <p className="mt-2 text-gray-300">Download a PDF or view a quick summary below.</p>
+          <p className="mt-2 text-gray-300">Download the PDF.</p>
         </div>
         <div>
-          <a href="/resume.pdf" className="px-4 py-2 bg-brand rounded-full text-white">Download PDF</a>
+          <a href="src/assets/resume.pdf" className="px-4 py-2 bg-brand rounded-full text-white">Download PDF</a>
         </div>
       </div>
 
-      <div className="mt-6 grid md:grid-cols-2 gap-6">
+      {/* <div className="mt-6 grid md:grid-cols-2 gap-6">
         <div className="p-4 bg-site-mid rounded">
           <h4 className="font-semibold">Education</h4>
           <p className="text-gray-300 mt-2">BCA — Tribhuvan University, Nepathya College</p>
@@ -26,7 +26,7 @@ export default function Resume() {
             <li>Portfolio website (this project)</li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }

@@ -12,7 +12,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.12 }} className="mt-4 text-lg md:text-xl max-w-xl">
-            Full-Stack developer — I build responsive web apps using <strong>React</strong>, <strong>Node.js</strong>, and modern tools. Currently learning more advanced backend and system design.
+            I try to build responsive web apps using <strong>React</strong>, and modern tools. I am currently pursuing advanced studies in backend development and system design, with an emphasis on Java and Spring Boot.
           </motion.p>
 
           <div className="mt-6 flex gap-4">
@@ -20,12 +20,12 @@ export default function Hero() {
             <a href="#contact" className="px-5 py-3 rounded-full border border-gray-600">Contact Me</a>
           </div>
 
-          <div className="mt-6 flex gap-4 flex-wrap text-sm text-gray-300">
+          {/* <div className="mt-6 flex gap-4 flex-wrap text-sm text-gray-300">
             <span className="px-3 py-1 rounded bg-white/5">React</span>
             <span className="px-3 py-1 rounded bg-white/5">JavaScript</span>
             <span className="px-3 py-1 rounded bg-white/5">Node.js</span>
             <span className="px-3 py-1 rounded bg-white/5">Tailwind</span>
-          </div>
+          </div> */}
         </div>
 
         <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.12 }} className="flex justify-center">
