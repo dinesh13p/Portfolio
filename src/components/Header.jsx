@@ -37,7 +37,7 @@ export default function Header() {
       </div>
 
       {/* mobile menu */}
-      {open && (
+      {/* {open && (
         <div className="md:hidden bg-site-mid/90 backdrop-blur-sm">
           <div className="container py-4 flex flex-col gap-3">
             {NAV.map((n) => (
@@ -46,7 +46,7 @@ export default function Header() {
             <a href="#contact" className="mt-2 inline-block px-4 py-2 rounded-full bg-brand text-white">Contact</a>
           </div>
         </div>
-      )}
+      )} */}
     </header>
   )
 }

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Portfolio/",  // <-- change this from "/" to "/Portfolio/"
+  base: "/",  // Changed from "/Portfolio/" to "/" for custom domain
   resolve: {
     extensions: ['.js', '.jsx'],
   },
