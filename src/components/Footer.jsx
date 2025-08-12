@@ -1,32 +1,17 @@
-import React from 'react';
-import './Footer.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faFacebook, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import React from 'react'
+import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 
-const Footer = () => {
+export default function Footer(){
   return (
-    <footer className="footer" id="more">
-      <div className="footer-content">
-        <div className="footer-socials">
-          <a href="https://www.instagram.com/_d_nesh_/" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faInstagram} /> Instagram
-          </a>
-          <a href="https://www.facebook.com/dinesh.poudel.319452" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faFacebook} /> Facebook
-          </a>
-          <a href="https://github.com/dinesh13p" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faGithub} /> GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/dinesh-poudel-3a4b10331/" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
-          </a>
+    <footer className="bg-site-mid py-8 mt-12">
+      <div className="container flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="text-sm text-gray-300">© {new Date().getFullYear()} Dinesh Poudel — Built with React + Tailwind</div>
+        <div className="flex gap-4">
+          <a href="https://github.com/dinesh13p" target="_blank" rel="noreferrer" aria-label="Github"><FaGithub /></a>
+          <a href="https://www.linkedin.com/in/dinesh-poudel-3a4b10331/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="https://www.instagram.com/_d_nesh_/" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
         </div>
-        <br/>
-        <p className="footer-text2">-- This is a frontend-only website with no backend integration at the moment. --</p>
-        <p className="footer-text1">2025</p>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
+  )
+}
