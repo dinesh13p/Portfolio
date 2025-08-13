@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function Resume() {
   const handleDownload = () => {
-    // Try to download, fallback to opening in new tab if download fails
+    // Create download link for PDF in public folder
     const link = document.createElement('a')
-    link.href = '/src/assets/resume.pdf'
+    link.href = '/resume.pdf'  // ✅ Correct path for public folder
     link.download = 'Dinesh_Poudel_Resume.pdf'
     document.body.appendChild(link)
     link.click()
@@ -25,8 +25,9 @@ export default function Resume() {
           >
             Download PDF
           </button>
+          {/* ✅ Correct path for public folder */}
           <a 
-            href="/src/assets/resume.pdf" 
+            href="/resume.pdf"
             target="_blank" 
             rel="noopener noreferrer"
             className="px-4 py-2 border border-gray-600 rounded-full hover:border-brand transition"
