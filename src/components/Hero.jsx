@@ -54,7 +54,7 @@ export default function Hero() {
         >
           <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/10">
             <img 
-              src="/src/assets/Profile.jpg" 
+              src="/src/assets/profile.jpg" 
               alt="Dinesh Poudel" 
               className="object-cover w-full h-full"
               onError={(e) => {
