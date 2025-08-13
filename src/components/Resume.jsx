@@ -4,7 +4,7 @@ export default function Resume() {
   const handleDownload = () => {
     // Try to download, fallback to opening in new tab if download fails
     const link = document.createElement('a')
-    link.href = '/resume.pdf'
+    link.href = '/src/assets/resume.pdf'
     link.download = 'Dinesh_Poudel_Resume.pdf'
     document.body.appendChild(link)
     link.click()
@@ -26,7 +26,7 @@ export default function Resume() {
             Download PDF
           </button>
           <a 
-            href="/resume.pdf" 
+            href="/src/assets/resume.pdf" 
             target="_blank" 
             rel="noopener noreferrer"
             className="px-4 py-2 border border-gray-600 rounded-full hover:border-brand transition"
