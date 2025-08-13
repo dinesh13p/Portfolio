@@ -14,13 +14,55 @@ body {
 }
 
 /* Simple utility for container centering used across components */
-.container { max-width: var(--container); margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+.container { 
+  max-width: var(--container); 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding-left: 1rem; 
+  padding-right: 1rem; 
+}
 
-/* accessibility focus ring */
-:focus { outline: 3px solid rgba(255,60,60,0.25); outline-offset: 2px; }
+/* Enhanced accessibility focus ring */
+:focus { 
+  outline: 3px solid rgba(255,60,60,0.5); 
+  outline-offset: 2px; 
+}
+
+/* Better focus for buttons and links */
+button:focus, a:focus {
+  outline: 2px solid rgba(255,60,60,0.8);
+  outline-offset: 2px;
+}
 
 /* minor image styling */
-img { display: block; max-width: 100%; }
+img { 
+  display: block; 
+  max-width: 100%; 
+  height: auto;
+}
 
 /* smooth scroll for anchor links */
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+}
+
+/* Add smooth transitions globally */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Loading state styles */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Better form input styles */
+input, textarea {
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 60, 60, 0.15);
+}

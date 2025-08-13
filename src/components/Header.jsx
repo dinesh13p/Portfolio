@@ -28,7 +28,6 @@ export default function Header() {
           {NAV.map((n) => (
             <a key={n.id} href={`#${n.id}`} className="hover:text-brand transition">{n.label}</a>
           ))}
-          {/* <a className="ml-4 inline-block px-4 py-2 rounded-full bg-brand text-white font-medium" href="#contact">Contact</a> */}
         </nav>
 
         <button className="md:hidden p-2" onClick={() => setOpen((s) => !s)} aria-label="Toggle menu">
@@ -36,17 +35,23 @@ export default function Header() {
         </button>
       </div>
 
-      {/* mobile menu */}
-      {/* {open && (
+      {/* Mobile menu - Fixed and uncommented */}
+      {open && (
         <div className="md:hidden bg-site-mid/90 backdrop-blur-sm">
           <div className="container py-4 flex flex-col gap-3">
             {NAV.map((n) => (
-              <a key={n.id} href={`#${n.id}`} onClick={() => setOpen(false)} className="block py-2">{n.label}</a>
+              <a 
+                key={n.id} 
+                href={`#${n.id}`} 
+                onClick={() => setOpen(false)} 
+                className="block py-2 hover:text-brand transition"
+              >
+                {n.label}
+              </a>
             ))}
-            <a href="#contact" className="mt-2 inline-block px-4 py-2 rounded-full bg-brand text-white">Contact</a>
           </div>
         </div>
-      )} */}
+      )}
     </header>
   )
 }
