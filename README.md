@@ -1,1 +1,1 @@
-## This Website is made by Dinesh Poudel.
+## This Website is entirely desined and developed by Dinesh Poudel.

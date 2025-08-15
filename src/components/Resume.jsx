@@ -12,11 +12,11 @@ export default function Resume() {
   }
 
   return (
-    <section id="resume">
-      <div className="flex items-center justify-between flex-wrap gap-4">
+    <section id="resume" className="bg-site-mid py-4 mt-12">
+      <div className="container flex items-center justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-3xl font-bold">Resume</h2>
-          <p className="mt-2 text-gray-300">Download my resume to learn more about my experience.</p>
+          <p className="mt-2 text-gray-300">View or Download my resume to learn more about me.</p>
         </div>
         <div className="flex gap-3">
           <button 

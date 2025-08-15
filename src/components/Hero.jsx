@@ -24,7 +24,7 @@ export default function Hero() {
             className="mt-4 text-lg md:text-xl max-w-xl text-gray-300"
           >
             I build responsive web applications using <strong className="text-white">React</strong> and modern tools. 
-            Currently pursuing advanced studies in backend development and system design, with emphasis on Java and Spring Boot.
+            Currently pursuing studies in backend development and system design, with emphasis on Java and Spring Boot.
           </motion.p>
 
           <motion.div 

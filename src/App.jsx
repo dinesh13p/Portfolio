@@ -23,9 +23,11 @@ export default function App() {
           <Projects />
         </div>
 
-        <div className="container py-16">
-          <Resume />
-        </div>
+        <section className="bg-site-mid">
+          <div className="container py-16">
+            <Resume />
+          </div>
+        </section>
 
         <div className="container py-16">
           <Contact />
