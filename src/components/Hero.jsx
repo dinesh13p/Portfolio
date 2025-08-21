@@ -14,8 +14,7 @@ const NetworkBackground = () => {
     let animationFrameId
     let particles = []
     let mouse = { x: 0, y: 0, isMoving: false }
-    // NEW: zones that temporarily boost the normal white-line connection radius
-    let clickZones = []  // { x, y, age, maxAge, radius, boost }
+    let clickZones = []
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
@@ -34,7 +33,10 @@ const NetworkBackground = () => {
           vy: (Math.random() - 0.5) * 1.2,
           originalVx: (Math.random() - 0.5) * 1.2,
           originalVy: (Math.random() - 0.5) * 1.2,
-          radius: Math.random() * 2 + 1
+          radius: Math.random() * 2 + 1,
+          // Add properties to track if particle needs repositioning
+          isActive: true,
+          repositionTimer: 0
         })
       }
     }
@@ -42,8 +44,8 @@ const NetworkBackground = () => {
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // --- Normal moving connections (unchanged look) ---
-      const BASE_R = 120 // original connection radius
+      // Normal moving connections
+      const BASE_R = 120
       ctx.lineWidth = 1
 
       for (let i = 0; i < particles.length; i++) {
@@ -60,8 +62,7 @@ const NetworkBackground = () => {
             alphaBase = ((BASE_R - dist) / BASE_R) * 0.4
           }
 
-          // Extra alpha contributed by any active click zone nearby
-          // This makes lines appear "like normal ones" but only around clicks, and they fade out.
+          // Extra alpha from click zones
           let alphaBoost = 0
           for (let z = 0; z < clickZones.length; z++) {
             const zone = clickZones[z]
@@ -69,10 +70,9 @@ const NetworkBackground = () => {
             const d1 = Math.hypot(p1.x - zx, p1.y - zy)
             const d2 = Math.hypot(p2.x - zx, p2.y - zy)
 
-            // Only affect pairs that are inside the zone's influence
             if (Math.min(d1, d2) <= zone.radius) {
-              const life = 1 - zone.age / zone.maxAge // 1 -> 0 as it ages (fade)
-              const effectiveR = BASE_R + zone.boost * life // temporarily larger radius
+              const life = 1 - zone.age / zone.maxAge
+              const effectiveR = BASE_R + zone.boost * life
               if (dist < effectiveR) {
                 const localAlpha = ((effectiveR - dist) / effectiveR) * 0.4 * life
                 if (localAlpha > alphaBoost) alphaBoost = localAlpha
@@ -91,7 +91,7 @@ const NetworkBackground = () => {
         }
       }
 
-      // Mouse connections (kept as-is)
+      // Mouse connections
       if (mouse.isMoving) {
         for (let particle of particles) {
           const dx = particle.x - mouse.x
@@ -110,18 +110,20 @@ const NetworkBackground = () => {
         }
       }
 
-      // Draw particles (unchanged)
+      // Draw particles
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'
       for (let particle of particles) {
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
-        ctx.fill()
+        if (particle.isActive) {
+          ctx.beginPath()
+          ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
+          ctx.fill()
+        }
       }
     }
 
     const updateParticles = () => {
       for (let particle of particles) {
-        // Mouse magnetic effect (unchanged)
+        // Mouse magnetic effect
         if (mouse.isMoving) {
           const dx = mouse.x - particle.x
           const dy = mouse.y - particle.y
@@ -138,26 +140,82 @@ const NetworkBackground = () => {
         particle.x += particle.vx
         particle.y += particle.vy
         
-        // Boundary collisions
-        if (particle.x < 0 || particle.x > canvas.width) {
-          particle.vx *= -0.8
-          particle.x = Math.max(0, Math.min(canvas.width, particle.x))
+        // Improved boundary handling - wrap around instead of bouncing
+        const margin = 50 // Buffer zone around edges
+        
+        if (particle.x < -margin) {
+          particle.x = canvas.width + margin
+          particle.vx = Math.abs(particle.vx) * -0.5 // Slow down when wrapping
+        } else if (particle.x > canvas.width + margin) {
+          particle.x = -margin
+          particle.vx = Math.abs(particle.vx) * 0.5
         }
-        if (particle.y < 0 || particle.y > canvas.height) {
-          particle.vy *= -0.8
-          particle.y = Math.max(0, Math.min(canvas.height, particle.y))
+        
+        if (particle.y < -margin) {
+          particle.y = canvas.height + margin
+          particle.vy = Math.abs(particle.vy) * -0.5
+        } else if (particle.y > canvas.height + margin) {
+          particle.y = -margin
+          particle.vy = Math.abs(particle.vy) * 0.5
         }
 
-        // Damping - gradually return to original velocity
-        particle.vx = particle.vx * 0.99 + particle.originalVx * 0.01
-        particle.vy = particle.vy * 0.99 + particle.originalVy * 0.01
+        // Gentle velocity restoration instead of harsh damping
+        const dampening = 0.995 // Very gentle damping
+        const restoration = 0.005 // Gentle restoration to original velocity
+        
+        particle.vx = particle.vx * dampening + particle.originalVx * restoration
+        particle.vy = particle.vy * dampening + particle.originalVy * restoration
+
+        // Occasionally give particles a small random boost to prevent stagnation
+        if (Math.random() < 0.001) {
+          particle.vx += (Math.random() - 0.5) * 0.3
+          particle.vy += (Math.random() - 0.5) * 0.3
+        }
+
+        // Check if particle has been inactive (stuck at edges) for too long
+        const isNearEdge = particle.x < 100 || particle.x > canvas.width - 100 || 
+                          particle.y < 100 || particle.y > canvas.height - 100
+        
+        if (isNearEdge) {
+          particle.repositionTimer++
+          if (particle.repositionTimer > 300) { // 5 seconds at 60fps
+            // Reposition particle towards center with new velocity
+            particle.x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6
+            particle.y = canvas.height * 0.2 + Math.random() * canvas.height * 0.6
+            particle.vx = (Math.random() - 0.5) * 1.2
+            particle.vy = (Math.random() - 0.5) * 1.2
+            particle.originalVx = particle.vx
+            particle.originalVy = particle.vy
+            particle.repositionTimer = 0
+          }
+        } else {
+          particle.repositionTimer = Math.max(0, particle.repositionTimer - 1)
+        }
       }
 
-      // Age out click zones (this controls fade-out of extra lines)
+      // Age out click zones
       clickZones = clickZones.filter(zone => {
         zone.age++
         return zone.age < zone.maxAge
       })
+
+      // Periodically add new particles if count is low
+      const minParticles = Math.floor((canvas.width * canvas.height) / 15000)
+      if (particles.length < minParticles) {
+        for (let i = particles.length; i < minParticles; i++) {
+          particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: (Math.random() - 0.5) * 1.2,
+            originalVx: (Math.random() - 0.5) * 1.2,
+            originalVy: (Math.random() - 0.5) * 1.2,
+            radius: Math.random() * 2 + 1,
+            isActive: true,
+            repositionTimer: 0
+          })
+        }
+      }
     }
 
     const handleMouseMove = (e) => {
@@ -172,21 +230,18 @@ const NetworkBackground = () => {
       }, 100)
     }
 
-    // CLICK now: add a fading influence zone (NO red starburst, NO permanent lines)
     const handleClick = (e) => {
       const rect = canvas.getBoundingClientRect()
       const clickX = e.clientX - rect.left
       const clickY = e.clientY - rect.top
 
-      // Each click spawns a zone where the normal white-line radius is boosted,
-      // so you see *the same* white lines appear there, then fade away.
       clickZones.push({
         x: clickX,
         y: clickY,
         age: 0,
-        maxAge: 180,  // ~3 seconds at 60fps; increase for longer
-        radius: 220,  // area around click affected
-        boost: 140    // how much to expand the connection radius temporarily
+        maxAge: 180,
+        radius: 220,
+        boost: 140
       })
     }
 
