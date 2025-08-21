@@ -2,6 +2,11 @@
   "name": "dinesh-portfolio",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://dinesh2004.com.np",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dinesh13p/Portfolio.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
