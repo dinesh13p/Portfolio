@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 export default function Resume() {
   const handleDownload = () => {
@@ -12,16 +13,22 @@ export default function Resume() {
   }
 
   return (
-    <section id="resume" className="bg-site-mid py-4 mt-12">
-      <div className="container flex items-center justify-between flex-wrap gap-4">
-        <div>
-          <h2 className="text-3xl font-bold">Resume</h2>
-          <p className="mt-2 text-gray-300">View or Download my resume to learn more about me.</p>
-        </div>
-        <div className="flex gap-3">
+    <div className="container py-8 flex items-center justify-center min-h-full">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
+      >
+        <h2 className="text-3xl font-bold">Resume</h2>
+        <p className="mt-4 text-gray-300 max-w-lg mx-auto">
+          View or Download my resume to learn more about my experience, education, and skills.
+        </p>
+        
+        <div className="mt-8 flex gap-4 justify-center">
           <button 
             onClick={handleDownload}
-            className="px-4 py-2 bg-brand rounded-full text-white hover:bg-brand-dark transition"
+            className="px-6 py-3 bg-brand rounded-full text-white hover:bg-brand-dark transition font-semibold"
           >
             Download PDF
           </button>
@@ -30,12 +37,12 @@ export default function Resume() {
             href="/resume.pdf"
             target="_blank" 
             rel="noopener noreferrer"
-            className="px-4 py-2 border border-gray-600 rounded-full hover:border-brand transition"
+            className="px-6 py-3 border border-gray-600 rounded-full hover:border-brand transition font-semibold"
           >
             View Online
           </a>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   )
 }
