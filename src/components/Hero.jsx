@@ -34,7 +34,6 @@ const NetworkBackground = () => {
           originalVx: (Math.random() - 0.5) * 1.2,
           originalVy: (Math.random() - 0.5) * 1.2,
           radius: Math.random() * 2 + 1,
-          // Add properties to track if particle needs repositioning
           isActive: true,
           repositionTimer: 0
         })
@@ -44,7 +43,6 @@ const NetworkBackground = () => {
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      // Normal moving connections
       const BASE_R = 120
       ctx.lineWidth = 1
 
@@ -56,13 +54,11 @@ const NetworkBackground = () => {
           const dy = p1.y - p2.y
           const dist = Math.sqrt(dx * dx + dy * dy)
 
-          // Base alpha using the original rule
           let alphaBase = 0
           if (dist < BASE_R) {
             alphaBase = ((BASE_R - dist) / BASE_R) * 0.4
           }
 
-          // Extra alpha from click zones
           let alphaBoost = 0
           for (let z = 0; z < clickZones.length; z++) {
             const zone = clickZones[z]
@@ -91,7 +87,6 @@ const NetworkBackground = () => {
         }
       }
 
-      // Mouse connections
       if (mouse.isMoving) {
         for (let particle of particles) {
           const dx = particle.x - mouse.x
@@ -110,7 +105,6 @@ const NetworkBackground = () => {
         }
       }
 
-      // Draw particles
       ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'
       for (let particle of particles) {
         if (particle.isActive) {
@@ -123,7 +117,6 @@ const NetworkBackground = () => {
 
     const updateParticles = () => {
       for (let particle of particles) {
-        // Mouse magnetic effect
         if (mouse.isMoving) {
           const dx = mouse.x - particle.x
           const dy = mouse.y - particle.y
@@ -136,16 +129,14 @@ const NetworkBackground = () => {
           }
         }
 
-        // Apply velocity
         particle.x += particle.vx
         particle.y += particle.vy
         
-        // Improved boundary handling - wrap around instead of bouncing
-        const margin = 50 // Buffer zone around edges
+        const margin = 50
         
         if (particle.x < -margin) {
           particle.x = canvas.width + margin
-          particle.vx = Math.abs(particle.vx) * -0.5 // Slow down when wrapping
+          particle.vx = Math.abs(particle.vx) * -0.5
         } else if (particle.x > canvas.width + margin) {
           particle.x = -margin
           particle.vx = Math.abs(particle.vx) * 0.5
@@ -159,27 +150,23 @@ const NetworkBackground = () => {
           particle.vy = Math.abs(particle.vy) * 0.5
         }
 
-        // Gentle velocity restoration instead of harsh damping
-        const dampening = 0.995 // Very gentle damping
-        const restoration = 0.005 // Gentle restoration to original velocity
+        const dampening = 0.995
+        const restoration = 0.005
         
         particle.vx = particle.vx * dampening + particle.originalVx * restoration
         particle.vy = particle.vy * dampening + particle.originalVy * restoration
 
-        // Occasionally give particles a small random boost to prevent stagnation
         if (Math.random() < 0.001) {
           particle.vx += (Math.random() - 0.5) * 0.3
           particle.vy += (Math.random() - 0.5) * 0.3
         }
 
-        // Check if particle has been inactive (stuck at edges) for too long
         const isNearEdge = particle.x < 100 || particle.x > canvas.width - 100 || 
                           particle.y < 100 || particle.y > canvas.height - 100
         
         if (isNearEdge) {
           particle.repositionTimer++
-          if (particle.repositionTimer > 300) { // 5 seconds at 60fps
-            // Reposition particle towards center with new velocity
+          if (particle.repositionTimer > 300) {
             particle.x = canvas.width * 0.2 + Math.random() * canvas.width * 0.6
             particle.y = canvas.height * 0.2 + Math.random() * canvas.height * 0.6
             particle.vx = (Math.random() - 0.5) * 1.2
@@ -193,13 +180,11 @@ const NetworkBackground = () => {
         }
       }
 
-      // Age out click zones
       clickZones = clickZones.filter(zone => {
         zone.age++
         return zone.age < zone.maxAge
       })
 
-      // Periodically add new particles if count is low
       const minParticles = Math.floor((canvas.width * canvas.height) / 15000)
       if (particles.length < minParticles) {
         for (let i = particles.length; i < minParticles; i++) {
@@ -285,14 +270,16 @@ const NetworkBackground = () => {
 export default function Hero({ setActiveTab }) {
   return (
     <div className="relative flex items-center justify-center min-h-full overflow-hidden">
-      {/* Animated Network Background */}
       <div className="absolute inset-0 z-0">
         <NetworkBackground />
       </div>
       
-      {/* Content */}
       <div className="relative z-10 container grid md:grid-cols-2 gap-8 items-center">
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <motion.h1 
             initial={{ y: 20, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
@@ -318,28 +305,36 @@ export default function Hero({ setActiveTab }) {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="mt-6 flex gap-4"
           >
-            <button 
+            <motion.button 
               onClick={() => setActiveTab('projects')}
-              className="px-5 py-3 rounded-full bg-brand text-white font-semibold hover:bg-brand-dark transition"
+              className="px-5 py-3 rounded-full btn-primary text-white font-semibold"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               View My Work
-            </button>
-            <button 
+            </motion.button>
+            <motion.button 
               onClick={() => setActiveTab('contact')}
-              className="px-5 py-3 rounded-full border border-gray-600 hover:border-brand transition"
+              className="px-5 py-3 rounded-full btn-secondary"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
               Contact Me
-            </button>
+            </motion.button>
           </motion.div>
-        </div>
+        </motion.div>
 
         <motion.div 
-          initial={{ scale: 0.95, opacity: 0 }} 
-          animate={{ scale: 1, opacity: 1 }} 
-          transition={{ delay: 0.3, duration: 0.6 }} 
+          initial={{ scale: 0.8, opacity: 0, x: 50 }} 
+          animate={{ scale: 1, opacity: 1, x: 0 }} 
+          transition={{ delay: 0.3, duration: 0.8 }} 
           className="flex justify-center"
         >
-          <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10 relative z-10">
+          <motion.div 
+            className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10 relative z-10"
+            whileHover={{ scale: 1.05, borderColor: 'rgba(255, 60, 60, 0.3)' }}
+            transition={{ duration: 0.3 }}
+          >
             <img 
               src={profileImage} 
               alt="Dinesh Poudel" 
@@ -349,7 +344,7 @@ export default function Hero({ setActiveTab }) {
                 console.log('Profile image failed to load, using placeholder')
               }}
             />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </div>

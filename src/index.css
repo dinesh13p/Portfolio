@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,9 +47,9 @@ html {
   scroll-behavior: smooth; 
 }
 
-/* Add smooth transitions globally */
+/* Enhanced smooth transitions globally */
 * {
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
 }
 
 /* Loading state styles */
@@ -59,10 +60,90 @@ html {
 
 /* Better form input styles */
 input, textarea {
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 input:focus, textarea:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 60, 60, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 60, 60, 0.15);
+}
+
+/* Enhanced skill card styles */
+.skill-card {
+  background: linear-gradient(135deg, rgba(31, 31, 31, 0.8) 0%, rgba(17, 17, 17, 0.9) 100%);
+  border: 1px solid rgba(255, 60, 60, 0.1);
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 60, 60, 0.4);
+  box-shadow: 0 20px 40px rgba(255, 60, 60, 0.2);
+}
+
+/* Project card enhancements */
+.project-card {
+  background: linear-gradient(145deg, rgba(31, 31, 31, 0.6) 0%, rgba(17, 17, 17, 0.8) 100%);
+  border: 1px solid rgba(255, 60, 60, 0.1);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 60, 60, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 60, 60, 0.1);
+}
+
+/* Enhanced button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #ff3c3c 0%, #e33636 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #e33636 0%, #cc2b2b 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 60, 60, 0.4);
+}
+
+.btn-secondary {
+  border: 2px solid rgba(255, 60, 60, 0.5);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: #ff3c3c;
+  background: rgba(255, 60, 60, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 60, 60, 0.2);
+}
+
+/* Navbar blur effect */
+.navbar-blur {
+  backdrop-filter: blur(20px);
+  background: rgba(17, 17, 17, 0.9);
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, #111111 0%, #1f1f1f 50%, #0a0a0a 100%);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(31, 31, 31, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 60, 60, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 60, 60, 0.8);
 }

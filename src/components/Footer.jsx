@@ -1,27 +1,67 @@
 import React from 'react'
-
-import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { motion } from 'framer-motion'
+import { FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa'
 
 export default function Footer(){
+  const socialLinks = [
+    { icon: FaGithub, url: 'https://github.com/dinesh13p', name: 'Github' },
+    { icon: FaLinkedin, url: 'https://www.linkedin.com/in/dinesh-poudel-3a4b10331/', name: 'LinkedIn' },
+    { icon: FaInstagram, url: 'https://www.instagram.com/_d_nesh_/', name: 'Instagram' },
+    { icon: FaTwitter, url: 'https://x.com/Dinesh2061', name: 'X (formerly Twitter)' },
+    { icon: FaFacebook, url: 'https://www.facebook.com/dinesh.poudel.319452', name: 'Facebook' }
+  ]
+
   return (
-    <footer className="fixed bottom-0 w-full backdrop-blur bg-black/60 py-6 border-t border-gray-800 z-20">
+    <motion.footer 
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="fixed bottom-0 w-full backdrop-blur bg-black/60 py-6 border-t border-gray-800 z-20"
+    >
       <div className="container flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-sm text-gray-300">© {new Date().getFullYear()} Dinesh Poudel</div>
-        <div className="flex gap-6">
-          <a href="https://github.com/dinesh13p" target="_blank" rel="noopener noreferrer" aria-label="Github">
-            <FaGithub className="text-2xl hover:text-brand transition" />
-          </a>
-          <a href="https://www.linkedin.com/in/dinesh-poudel-3a4b10331/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedin className="text-2xl hover:text-brand transition" />
-          </a>
-          <a href="https://www.instagram.com/_d_nesh_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FaInstagram className="text-2xl hover:text-brand transition" />
-          </a>
-          <a href="https://x.com/Dinesh2061" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)">
-            <FaTwitter className="text-2xl hover:text-brand transition" />
-          </a>
-        </div>
+        <motion.div 
+          className="text-sm text-gray-300"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          © {new Date().getFullYear()} Dinesh Poudel
+        </motion.div>
+        <motion.div 
+          className="flex gap-6"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          {socialLinks.map((social, index) => (
+            <motion.a 
+              key={social.name}
+              href={social.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label={social.name}
+              className="text-2xl hover:text-brand transition-all duration-300"
+              initial={{ opacity: 0, y: 20, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: index * 0.1 + 0.6, 
+                duration: 0.5,
+                type: "spring",
+                stiffness: 150
+              }}
+              whileHover={{ 
+                scale: 1.2, 
+                y: -3,
+                color: '#ff3c3c',
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <social.icon />
+            </motion.a>
+          ))}
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
