@@ -16,11 +16,15 @@ export default function Footer(){
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="fixed bottom-0 w-full backdrop-blur bg-black/60 py-6 border-t border-gray-800 z-20"
+      className="fixed bottom-0 w-full backdrop-blur bg-black/60 border-t border-gray-800 z-20"
+      style={{ 
+        paddingTop: 'clamp(12px, 3vh, 24px)', 
+        paddingBottom: 'clamp(12px, 3vh, 24px)' 
+      }}
     >
-      <div className="container flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="container flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6">
         <motion.div 
-          className="text-sm text-gray-300"
+          className="text-xs sm:text-sm text-gray-300"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -28,7 +32,7 @@ export default function Footer(){
           © {new Date().getFullYear()} Dinesh Poudel
         </motion.div>
         <motion.div 
-          className="flex gap-6"
+          className="flex gap-4 md:gap-6"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -40,7 +44,7 @@ export default function Footer(){
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label={social.name}
-              className="text-2xl hover:text-brand transition-all duration-300"
+              className="text-xl sm:text-2xl hover:text-brand transition-all duration-300"
               initial={{ opacity: 0, y: 20, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
@@ -50,8 +54,8 @@ export default function Footer(){
                 stiffness: 150
               }}
               whileHover={{ 
-                scale: 1.2, 
-                y: -3,
+                scale: window.innerWidth <= 768 ? 1.1 : 1.2, 
+                y: window.innerWidth <= 768 ? -1 : -3,
                 color: '#ff3c3c',
                 transition: { duration: 0.2 }
               }}

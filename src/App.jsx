@@ -29,25 +29,54 @@ export default function App() {
   }
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-site-dark text-site-light">
+    <div className="min-h-screen flex bg-site-dark text-site-light">
+      {/* Vertical Sidebar for Desktop / Top Header for Mobile */}
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      <main className="flex-1 pt-20 pb-20 overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="h-full"
-          >
-            {renderContent()}
-          </motion.div>
-        </AnimatePresence>
+      {/* Main Content */}
+      <main className="flex-1 lg:ml-80 lg:overflow-hidden">
+        {/* Mobile: Account for top header height and include Footer */}
+        <div className="lg:hidden h-screen flex flex-col overflow-hidden" style={{ 
+          paddingTop: 'clamp(64px, 15vh, 80px)', 
+          paddingBottom: 'clamp(64px, 12vh, 80px)' 
+        }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="h-full"
+            >
+              {renderContent()}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Footer only for mobile */}
+          <Footer />
+        </div>
+
+        {/* Desktop: Full height content */}
+        <div className="hidden lg:block h-screen overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="h-full"
+              style={{ 
+                paddingTop: 'clamp(16px, 4vh, 32px)', 
+                paddingBottom: 'clamp(16px, 4vh, 32px)' 
+              }}
+            >
+              {renderContent()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </main>
-      
-      <Footer />
     </div>
   )
 }

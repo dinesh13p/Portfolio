@@ -13,7 +13,10 @@ export default function Resume() {
   }
 
   return (
-    <div className="container py-8 flex items-center justify-center min-h-full relative">
+    <div className="container flex items-center justify-center min-h-full relative" style={{ 
+      paddingTop: 'clamp(16px, 4vh, 32px)', 
+      paddingBottom: 'clamp(16px, 4vh, 32px)' 
+    }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,7 +27,7 @@ export default function Resume() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row items-center justify-between gap-8"
+          className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8"
         >
           <motion.div 
             className="text-center lg:text-left"
@@ -36,10 +39,10 @@ export default function Resume() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex items-center justify-center lg:justify-start gap-4 mb-6"
+              className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-4 sm:mb-6"
             >
               <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-brand to-brand-dark rounded-2xl flex items-center justify-center"
+                className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-brand to-brand-dark rounded-xl sm:rounded-2xl flex items-center justify-center"
                 whileHover={{ 
                   scale: 1.1, 
                   rotate: 5,
@@ -47,11 +50,11 @@ export default function Resume() {
                 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <FaFileAlt className="text-2xl text-white" />
+                <FaFileAlt className="text-xl sm:text-2xl text-white" />
               </motion.div>
               <div>
                 <motion.h2 
-                  className="text-3xl md:text-4xl font-bold text-white"
+                  className="text-2xl sm:text-3xl md:text-4xl font-bold text-white"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -65,7 +68,7 @@ export default function Resume() {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg text-gray-300 max-w-lg lg:mx-0 mx-auto leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-gray-300 max-w-lg lg:mx-0 mx-auto leading-relaxed"
             >
               View or download my resume to learn more about my experience, education, and skills.
             </motion.p>
@@ -75,11 +78,11 @@ export default function Resume() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
           >
             <motion.button 
               onClick={handleDownload}
-              className="flex items-center gap-3 px-6 py-4 btn-primary text-white rounded-2xl font-semibold text-lg shadow-lg"
+              className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 btn-primary text-white rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg shadow-lg w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -103,7 +106,7 @@ export default function Resume() {
               href="/resume.pdf"
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-4 btn-secondary rounded-2xl font-semibold text-lg text-white"
+              className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 btn-secondary rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg text-white w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -122,7 +125,7 @@ export default function Resume() {
 
         {/* Decorative elements */}
         <motion.div
-          className="absolute -top-4 -right-4 w-24 h-24 bg-brand/10 rounded-full blur-xl"
+          className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-brand/10 rounded-full blur-xl"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.6, 0.3],
@@ -134,7 +137,7 @@ export default function Resume() {
           }}
         />
         <motion.div
-          className="absolute -bottom-4 -left-4 w-32 h-32 bg-brand-dark/10 rounded-full blur-xl"
+          className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-20 h-20 sm:w-32 sm:h-32 bg-brand-dark/10 rounded-full blur-xl"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.2, 0.5, 0.2],

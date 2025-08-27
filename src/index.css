@@ -14,13 +14,21 @@ body {
   @apply bg-site-dark text-site-light font-sans;
 }
 
-/* Simple utility for container centering used across components */
+/* Mobile-first responsive container with better viewport handling */
 .container { 
   max-width: var(--container); 
   margin-left: auto; 
   margin-right: auto; 
-  padding-left: 1rem; 
-  padding-right: 1rem; 
+  padding-left: 0.75rem; 
+  padding-right: 0.75rem; 
+}
+
+/* Increase padding for larger screens */
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* Enhanced accessibility focus ring */
@@ -81,6 +89,14 @@ input:focus, textarea:focus {
   box-shadow: 0 20px 40px rgba(255, 60, 60, 0.2);
 }
 
+/* Reduce hover effects on small screens */
+@media (max-width: 767px) {
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(255, 60, 60, 0.2);
+  }
+}
+
 /* Project card enhancements */
 .project-card {
   background: linear-gradient(145deg, rgba(31, 31, 31, 0.6) 0%, rgba(17, 17, 17, 0.8) 100%);
@@ -92,6 +108,14 @@ input:focus, textarea:focus {
   transform: translateY(-8px);
   border-color: rgba(255, 60, 60, 0.4);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 60, 60, 0.1);
+}
+
+/* Reduce hover effects on small screens */
+@media (max-width: 767px) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 60, 60, 0.1);
+  }
 }
 
 /* Enhanced button styles */
@@ -118,6 +142,19 @@ input:focus, textarea:focus {
   box-shadow: 0 10px 25px rgba(255, 60, 60, 0.2);
 }
 
+/* Reduce button hover effects on small screens */
+@media (max-width: 767px) {
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(255, 60, 60, 0.4);
+  }
+  
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(255, 60, 60, 0.2);
+  }
+}
+
 /* Navbar blur effect */
 .navbar-blur {
   backdrop-filter: blur(20px);
@@ -131,7 +168,14 @@ input:focus, textarea:focus {
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+}
+
+/* Make scrollbar even thinner on mobile */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -146,4 +190,25 @@ input:focus, textarea:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 60, 60, 0.8);
+}
+
+/* Mobile-specific viewport handling */
+@media screen and (max-height: 700px) {
+  /* For very small height screens, reduce all vertical spacing */
+  .container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Ensure content never gets cut off on any screen size */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  body {
+    min-height: -webkit-fill-available;
+  }
+  
+  #root {
+    min-height: -webkit-fill-available;
+  }
 }

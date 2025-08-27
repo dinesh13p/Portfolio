@@ -1,6 +1,52 @@
-import React, { useEffect, useRef } from 'react' 
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import profileImage from '../assets/profile.jpg'
+
+// Typewriter Effect Component
+const TypewriterText = () => {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [currentText, setCurrentText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  
+  const texts = [
+    'Student',
+    'Full Stack Developer',
+    'IoT and Robotics Enthusiast',
+    'UI/UX Enthusiast'
+  ]
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const fullText = texts[currentTextIndex]
+      
+      if (!isDeleting) {
+        setCurrentText(fullText.substring(0, currentText.length + 1))
+        
+        if (currentText === fullText) {
+          setTimeout(() => setIsDeleting(true), 2000)
+        }
+      } else {
+        setCurrentText(fullText.substring(0, currentText.length - 1))
+        
+        if (currentText === '') {
+          setIsDeleting(false)
+          setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length)
+        }
+      }
+    }, isDeleting ? 50 : 100)
+
+    return () => clearTimeout(timeout)
+  }, [currentText, isDeleting, currentTextIndex, texts])
+
+  return (
+    <div className="h-10 md:h-12 flex items-center justify-center md:justify-start">
+      <span className="text-white font-semibold text-lg sm:text-xl md:text-2xl lg:text-2xl">
+        {currentText}
+        <span className="animate-pulse">|</span>
+      </span>
+    </div>
+  )
+}
 
 // Animated Network Background Component
 const NetworkBackground = () => {
@@ -269,45 +315,45 @@ const NetworkBackground = () => {
 
 export default function Hero({ setActiveTab }) {
   return (
-    <div className="relative flex items-center justify-center min-h-full overflow-hidden">
+    <div className="relative flex items-center justify-center min-h-full overflow-hidden px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 z-0">
         <NetworkBackground />
       </div>
       
-      <div className="relative z-10 container grid md:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 container grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
+          className="order-2 md:order-1 text-center md:text-left"
         >
           <motion.h1 
             initial={{ y: 20, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ duration: 0.6 }} 
-            className="text-4xl md:text-5xl font-bold leading-tight"
+            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
           >
-            Hi, I'm <span className="text-brand">Dinesh Poudel</span>
+            Hi, it's me <span className="text-brand">Dinesh Poudel</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.div 
             initial={{ y: 12, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ delay: 0.2, duration: 0.6 }} 
-            className="mt-4 text-lg md:text-xl max-w-xl text-gray-300"
+            className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl lg:text-xl max-w-xl text-gray-300 mx-auto md:mx-0"
           >
-            I build responsive web applications using <strong className="text-white">React</strong> and modern tools. 
-            Currently pursuing studies in backend development and system design, with emphasis on Java and Spring Boot.
-          </motion.p>
+            <TypewriterText />
+          </motion.div>
 
           <motion.div 
             initial={{ y: 12, opacity: 0 }} 
             animate={{ y: 0, opacity: 1 }} 
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-6 flex gap-4"
+            className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start max-w-md mx-auto md:mx-0"
           >
             <motion.button 
               onClick={() => setActiveTab('projects')}
-              className="px-5 py-3 rounded-full btn-primary text-white font-semibold"
+              className="px-5 py-3 rounded-full btn-primary text-white font-semibold text-base md:text-base whitespace-nowrap"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -315,7 +361,7 @@ export default function Hero({ setActiveTab }) {
             </motion.button>
             <motion.button 
               onClick={() => setActiveTab('contact')}
-              className="px-5 py-3 rounded-full btn-secondary"
+              className="px-5 py-3 rounded-full btn-secondary text-base md:text-base whitespace-nowrap"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -328,10 +374,10 @@ export default function Hero({ setActiveTab }) {
           initial={{ scale: 0.8, opacity: 0, x: 50 }} 
           animate={{ scale: 1, opacity: 1, x: 0 }} 
           transition={{ delay: 0.3, duration: 0.8 }} 
-          className="flex justify-center"
+          className="order-1 md:order-2 flex justify-center"
         >
           <motion.div 
-            className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-white/10 relative z-10"
+            className="w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 md:w-88 md:h-88 lg:w-104 lg:h-104 xl:w-[28rem] xl:h-[28rem] rounded-full overflow-hidden border-4 border-white/10 relative z-10 flex-shrink-0"
             whileHover={{ scale: 1.05, borderColor: 'rgba(255, 60, 60, 0.3)' }}
             transition={{ duration: 0.3 }}
           >
@@ -340,7 +386,7 @@ export default function Hero({ setActiveTab }) {
               alt="Dinesh Poudel" 
               className="object-cover w-full h-full"
               onError={(e) => {
-                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5Qcm9maWxlIEltYWdlPC90ZXh0Pjwvc3ZnPg=='
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
                 console.log('Profile image failed to load, using placeholder')
               }}
             />

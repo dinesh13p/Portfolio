@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Github, ExternalLink } from 'lucide-react'
 
 const MOCK = [
   {
@@ -13,7 +14,7 @@ const MOCK = [
   {
     id: 'proj-2',
     title: 'Portfolio Website',
-    desc: 'Portfolio website for Sandhya Paudel, built with React.js and Tailwind CSS with responsive design.',
+    desc: 'Portfolio website for Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built and deployed entirely by myself.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/paudelsandhya/Portfolio',
     live: 'https://paudelsandhya.github.io/Portfolio/'
@@ -21,7 +22,7 @@ const MOCK = [
   {
     id: 'proj-3',
     title: 'Portfolio Website',
-    desc: 'Portfolio website for Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped to build and host & deploy the website.',
+    desc: 'Portfolio website for Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/Sunil5566/Portfolio',
     live: 'https://sunil5566.github.io/Portfolio/'
@@ -29,7 +30,7 @@ const MOCK = [
   {
     id: 'proj-4',
     title: 'Portfolio Website',
-    desc: 'Portfolio website for Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped to build and host & deploy the website.',
+    desc: 'Portfolio website for Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/bixal127/Portfolio',
     live: 'https://bixal127.github.io/Portfolio/'
@@ -37,7 +38,7 @@ const MOCK = [
   {
     id: 'proj-5',
     title: 'Robo Car Controller',
-    desc: 'Remote controlled car via Bluetooth and wifi with telemetry data',
+    desc: 'Remote controlled car via Bluetooth and wifi with telemetry data.',
     tech: ['IoT'],
     github: null,
     live: null
@@ -45,7 +46,7 @@ const MOCK = [
   {
     id: 'proj-6',
     title: 'Smart Dustbin',
-    desc: 'Project for IoT and Robotics phase I training',
+    desc: 'Project for IoT and Robotics phase I training.',
     tech: ['IoT'],
     github: null,
     live: null
@@ -53,7 +54,7 @@ const MOCK = [
   {
     id: 'proj-7',
     title: '4th semester project',
-    desc: 'Project for 4th semester',
+    desc: 'Project for 4th semester. In building phase.',
     tech: ['Java', 'Spring Boot'],
     github: null,
     live: null
@@ -62,14 +63,19 @@ const MOCK = [
 
 export default function Projects() {
   const [filter, setFilter] = useState('All')
-  const tags = ['All', 'React', 'IoT', 'Java']
+  const tags = ['All', 'Websites', 'IoT', 'Java']
 
   const filtered = MOCK.filter((p) => 
-    filter === 'All' || (p.tech && p.tech.some(tech => tech.includes(filter)))
+    filter === 'All' || 
+    (filter === 'Websites' && p.tech && p.tech.some(tech => tech.includes('React'))) ||
+    (filter !== 'Websites' && p.tech && p.tech.some(tech => tech.includes(filter)))
   )
 
   return (
-    <div className="container py-8 h-full flex flex-col">
+    <div className="container h-full flex flex-col" style={{ 
+      paddingTop: 'clamp(16px, 4vh, 32px)', 
+      paddingBottom: 'clamp(16px, 4vh, 32px)' 
+    }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -77,22 +83,22 @@ export default function Projects() {
         className="flex-1 min-h-0 flex flex-col"
       >
         <motion.div 
-          className="flex-shrink-0"
+          className="flex-shrink-0 mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <motion.h2 
-            className="text-3xl font-bold"
+            className="text-2xl sm:text-3xl font-bold"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Projects
           </motion.h2>
-          <p>Projects I've worked on</p>
+          <p className="text-sm sm:text-base text-gray-300">Projects I've worked on</p>
           <motion.div 
-            className="mt-4 flex gap-2 items-center flex-wrap"
+            className="mt-3 sm:mt-4 flex gap-2 items-center flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -101,7 +107,7 @@ export default function Projects() {
               <motion.button 
                 key={t} 
                 onClick={() => setFilter(t)} 
-                className={`px-4 py-2 rounded-full transition-all ${
+                className={`px-3 sm:px-4 py-2 rounded-full transition-all text-sm sm:text-base ${
                   filter === t 
                     ? 'bg-brand text-white shadow-lg' 
                     : 'bg-white/5 hover:bg-white/10'
@@ -123,12 +129,12 @@ export default function Projects() {
           </motion.div>
         </motion.div>
 
-        <div className="mt-6 flex-1 min-h-0">
+        <div className="flex-1 min-h-0">
           <div className="h-full overflow-y-auto" style={{
             msOverflowStyle: 'none',
             scrollbarWidth: 'none'
           }}>
-            <div className="grid sm:grid-cols-2 gap-6 pb-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pb-4">
               {filtered.map((p, index) => (
                 <motion.article 
                   key={p.id}
@@ -140,9 +146,9 @@ export default function Projects() {
                     type: "spring",
                     stiffness: 100
                   }}
-                  className="project-card p-6 rounded-2xl shadow-sm flex-shrink-0 relative overflow-hidden group"
+                  className="project-card p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm flex-shrink-0 relative overflow-hidden group"
                   whileHover={{ 
-                    y: -8,
+                    y: window.innerWidth <= 768 ? -4 : -8,
                     transition: { duration: 0.3 }
                   }}
                 >
@@ -154,7 +160,7 @@ export default function Projects() {
                   />
                   
                   <motion.h3 
-                    className="font-semibold text-xl text-brand"
+                    className="font-semibold text-lg sm:text-xl text-brand"
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -162,7 +168,7 @@ export default function Projects() {
                   </motion.h3>
                   
                   <motion.p 
-                    className="mt-3 text-gray-300 leading-relaxed"
+                    className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-300 leading-relaxed"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: index * 0.15 + 0.7 }}
@@ -171,7 +177,7 @@ export default function Projects() {
                   </motion.p>
                   
                   <motion.div 
-                    className="mt-4 flex items-center gap-2 flex-wrap"
+                    className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.15 + 0.8 }}
@@ -179,11 +185,10 @@ export default function Projects() {
                     {p.tech && p.tech.map((t, techIndex) => (
                       <motion.span 
                         key={t} 
-                        className="text-sm bg-white/10 px-3 py-1 rounded-full border border-white/20"
+                        className="text-xs sm:text-sm bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: index * 0.15 + 0.8 + techIndex * 0.1 }}
-                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 60, 60, 0.1)' }}
                       >
                         {t}
                       </motion.span>
@@ -191,58 +196,41 @@ export default function Projects() {
                   </motion.div>
 
                   <motion.div 
-                    className="mt-6 flex gap-3"
+                    className="mt-4 sm:mt-6 flex gap-3"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.15 + 0.9 }}
                   >
-                    {p.live ? (
-                      <motion.a 
-                        href={p.live} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-sm px-4 py-2 rounded-full btn-secondary font-medium"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Live Demo
-                      </motion.a>
-                    ) : (
-                      <span className="text-sm px-4 py-2 rounded-full border border-gray-600 opacity-50 cursor-not-allowed font-medium">
-                        No Demo
-                      </span>
-                    )}
-                    
-                    {p.github ? (
+                    {p.github && (
                       <motion.a 
                         href={p.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-sm px-4 py-2 rounded-full btn-primary text-white font-medium"
+                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all"
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        Source Code
+                        <Github size={16} />
+                        Code
                       </motion.a>
-                    ) : (
-                      <span className="text-sm px-4 py-2 rounded-full bg-gray-600 text-white opacity-50 cursor-not-allowed font-medium">
-                        Private
-                      </span>
+                    )}
+                    
+                    {p.live && (
+                      <motion.a 
+                        href={p.live} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm btn-primary text-white rounded-lg"
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <ExternalLink size={16} />
+                        Live Demo
+                      </motion.a>
                     )}
                   </motion.div>
                 </motion.article>
               ))}
-
-              {filtered.length === 0 && (
-                <motion.p 
-                  className="text-gray-400 col-span-2 text-center py-8"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  No projects found for this filter.
-                </motion.p>
-              )}
             </div>
           </div>
         </div>
