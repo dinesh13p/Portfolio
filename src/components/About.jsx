@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaHtml5, FaCss3Alt, FaReact, FaDatabase, FaJsSquare, FaJava, FaPython, FaGit, FaCloudflare } from 'react-icons/fa'
-import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiRedux, SiGithub, SiFigma } from 'react-icons/si'
+import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiRedux, SiGithub, SiFigma, SiPhp, SiMysql } from 'react-icons/si'
 
 const skills = [
   {
@@ -68,6 +68,20 @@ const skills = [
     iconColor: 'text-green-500'
   },
   {
+    name: 'PHP',
+    icon: <SiPhp />,
+    color: 'from-blue-500 to-blue-600',
+    borderColor: 'border-blue-500/30',
+    iconColor: 'text-blue-500'
+  },
+  {
+    name: 'SQL',
+    icon: <SiMysql />,
+    color: 'from-blue-500 to-blue-600',
+    borderColor: 'border-blue-500/30',
+    iconColor: 'text-blue-500'
+  },
+  {
     name: 'Git',
     icon: <FaGit />,
     color: 'from-gray-500 to-gray-600',
@@ -94,14 +108,14 @@ const skills = [
     color: 'from-pink-500 to-pink-600',
     borderColor: 'border-pink-500/30',
     iconColor: 'text-pink-500'
-  },
-  {
-    name: 'Databases',
-    icon: <FaDatabase />,
-    color: 'from-green-500 to-green-600',
-    borderColor: 'border-green-500/30',
-    iconColor: 'text-green-500'
   }
+  // {
+  //   name: 'Databases',
+  //   icon: <FaDatabase />,
+  //   color: 'from-green-500 to-green-600',
+  //   borderColor: 'border-green-500/30',
+  //   iconColor: 'text-green-500'
+  // }
 ]
 
 export default function About() {
@@ -128,7 +142,7 @@ export default function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            About Me
+            About me
           </motion.h2>
           <motion.p
             className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-gray-300 leading-relaxed"

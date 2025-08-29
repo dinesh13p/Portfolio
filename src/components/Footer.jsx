@@ -7,7 +7,7 @@ export default function Footer(){
     { icon: FaGithub, url: 'https://github.com/dinesh13p', name: 'Github' },
     { icon: FaLinkedin, url: 'https://www.linkedin.com/in/dinesh-poudel-3a4b10331/', name: 'LinkedIn' },
     { icon: FaInstagram, url: 'https://www.instagram.com/_d_nesh_/', name: 'Instagram' },
-    { icon: FaTwitter, url: 'https://x.com/Dinesh2061', name: 'X (formerly Twitter)' },
+    { icon: FaTwitter, url: 'https://x.com/Dinesh2061', name: 'X (Formerly Twitter)' },
     { icon: FaFacebook, url: 'https://www.facebook.com/dinesh.poudel.319452', name: 'Facebook' }
   ]
 

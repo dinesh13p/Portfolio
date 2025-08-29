@@ -7,6 +7,7 @@ import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Portal from './components/Portal'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home')
@@ -23,6 +24,8 @@ export default function App() {
         return <Resume />
       case 'contact':
         return <Contact />
+      case 'portal':
+        return <Portal />
       default:
         return <Hero setActiveTab={setActiveTab} />
     }

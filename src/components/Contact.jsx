@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'   // ✅ import EmailJS
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })  // 👈 added subject
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -14,26 +15,36 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
-    if (!form.name || !form.email || !form.message) {
+
+    if (!form.name || !form.email || !form.subject || !form.message) {  // 👈 added subject validation
       setError('Please fill in all fields')
       return
     }
-    
+
     setLoading(true)
     setError('')
+    setSent(false)
 
-    try {
-      const mailtoLink = `mailto:dineshp4297501@gmail.com,dineshacc02@gmail.com?subject=Contact from ${encodeURIComponent(form.name)}&body=From: ${encodeURIComponent(form.name)}%0D%0AEmail: ${encodeURIComponent(form.email)}%0D%0A%0D%0A${encodeURIComponent(form.message)}`
-      window.location.href = mailtoLink
-      
+    // ✅ Send with EmailJS
+    emailjs.send(
+      'service_hq74kgj',       // your Service ID
+      'template_na33j7q',      // your Template ID
+      {
+        name: form.name,       // matches {{name}} in template
+        email: form.email,     // matches {{email}} in template
+        subject: form.subject, // matches {{subject}} in template
+        message: form.message, // matches {{message}} in template
+      },
+      '-YagopFk-nVTSOyiZ'      // your Public Key
+    )
+    .then(() => {
       setSent(true)
-      setForm({ name: '', email: '', message: '' })
-    } catch (err) {
-      setError('Could not send message. Please try emailing directly: dineshp4297501@gmail.com or dineshacc02@gmail.com')
-    } finally {
-      setLoading(false)
-    }
+      setForm({ name: '', email: '', subject: '', message: '' })  // 👈 reset subject too
+    })
+    .catch(() => {
+      setError('Could not send message. Please try again later.')
+    })
+    .finally(() => setLoading(false))
   }
 
   return (
@@ -53,7 +64,7 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Contact
+          Contact me
         </motion.h2>
         <motion.p 
           className="mt-2 text-sm sm:text-base text-gray-300"
@@ -98,6 +109,19 @@ export default function Contact() {
             transition={{ duration: 0.6, delay: 0.5 }}
             whileFocus={{ scale: 1.02, y: -2 }}
           />
+          <motion.input 
+            required 
+            name="subject" 
+            value={form.subject} 
+            onChange={handleChange} 
+            placeholder="Subject" 
+            className="p-3 sm:p-4 bg-site-mid rounded-xl border border-gray-600 focus:border-brand transition-all duration-300 focus:ring-2 focus:ring-brand/20 text-sm sm:text-base col-span-1 sm:col-span-2" 
+            disabled={loading}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            whileFocus={{ scale: 1.02, y: -2 }}
+          />
           <motion.textarea 
             required 
             name="message" 
@@ -109,7 +133,7 @@ export default function Contact() {
             disabled={loading}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
             whileFocus={{ scale: 1.01, y: -2 }}
           />
 
@@ -117,7 +141,7 @@ export default function Contact() {
             className="sm:col-span-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
           >
             <motion.button 
               type="submit"
@@ -158,7 +182,7 @@ export default function Contact() {
           className="mt-6 sm:mt-8 text-gray-300 space-y-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
         >
           <p className="text-sm sm:text-base">
             Email 1: <a className="text-brand hover:underline transition-all duration-300" href="mailto:dineshp4297501@gmail.com">dineshp4297501@gmail.com</a>

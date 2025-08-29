@@ -2,7 +2,7 @@
   "name": "dinesh-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://dinesh2004.com.np",
+  "homepage": "https://dinesh-poudel.com.np",
   "repository": {
     "type": "git",
     "url": "https://github.com/dinesh13p/Portfolio.git"
@@ -15,6 +15,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "framer-motion": "^10.12.6",
     "lucide-react": "^0.542.0",
     "react": "^18.2.0",

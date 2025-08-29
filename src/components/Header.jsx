@@ -3,7 +3,8 @@ import { HiMenu, HiX } from 'react-icons/hi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FaHome, FaUser, FaProjectDiagram, FaFileAlt, FaEnvelope,
-  FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaFacebook 
+  FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaFacebook, 
+  FaGlobe
 } from 'react-icons/fa'
 
 const NAV = [
@@ -11,7 +12,8 @@ const NAV = [
   { id: 'about', label: 'About', icon: <FaUser /> },
   { id: 'projects', label: 'Projects', icon: <FaProjectDiagram /> },
   { id: 'resume', label: 'Resume', icon: <FaFileAlt /> },
-  { id: 'contact', label: 'Contact', icon: <FaEnvelope /> }
+  { id: 'contact', label: 'Contact', icon: <FaEnvelope /> },
+  { id: 'portal', label: 'Portal', icon: <FaGlobe /> }
 ]
 
 const socialLinks = [
@@ -54,7 +56,7 @@ export default function Header({ activeTab, setActiveTab }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            dinesh2004.com.np
+            dinesh-poudel.com.np
           </motion.h1>
         </div>
 
@@ -201,7 +203,7 @@ export default function Header({ activeTab, setActiveTab }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            dinesh2004.com.np
+            dinesh-poudel.com.np
           </motion.button>
 
           <motion.button 

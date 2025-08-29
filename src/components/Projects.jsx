@@ -4,57 +4,57 @@ import { Github, ExternalLink } from 'lucide-react'
 
 const MOCK = [
   {
+    id: 'proj-0',
+    title: 'Marvel Copy-Website',
+    desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
+    tech: ['HTML', 'CSS', 'Bootstrap'],
+    github: 'https://github.com/dinesh13p/First-sem_Project',
+    live: 'https://dinesh13p.github.io/First-sem_Project/'
+  },
+  {
     id: 'proj-1',
-    title: 'Portfolio v1',
-    desc: 'Personal portfolio built with React.js and Tailwind CSS with responsive design.',
+    title: 'Portfolio v1_dinesh13p',
+    desc: 'My Personal Portfolio Website built with React.js and Tailwind CSS with responsive design.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/dinesh13p/Portfolio',
     live: 'https://dinesh2004.com.np'
   },
   {
     id: 'proj-2',
-    title: 'Portfolio Website',
-    desc: 'Portfolio website for Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built and deployed entirely by myself.',
+    title: 'Portfolio Website_Sandhya',
+    desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built & deployed entirely by myself.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/paudelsandhya/Portfolio',
     live: 'https://paudelsandhya.github.io/Portfolio/'
   },
   {
     id: 'proj-3',
-    title: 'Portfolio Website',
-    desc: 'Portfolio website for Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
+    title: 'Portfolio Website_Sunil',
+    desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/Sunil5566/Portfolio',
     live: 'https://sunil5566.github.io/Portfolio/'
   },
   {
     id: 'proj-4',
-    title: 'Portfolio Website',
-    desc: 'Portfolio website for Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
+    title: 'Portfolio Website_Bishal',
+    desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/bixal127/Portfolio',
     live: 'https://bixal127.github.io/Portfolio/'
   },
   {
     id: 'proj-5',
-    title: 'Robo Car Controller',
-    desc: 'Remote controlled car via Bluetooth and wifi with telemetry data.',
-    tech: ['IoT'],
-    github: null,
+    title: 'IoT & Robotics Projects',
+    desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
+    tech: ['IoT', 'Arduino IDE'],
+    github: 'https://github.com/dinesh13p/IoT_Projects_Drogon',
     live: null
   },
   {
     id: 'proj-6',
-    title: 'Smart Dustbin',
-    desc: 'Project for IoT and Robotics phase I training.',
-    tech: ['IoT'],
-    github: null,
-    live: null
-  },
-  {
-    id: 'proj-7',
     title: '4th semester project',
-    desc: 'Project for 4th semester. In building phase.',
+    desc: '4th Semester Project --> Development in Progress.',
     tech: ['Java', 'Spring Boot'],
     github: null,
     live: null
@@ -67,7 +67,7 @@ export default function Projects() {
 
   const filtered = MOCK.filter((p) => 
     filter === 'All' || 
-    (filter === 'Websites' && p.tech && p.tech.some(tech => tech.includes('React'))) ||
+    (filter === 'Websites' && p.tech && p.tech.some(tech => tech.includes('HTML') || tech.includes('React'))) ||
     (filter !== 'Websites' && p.tech && p.tech.some(tech => tech.includes(filter)))
   )
 
@@ -94,7 +94,7 @@ export default function Projects() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Projects
+            My Projects
           </motion.h2>
           <p className="text-sm sm:text-base text-gray-300">Projects I've worked on</p>
           <motion.div 
@@ -137,7 +137,7 @@ export default function Projects() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pb-4">
               {filtered.map((p, index) => (
                 <motion.article 
-                  key={p.id}
+                  key={`${p.id}-${filter}`}
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ 

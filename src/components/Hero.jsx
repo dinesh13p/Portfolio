@@ -10,7 +10,8 @@ const TypewriterText = () => {
   
   const texts = [
     'Student',
-    'Full Stack Developer',
+    'Front-end Developer',
+    'Aspiring Full Stack Developer',
     'IoT and Robotics Enthusiast',
     'UI/UX Enthusiast'
   ]
