@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaHtml5, FaCss3Alt, FaReact, FaDatabase, FaJsSquare, FaJava, FaPython, FaGit, FaCloudflare } from 'react-icons/fa'
-import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiRedux, SiGithub, SiFigma, SiPhp, SiMysql } from 'react-icons/si'
+import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiFigma, SiPhp, SiMysql } from 'react-icons/si'
 
 const skills = [
   {

@@ -4,7 +4,7 @@ import { Github, ExternalLink } from 'lucide-react'
 
 const MOCK = [
   {
-    id: 'proj-0',
+    id: 'proj-1',
     title: 'Marvel Copy-Website',
     desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
     tech: ['HTML', 'CSS', 'Bootstrap'],
@@ -12,7 +12,7 @@ const MOCK = [
     live: 'https://dinesh13p.github.io/First-sem_Project/'
   },
   {
-    id: 'proj-1',
+    id: 'proj-2',
     title: 'Portfolio v1_dinesh13p',
     desc: 'My Personal Portfolio Website built with React.js and Tailwind CSS with responsive design.',
     tech: ['React', 'Tailwind'],
@@ -20,31 +20,7 @@ const MOCK = [
     live: 'https://dinesh2004.com.np'
   },
   {
-    id: 'proj-2',
-    title: 'Portfolio Website_Sandhya',
-    desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built & deployed entirely by myself.',
-    tech: ['React', 'Tailwind'],
-    github: 'https://github.com/paudelsandhya/Portfolio',
-    live: 'https://paudelsandhya.github.io/Portfolio/'
-  },
-  {
     id: 'proj-3',
-    title: 'Portfolio Website_Sunil',
-    desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-    tech: ['React', 'Tailwind'],
-    github: 'https://github.com/Sunil5566/Portfolio',
-    live: 'https://sunil5566.github.io/Portfolio/'
-  },
-  {
-    id: 'proj-4',
-    title: 'Portfolio Website_Bishal',
-    desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-    tech: ['React', 'Tailwind'],
-    github: 'https://github.com/bixal127/Portfolio',
-    live: 'https://bixal127.github.io/Portfolio/'
-  },
-  {
-    id: 'proj-5',
     title: 'IoT & Robotics Projects',
     desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
     tech: ['IoT', 'Arduino IDE'],
@@ -52,24 +28,64 @@ const MOCK = [
     live: null
   },
   {
-    id: 'proj-6',
+    id: 'proj-4',
+    title: 'Personal Project_2',
+    desc: 'My personal growth project where I\'ve made various games.',
+    tech: ['React', 'JavaScript'],
+    github: 'https://github.com/dinesh13p/Games-V1',
+    live: 'https://dinesh2004.com.np'
+  },
+  {
+    id: 'proj-5',
     title: '4th semester project',
     desc: '4th Semester Project --> Development in Progress.',
     tech: ['Java', 'Spring Boot'],
     github: null,
     live: null
+  },
+  {
+    id: 'proj-6',
+    title: 'Portfolio Website_Sandhya',
+    desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built & deployed entirely by myself.',
+    tech: ['React', 'Tailwind'],
+    github: 'https://github.com/paudelsandhya/Portfolio',
+    live: 'https://paudelsandhya.github.io/Portfolio/'
+  },
+  {
+    id: 'proj-7',
+    title: 'Portfolio Website_Sunil',
+    desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
+    tech: ['React', 'Tailwind'],
+    github: 'https://github.com/Sunil5566/Portfolio',
+    live: 'https://sunil5566.github.io/Portfolio/'
+  },
+  {
+    id: 'proj-8',
+    title: 'Portfolio Website_Bishal',
+    desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
+    tech: ['React', 'Tailwind'],
+    github: 'https://github.com/bixal127/Portfolio',
+    live: 'https://bixal127.github.io/Portfolio/'
   }
 ]
 
 export default function Projects() {
   const [filter, setFilter] = useState('All')
-  const tags = ['All', 'Websites', 'IoT', 'Java']
+  const tags = ['All', 'Websites', 'IoT', 'Java', 'Personal']
 
-  const filtered = MOCK.filter((p) => 
-    filter === 'All' || 
-    (filter === 'Websites' && p.tech && p.tech.some(tech => tech.includes('HTML') || tech.includes('React'))) ||
-    (filter !== 'Websites' && p.tech && p.tech.some(tech => tech.includes(filter)))
-  )
+  const filtered = MOCK.filter((p) => {
+    if (p.id === 'proj-4') {
+      return filter === 'All' || filter === 'Personal';
+    }
+    if (p.id === 'proj-2') {
+      return filter === 'All' || filter === 'Websites' || filter === 'Personal';
+    }
+    if (filter === 'All') return true;
+    if (filter === 'Websites') {
+      return p.tech && p.tech.some(tech => tech.includes('HTML') || tech.includes('React')) && p.id !== 'proj-4';
+    }
+    return p.tech && p.tech.some(tech => tech.includes(filter));
+  })
 
   return (
     <div className="container h-full flex flex-col" style={{ 

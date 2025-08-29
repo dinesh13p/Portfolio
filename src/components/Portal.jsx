@@ -38,7 +38,7 @@ export default function Portal() {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.6, delay: 0.2 }}
                                 >
-                                    My Secondary Domain
+                                    Portal of Surprise
                                 </motion.h2>
                             </div>
                         </motion.div>
@@ -49,7 +49,7 @@ export default function Portal() {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             className="text-sm sm:text-base md:text-lg text-gray-300 max-w-lg lg:mx-0 mx-auto leading-relaxed"
                         >
-                            This is my Secondary Domain. It showcases my CV website.
+                            Clicking the button will take you to my Secondary Domain. <br></br> A surprise awaits you there.
                         </motion.p>
                     </motion.div>
 
