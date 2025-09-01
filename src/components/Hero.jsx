@@ -12,7 +12,7 @@ const TypewriterText = () => {
     'Student',
     'Front-end Developer',
     'Aspiring Full Stack Developer',
-    'IoT and Robotics Enthusiast',
+    'IoT & Robotics Enthusiast',
     'UI/UX Enthusiast'
   ]
 

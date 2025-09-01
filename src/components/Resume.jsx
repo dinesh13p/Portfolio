@@ -123,32 +123,7 @@ export default function Resume() {
           </motion.div>
         </motion.div>
 
-        {/* Decorative elements */}
-        <motion.div
-          className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-brand/10 rounded-full blur-xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-20 h-20 sm:w-32 sm:h-32 bg-brand-dark/10 rounded-full blur-xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.5, 0.2],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
+  {/* ...existing code... */}
       </motion.div>
     </div>
   )

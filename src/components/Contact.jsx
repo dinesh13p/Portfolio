@@ -16,8 +16,15 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (!form.name || !form.email || !form.subject || !form.message) {  // 👈 added subject validation
+    if (!form.name || !form.email || !form.subject || !form.message) {
       setError('Please fill in all fields')
+      return
+    }
+
+    // Only allow verified Gmail addresses
+    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!gmailRegex.test(form.email)) {
+      setError('Email or username not verified')
       return
     }
 
@@ -25,26 +32,25 @@ export default function Contact() {
     setError('')
     setSent(false)
 
-    // ✅ Send with EmailJS
     emailjs.send(
-      'service_hq74kgj',       // your Service ID
-      'template_na33j7q',      // your Template ID
+      'service_hq74kgj',
+      'template_na33j7q',
       {
-        name: form.name,       // matches {{name}} in template
-        email: form.email,     // matches {{email}} in template
-        subject: form.subject, // matches {{subject}} in template
-        message: form.message, // matches {{message}} in template
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
       },
-      '-YagopFk-nVTSOyiZ'      // your Public Key
+      '-YagopFk-nVTSOyiZ'
     )
-    .then(() => {
-      setSent(true)
-      setForm({ name: '', email: '', subject: '', message: '' })  // 👈 reset subject too
-    })
-    .catch(() => {
-      setError('Could not send message. Please try again later.')
-    })
-    .finally(() => setLoading(false))
+      .then(() => {
+        setSent(true)
+        setForm({ name: '', email: '', subject: '', message: '' })
+      })
+      .catch(() => {
+        setError('Could not send message. Please try again later.')
+      })
+      .finally(() => setLoading(false))
   }
 
   return (
