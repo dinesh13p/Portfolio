@@ -167,84 +167,113 @@ export default function Projects() {
                     y: window.innerWidth <= 768 ? -4 : -8,
                     transition: { duration: 0.3 }
                   }}
+                  style={{
+                    backgroundImage: (() => {
+                      switch (p.id) {
+                        case 'proj-1': return "url('/src/assets/Marvel_Copy_Website.jpg')";
+                        case 'proj-2': return "url('/src/assets/Portfolio_v1.jpg')";
+                        case 'proj-3': return "url('/src/assets/IoT_&_Robotics.jpg')";
+                        case 'proj-4': return "url('/src/assets/Personal_Project.jpg')";
+                        case 'proj-5': return "url('/src/assets/4th_Sem_Project.jpg')";
+                        case 'proj-6': return "url('/src/assets/Portfolio_Sandhya.jpg')";
+                        case 'proj-7': return "url('/src/assets/Portfolio_Sunil.jpg')";
+                        case 'proj-8': return "url('/src/assets/Portfolio_Bishal.jpg')";
+                        default: return undefined;
+                      }
+                    })(),
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}
                 >
+                  {/* Dark overlay for contrast */}
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(15, 15, 15, 0.82)',
+                    zIndex: 1,
+                    pointerEvents: 'none',
+                  }} />
                   <motion.div
                     className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand to-brand-dark"
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.4 }}
+                    style={{ zIndex: 2 }}
                   />
                   
-                  <motion.h3 
-                    className="font-semibold text-lg sm:text-xl text-brand"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {p.title}
-                  </motion.h3>
-                  
-                  <motion.p 
-                    className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-300 leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.15 + 0.7 }}
-                  >
-                    {p.desc}
-                  </motion.p>
-                  
-                  <motion.div 
-                    className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.15 + 0.8 }}
-                  >
-                    {p.tech && p.tech.map((t, techIndex) => (
-                      <motion.span 
-                        key={t} 
-                        className="text-xs sm:text-sm bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.15 + 0.8 + techIndex * 0.1 }}
-                      >
-                        {t}
-                      </motion.span>
-                    ))}
-                  </motion.div>
-
-                  <motion.div 
-                    className="mt-4 sm:mt-6 flex gap-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.15 + 0.9 }}
-                  >
-                    {p.github && (
-                      <motion.a 
-                        href={p.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Github size={16} />
-                        Code
-                      </motion.a>
-                    )}
+                  <div style={{ position: 'relative', zIndex: 3 }}>
+                    <motion.h3 
+                      className="font-semibold text-lg sm:text-xl text-brand"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {p.title}
+                    </motion.h3>
                     
-                    {p.live && (
-                      <motion.a 
-                        href={p.live} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm btn-primary text-white rounded-lg"
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <ExternalLink size={16} />
-                        Live Demo
-                      </motion.a>
-                    )}
-                  </motion.div>
+                    <motion.p 
+                      className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-300 leading-relaxed"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.15 + 0.7 }}
+                    >
+                      {p.desc}
+                    </motion.p>
+                    
+                    <motion.div 
+                      className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.15 + 0.8 }}
+                    >
+                      {p.tech && p.tech.map((t, techIndex) => (
+                        <motion.span 
+                          key={t} 
+                          className="text-xs sm:text-sm bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.15 + 0.8 + techIndex * 0.1 }}
+                        >
+                          {t}
+                        </motion.span>
+                      ))}
+                    </motion.div>
+
+                    <motion.div 
+                      className="mt-4 sm:mt-6 flex gap-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.15 + 0.9 }}
+                    >
+                      {p.github && (
+                        <motion.a 
+                          href={p.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Github size={16} />
+                          Code
+                        </motion.a>
+                      )}
+                      
+                      {p.live && (
+                        <motion.a 
+                          href={p.live} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm btn-primary text-white rounded-lg"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <ExternalLink size={16} />
+                          Live Demo
+                        </motion.a>
+                      )}
+                    </motion.div>
+                  </div>
                 </motion.article>
               ))}
             </div>
