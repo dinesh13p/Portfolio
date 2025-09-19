@@ -170,14 +170,14 @@ export default function Projects() {
                   style={{
                     backgroundImage: (() => {
                       switch (p.id) {
-                        case 'proj-1': return "url('/src/assets/Marvel_Copy_Website.jpg')";
-                        case 'proj-2': return "url('/src/assets/Portfolio_v1.jpg')";
-                        case 'proj-3': return "url('/src/assets/IoT_&_Robotics.jpg')";
-                        case 'proj-4': return "url('/src/assets/Personal_Project.jpg')";
-                        case 'proj-5': return "url('/src/assets/4th_Sem_Project.jpg')";
-                        case 'proj-6': return "url('/src/assets/Portfolio_Sandhya.jpg')";
-                        case 'proj-7': return "url('/src/assets/Portfolio_Sunil.jpg')";
-                        case 'proj-8': return "url('/src/assets/Portfolio_Bishal.jpg')";
+                        case 'proj-1': return "url('/src/assets/Marvel_Copy_Website.png')";
+                        case 'proj-2': return "url('/src/assets/Portfolio_v1.png')";
+                        case 'proj-3': return "url('/src/assets/IoT_&_Robotics.png')";
+                        case 'proj-4': return "url('/src/assets/Personal_Project.png')";
+                        case 'proj-5': return "url('/src/assets/4th_Sem_Project.png')";
+                        case 'proj-6': return "url('/src/assets/Portfolio_Sandhya.png')";
+                        case 'proj-7': return "url('/src/assets/Portfolio_Sunil.png')";
+                        case 'proj-8': return "url('/src/assets/Portfolio_Bishal.png')";
                         default: return undefined;
                       }
                     })(),
