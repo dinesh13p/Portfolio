@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import profileImage from '../assets/profile.jpg'
+import profileImage1 from '../assets/Profile1.jpg'
+import profileImage2 from '../assets/Profile2.jpg'
+import profileImage3 from '../assets/Profile3.jpg'
+import profileImage4 from '../assets/Profile4.jpg'
+import profileImage5 from '../assets/Profile5.jpg'
+import profileImage6 from '../assets/Profile6.jpg'
+import profileImage7 from '../assets/Profile7.jpg'
+import profileImage8 from '../assets/Profile8.jpg'
 
 // Typewriter Effect Component
 const TypewriterText = () => {
@@ -315,6 +322,74 @@ const NetworkBackground = () => {
 }
 
 export default function Hero({ setActiveTab }) {
+  const profileImages = [
+    profileImage1,
+    profileImage2,
+    profileImage3,
+    profileImage4,
+    profileImage5,
+    profileImage6,
+    profileImage7,
+    profileImage8
+  ]
+  const timeoutRef = useRef(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isReverse, setIsReverse] = useState(false)
+
+  // Preload images to avoid flicker during transitions
+  useEffect(() => {
+    profileImages.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  // schedule next slide using timeout
+  const scheduleNext = () => {
+    clearTimeout(timeoutRef.current)
+    let delay
+    
+    // If we're in reverse and at index 0 (Profile1.jpg), show it for 4 seconds
+    if (isReverse && currentImageIndex === 0) {
+      delay = 4000
+    } else {
+      // Otherwise use normal timing (0.2s reverse, 4s forward)
+      delay = isReverse ? 200 : 4000
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      setCurrentImageIndex((prevIndex) => {
+        // If going forward and reached the end, start moving backward
+        if (!isReverse && prevIndex >= profileImages.length - 1) {
+          setIsReverse(true)
+          return prevIndex - 1
+        }
+        // If going backward and reached the start, start moving forward
+        if (isReverse && prevIndex <= 0) {
+          setIsReverse(false)
+          return prevIndex + 1
+        }
+        // Otherwise continue in current direction
+        return isReverse ? prevIndex - 1 : prevIndex + 1
+      })
+    }, delay)
+  }
+
+  useEffect(() => {
+    // start the automatic sliding
+    scheduleNext()
+    return () => {
+      clearTimeout(timeoutRef.current)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    // Continue sliding in current direction
+    scheduleNext()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentImageIndex, isReverse])
+
   return (
     <div className="relative flex items-center justify-center min-h-full overflow-hidden px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 z-0">
@@ -334,7 +409,7 @@ export default function Hero({ setActiveTab }) {
             transition={{ duration: 0.6 }} 
             className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
           >
-            Hi, it's me <span className="text-brand">Dinesh Poudel</span>
+            Hi, it's me <span className="text-brand block">Dinesh Poudel</span>
           </motion.h1>
 
           <motion.div 
@@ -382,15 +457,32 @@ export default function Hero({ setActiveTab }) {
             whileHover={{ scale: 1.05, borderColor: 'rgba(255, 60, 60, 0.3)' }}
             transition={{ duration: 0.3 }}
           >
-            <img 
-              src={profileImage} 
-              alt="Dinesh Poudel" 
-              className="object-cover w-full h-full"
-              onError={(e) => {
-                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
-                console.log('Profile image failed to load, using placeholder')
+            <motion.div 
+              className="absolute inset-0 flex"
+              style={{ width: `${profileImages.length * 100}%`, willChange: 'transform' }}
+              animate={{ x: `-${(currentImageIndex * 100) / profileImages.length}%` }}
+              transition={{ 
+                duration: isReverse ? 0.2 : 1.0, 
+                ease: [0.4, 0.0, 0.2, 1.0] 
               }}
-            />
+            >
+              {profileImages.map((src, idx) => (
+                <img
+                  key={idx}
+                  src={src}
+                  alt="Dinesh Poudel"
+                  className="object-cover h-full flex-none select-none pointer-events-none"
+                  style={{ width: `${100 / profileImages.length}%` }}
+                  draggable={false}
+                  decoding="async"
+                  loading="eager"
+                  onError={(e) => {
+                    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
+                    console.log('Profile image failed to load, using placeholder')
+                  }}
+                />
+              ))}
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
