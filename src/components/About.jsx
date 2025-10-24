@@ -150,8 +150,8 @@ export default function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            I am a BCA student from Nepathya College (Tribhuvan University). I build responsive web applications using <strong className="text-white">React</strong> and modern tools.
-            Currently pursuing studies in backend development and system design, with emphasis on Java and Spring Boot.
+            I am a BCA student from Tribhuvan University. I build responsive web applications using <strong className="text-white">React</strong> and modern tools.
+            Currently pursuing studies in backend development and system design, with emphasis on <strong className="text-white">Java</strong> and <strong className="text-white"></strong>Spring Boot.
             I have worked on front-end UI, small backend APIs, and IoT & robotics experiments as my projects.
           </motion.p>
 

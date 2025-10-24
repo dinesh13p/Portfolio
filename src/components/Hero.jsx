@@ -335,6 +335,7 @@ export default function Hero({ setActiveTab }) {
   const timeoutRef = useRef(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isReverse, setIsReverse] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   // Preload images to avoid flicker during transitions
   useEffect(() => {
@@ -358,6 +359,7 @@ export default function Hero({ setActiveTab }) {
     }
 
     timeoutRef.current = setTimeout(() => {
+      setIsTransitioning(true)
       setCurrentImageIndex((prevIndex) => {
         // If going forward and reached the end, start moving backward
         if (!isReverse && prevIndex >= profileImages.length - 1) {
@@ -372,6 +374,9 @@ export default function Hero({ setActiveTab }) {
         // Otherwise continue in current direction
         return isReverse ? prevIndex - 1 : prevIndex + 1
       })
+      
+      // Reset transition state after animation completes
+      setTimeout(() => setIsTransitioning(false), isReverse ? 200 : 1000)
     }, delay)
   }
 
@@ -459,11 +464,12 @@ export default function Hero({ setActiveTab }) {
           >
             <motion.div 
               className="absolute inset-0 flex"
-              style={{ width: `${profileImages.length * 100}%`, willChange: 'transform' }}
-              animate={{ x: `-${(currentImageIndex * 100) / profileImages.length}%` }}
-              transition={{ 
-                duration: isReverse ? 0.2 : 1.0, 
-                ease: [0.4, 0.0, 0.2, 1.0] 
+              style={{ 
+                width: `${profileImages.length * 100}%`,
+                transform: `translateX(-${(currentImageIndex * 100) / profileImages.length}%)`,
+                transition: isTransitioning 
+                  ? `transform ${isReverse ? '0.2s' : '1.0s'} cubic-bezier(0.4, 0.0, 0.2, 1.0)`
+                  : 'none'
               }}
             >
               {profileImages.map((src, idx) => (
@@ -472,7 +478,12 @@ export default function Hero({ setActiveTab }) {
                   src={src}
                   alt="Dinesh Poudel"
                   className="object-cover h-full flex-none select-none pointer-events-none"
-                  style={{ width: `${100 / profileImages.length}%` }}
+                  style={{ 
+                    width: `${100 / profileImages.length}%`,
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)',
+                    WebkitFontSmoothing: 'antialiased'
+                  }}
                   draggable={false}
                   decoding="async"
                   loading="eager"

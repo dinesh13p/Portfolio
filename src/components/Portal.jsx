@@ -79,7 +79,6 @@ export default function Portal() {
                     </motion.div>
                 </motion.div>
 
-                {/* ...existing code... */}
             </motion.div>
         </div>
     )
