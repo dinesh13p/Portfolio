@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import profileImage1 from '../assets/Profile1.jpg'
 import profileImage2 from '../assets/Profile2.jpg'
 import profileImage3 from '../assets/Profile3.jpg'
@@ -321,7 +322,8 @@ const NetworkBackground = () => {
   )
 }
 
-export default function Hero({ setActiveTab }) {
+export default function Hero() {
+  const navigate = useNavigate()
   const profileImages = [
     profileImage1,
     profileImage2,
@@ -433,7 +435,7 @@ export default function Hero({ setActiveTab }) {
             className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start max-w-md mx-auto md:mx-0"
           >
             <motion.button 
-              onClick={() => setActiveTab('projects')}
+              onClick={() => navigate('/Showcase')}
               className="px-5 py-3 rounded-full btn-primary text-white font-semibold text-base md:text-base whitespace-nowrap"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -441,7 +443,7 @@ export default function Hero({ setActiveTab }) {
               View My Work
             </motion.button>
             <motion.button 
-              onClick={() => setActiveTab('contact')}
+              onClick={() => navigate('/Contact')}
               className="px-5 py-3 rounded-full btn-secondary text-base md:text-base whitespace-nowrap"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}

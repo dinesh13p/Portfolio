@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react'
 import { HiMenu, HiX } from 'react-icons/hi'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { 
   FaHome, FaUser, FaProjectDiagram, FaFileAlt, FaEnvelope,
-  FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaFacebook, 
+  FaGithub, FaLinkedin, FaInstagram, FaFacebook, 
   FaGlobe
 } from 'react-icons/fa'
+import { SiX } from 'react-icons/si'
 
 const NAV = [
-  { id: 'home', label: 'Home', icon: <FaHome /> },
-  { id: 'about', label: 'About', icon: <FaUser /> },
-  { id: 'projects', label: 'Projects', icon: <FaProjectDiagram /> },
-  { id: 'resume', label: 'Resume', icon: <FaFileAlt /> },
-  { id: 'contact', label: 'Contact', icon: <FaEnvelope /> },
-  { id: 'portal', label: 'Portal', icon: <FaGlobe /> }
+  { id: 'home', label: 'Home', icon: <FaHome />, path: '/Home' },
+  { id: 'about', label: 'About', icon: <FaUser />, path: '/About' },
+  { id: 'showcase', label: 'Showcase', icon: <FaProjectDiagram />, path: '/Showcase' },
+  { id: 'resume', label: 'Resume', icon: <FaFileAlt />, path: '/Resume' },
+  { id: 'contact', label: 'Contact', icon: <FaEnvelope />, path: '/Contact' },
+  // { id: 'portal', label: 'Portal', icon: <FaGlobe />, path: '/Portal' }
 ]
 
 const socialLinks = [
   { icon: FaGithub, url: 'https://github.com/dinesh13p', name: 'Github' },
-  { icon: FaLinkedin, url: 'https://www.linkedin.com/in/dinesh-poudel-3a4b10331/', name: 'LinkedIn' },
   { icon: FaInstagram, url: 'https://www.instagram.com/_d_nesh_/', name: 'Instagram' },
-  { icon: FaTwitter, url: 'https://x.com/Dinesh2061', name: 'X (formerly Twitter)' },
-  { icon: FaFacebook, url: 'https://www.facebook.com/dinesh.poudel.319452', name: 'Facebook' }
+  { icon: SiX, url: 'https://x.com/Dinesh2061', name: 'X (formerly Twitter)' },
+  { icon: FaFacebook, url: 'https://www.facebook.com/dinesh.poudel.319452', name: 'Facebook' },
+  { icon: FaLinkedin, url: 'https://www.linkedin.com/in/dinesh-poudel-3a4b10331/', name: 'LinkedIn' }
 ]
 
-export default function Header({ activeTab, setActiveTab }) {
+export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -34,9 +38,15 @@ export default function Header({ activeTab, setActiveTab }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handleNavClick = (tabId) => {
-    setActiveTab(tabId)
+  const handleNavClick = () => {
     setOpen(false)
+  }
+
+  const isActive = (path) => {
+    if (path === '/Home') {
+      return location.pathname === '/Home' || location.pathname === '/'
+    }
+    return location.pathname === path
   }
 
   return (
@@ -112,36 +122,39 @@ export default function Header({ activeTab, setActiveTab }) {
         <nav className="flex-1 p-6">
           <div className="space-y-3">
             {NAV.map((nav, i) => (
-              <motion.button
+              <motion.div
                 key={nav.id}
-                onClick={() => handleNavClick(nav.id)}
-                className={`w-full flex items-center gap-4 p-4 rounded-xl font-medium transition-all relative overflow-hidden group ${
-                  activeTab === nav.id 
-                    ? 'bg-gradient-to-r from-brand/20 to-brand-dark/20 text-brand border border-brand/30 shadow-lg' 
-                    : 'text-site-light/70 hover:text-site-light hover:bg-site-light/5'
-                }`}
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 + 0.5, duration: 0.6 }}
-                whileHover={{ x: 5, transition: { duration: 0.2 } }}
               >
-                <motion.span 
-                  className="text-xl"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  transition={{ duration: 0.2 }}
+                <Link
+                  to={nav.path}
+                  onClick={handleNavClick}
+                  className={`w-full flex items-center gap-4 p-4 rounded-xl font-medium transition-all relative overflow-hidden group ${
+                    isActive(nav.path)
+                      ? 'bg-gradient-to-r from-brand/20 to-brand-dark/20 text-brand border border-brand/30 shadow-lg' 
+                      : 'text-site-light/70 hover:text-site-light hover:bg-site-light/5'
+                  }`}
                 >
-                  {nav.icon}
-                </motion.span>
-                <span>{nav.label}</span>
-                
-                {activeTab === nav.id && (
-                  <motion.div
-                    className="absolute left-0 top-0 bottom-0 w-1 bg-brand rounded-r"
-                    layoutId="activeIndicator"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </motion.button>
+                  <motion.span 
+                    className="text-xl"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {nav.icon}
+                  </motion.span>
+                  <span>{nav.label}</span>
+                  
+                  {isActive(nav.path) && (
+                    <motion.div
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-brand rounded-r"
+                      layoutId="activeIndicator"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              </motion.div>
             ))}
           </div>
         </nav>
@@ -198,7 +211,7 @@ export default function Header({ activeTab, setActiveTab }) {
           paddingBottom: 'clamp(12px, 3vh, 24px)' 
         }}>
           <motion.button 
-            onClick={() => setActiveTab('home')} 
+            onClick={() => navigate('/Home')} 
             className="text-lg sm:text-xl md:text-2xl font-extrabold text-brand hover:text-brand-dark transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -279,19 +292,22 @@ export default function Header({ activeTab, setActiveTab }) {
                 </motion.div>
 
                 {NAV.map((n, i) => (
-                  <motion.button 
+                  <motion.div
                     key={n.id}
-                    onClick={() => handleNavClick(n.id)}
-                    className={`text-left block py-2 hover:text-brand transition-colors font-medium border-b border-gray-800 last:border-0 ${
-                      activeTab === n.id ? 'text-brand font-semibold' : ''
-                    }`}
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1, duration: 0.3 }}
-                    whileHover={{ x: 10 }}
                   >
-                    {n.label}
-                  </motion.button>
+                    <Link
+                      to={n.path}
+                      onClick={handleNavClick}
+                      className={`text-left block py-2 hover:text-brand transition-colors font-medium border-b border-gray-800 last:border-0 ${
+                        isActive(n.path) ? 'text-brand font-semibold' : ''
+                      }`}
+                    >
+                      {n.label}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
