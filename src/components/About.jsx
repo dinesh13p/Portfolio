@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaHtml5, FaCss3Alt, FaReact, FaDatabase, FaJsSquare, FaJava, FaPython, FaGit, FaCloudflare } from 'react-icons/fa'
-import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiFigma, SiPhp, SiMysql } from 'react-icons/si'
+import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiFigma, SiPhp, SiMysql, SiPostgresql } from 'react-icons/si'
 
 const skills = [
   {
@@ -80,6 +80,13 @@ const skills = [
     color: 'from-blue-500 to-blue-600',
     borderColor: 'border-blue-500/30',
     iconColor: 'text-blue-500'
+  },
+  {
+    name: 'PostgreSQL',
+    icon: <SiPostgresql />,
+    color: 'from-blue-600 to-blue-700',
+    borderColor: 'border-blue-600/30',
+    iconColor: 'text-blue-600'
   },
   {
     name: 'Git',

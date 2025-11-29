@@ -1,4 +1,3 @@
-
 # Dinesh Poudel's Portfolio Website
 
 This is my official portfolio website., I am a Frontend Developer and aspiring Full Stack Developer from Nepal. This site showcases my projects, skills, experience, and contact information.

@@ -191,10 +191,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.9 }}
         >
           <p className="text-sm sm:text-base">
-            Email 1: <a className="text-brand hover:underline transition-all duration-300" href="mailto:dineshp4297501@gmail.com">dineshp4297501@gmail.com</a>
-          </p>
-          <p className="text-sm sm:text-base">
-            Email 2: <a className="text-brand hover:underline transition-all duration-300" href="mailto:dineshacc02@gmail.com">dineshacc02@gmail.com</a>
+            Email directly at: <a className="text-brand hover:underline transition-all duration-300" href="mailto:dineshacc02@gmail.com">dineshacc02@gmail.com</a>
           </p>
         </motion.div>
       </motion.div>

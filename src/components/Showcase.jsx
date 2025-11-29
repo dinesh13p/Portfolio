@@ -45,23 +45,31 @@ const MOCK = [
   },
   {
     id: 'proj-6',
-    title: 'Portfolio Website_Sandhya',
-    desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Built & deployed entirely by myself.',
+    title: 'Self improvement project',
+    desc: 'Academics related personal project',
+    tech: ['Java', 'Spring Boot', 'pgAdmin4'],
+    github: null,
+    live: null
+  },
+  {
+    id: 'proj-7',
+    title: 'Portfolio_Website->Sandhya',
+    desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Developed entirely by myself.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/paudelsandhya/Portfolio',
     live: 'https://paudelsandhya.github.io/Portfolio/'
   },
   {
-    id: 'proj-7',
-    title: 'Portfolio Website_Sunil',
+    id: 'proj-8',
+    title: 'Portfolio_Website->Sunil',
     desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/Sunil5566/Portfolio',
     live: 'https://sunil5566.github.io/Portfolio/'
   },
   {
-    id: 'proj-8',
-    title: 'Portfolio Website_Bishal',
+    id: 'proj-9',
+    title: 'Portfolio_Website->Bishal',
     desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/bixal127/Portfolio',
@@ -72,7 +80,7 @@ const MOCK = [
 export default function Showcase() {
   const [activeTab, setActiveTab] = useState('Projects')
   const [filter, setFilter] = useState('All')
-  const tags = ['All', 'WebDev', 'IoT', 'Academics', 'Personal']
+  const tags = ['All', 'WebDev', 'IoT', 'Enterprise', 'Personal']
 
   const filtered = MOCK.filter((p) => {
     if (p.id === 'proj-4') {
@@ -81,8 +89,8 @@ export default function Showcase() {
     if (p.id === 'proj-2') {
       return filter === 'All' || filter === 'WebDev' || filter === 'Personal';
     }
-    if (p.id === 'proj-5') {
-      return filter === 'All' || filter === 'Academics';
+    if (p.id === 'proj-5' || p.id === 'proj-6') {
+      return filter === 'All' || filter === 'Enterprise';
     }
     if (filter === 'All') return true;
     if (filter === 'WebDev') {
@@ -210,9 +218,10 @@ export default function Showcase() {
                           case 'proj-3': return "url('/images/IoT_&_Robotics.jpg')";
                           case 'proj-4': return "url('/images/Personal_Project.jpg')";
                           case 'proj-5': return "url('/images/4th_Sem_Project.jpg')";
-                          case 'proj-6': return "url('/images/Portfolio_Sandhya.jpg')";
-                          case 'proj-7': return "url('/images/Portfolio_Sunil.jpg')";
-                          case 'proj-8': return "url('/images/Portfolio_Bishal.jpg')";
+                          case 'proj-6': return "url('/images/School_Management_System.jpg')";
+                          case 'proj-7': return "url('/images/Portfolio_Sandhya.jpg')";
+                          case 'proj-8': return "url('/images/Portfolio_Sunil.jpg')";
+                          case 'proj-9': return "url('/images/Portfolio_Bishal.jpg')";
                           default: return undefined;
                         }
                       })(),
