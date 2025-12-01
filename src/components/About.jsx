@@ -82,7 +82,7 @@ const skills = [
     iconColor: 'text-blue-500'
   },
   {
-    name: 'PostgreSQL',
+    name: 'pgAdmin',
     icon: <SiPostgresql />,
     color: 'from-blue-600 to-blue-700',
     borderColor: 'border-blue-600/30',
@@ -159,7 +159,7 @@ export default function About() {
           >
             I am a BCA student from Tribhuvan University. I build responsive web applications using <strong className="text-white">React</strong> and modern tools.
             Currently pursuing studies in backend development and system design, with emphasis on <strong className="text-white">Java</strong> and <strong className="text-white">Spring Boot. </strong>
-            I have worked on front-end UI, small backend APIs, and IoT & robotics experiments as my projects.
+            I have worked on front-end UI, small backend APIs, and IoT & Robotics experiments as my projects.
           </motion.p>
 
           <motion.div

@@ -70,7 +70,7 @@ export default function Resume() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-sm sm:text-base md:text-lg text-gray-300 max-w-lg lg:mx-0 mx-auto leading-relaxed"
             >
-              View or download my resume to learn more about my experience, education, and skills.
+              View or Download my <strong className="text-white">Resume</strong> to learn more about my skills, education, and experience.
             </motion.p>
           </motion.div>
 

@@ -5,14 +5,6 @@ import { Github, ExternalLink } from 'lucide-react'
 const MOCK = [
   {
     id: 'proj-1',
-    title: 'Marvel Copy-Website',
-    desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
-    tech: ['HTML', 'CSS', 'Bootstrap'],
-    github: 'https://github.com/dinesh13p/First-sem_Project',
-    live: 'https://dinesh13p.github.io/First-sem_Project/'
-  },
-  {
-    id: 'proj-2',
     title: 'Portfolio v1_dinesh13p',
     desc: 'My Personal Portfolio Website.',
     tech: ['React', 'Tailwind'],
@@ -20,15 +12,7 @@ const MOCK = [
     live: 'https://dinesh-poudel.com.np'
   },
   {
-    id: 'proj-3',
-    title: 'IoT & Robotics Projects',
-    desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
-    tech: ['IoT', 'Arduino IDE'],
-    github: 'https://github.com/dinesh13p/IoT_Projects_Drogon',
-    live: null
-  },
-  {
-    id: 'proj-4',
+    id: 'proj-2',
     title: 'GamesV1',
     desc: 'My personal growth project where I\'ve made various games.',
     tech: ['React', 'JavaScript'],
@@ -36,15 +20,15 @@ const MOCK = [
     live: 'https://dinesh2004.com.np'
   },
   {
-    id: 'proj-5',
+    id: 'proj-3',
     title: '4th semester project',
     desc: '4th Semester Project --> Development in Progress.',
-    tech: ['Java', 'Spring Boot', 'pgAdmin4'],
+    tech: ['Java', 'Spring Boot', 'Thymeleaf', 'pgAdmin4'],
     github: null,
     live: null
   },
   {
-    id: 'proj-6',
+    id: 'proj-4',
     title: 'Self improvement project',
     desc: 'Academics related personal project',
     tech: ['Java', 'Spring Boot', 'pgAdmin4'],
@@ -52,7 +36,7 @@ const MOCK = [
     live: null
   },
   {
-    id: 'proj-7',
+    id: 'proj-5',
     title: 'Portfolio_Website->Sandhya',
     desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Developed entirely by myself.',
     tech: ['React', 'Tailwind'],
@@ -60,7 +44,7 @@ const MOCK = [
     live: 'https://paudelsandhya.github.io/Portfolio/'
   },
   {
-    id: 'proj-8',
+    id: 'proj-6',
     title: 'Portfolio_Website->Sunil',
     desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
@@ -68,34 +52,65 @@ const MOCK = [
     live: 'https://sunil5566.github.io/Portfolio/'
   },
   {
-    id: 'proj-9',
+    id: 'proj-7',
     title: 'Portfolio_Website->Bishal',
     desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
     tech: ['React', 'Tailwind'],
     github: 'https://github.com/bixal127/Portfolio',
     live: 'https://bixal127.github.io/Portfolio/'
+  },
+  {
+    id: 'proj-8',
+    title: 'IoT & Robotics Projects',
+    desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
+    tech: ['IoT', 'Arduino IDE'],
+    github: 'https://github.com/dinesh13p/IoT_Projects_Drogon',
+    live: null
+  },
+  {
+    id: 'proj-9',
+    title: 'Marvel Copy Website',
+    desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
+    tech: ['HTML', 'CSS', 'Bootstrap'],
+    github: 'https://github.com/dinesh13p/First-sem_Project',
+    live: 'https://dinesh13p.github.io/First-sem_Project/'
   }
 ]
 
 export default function Showcase() {
   const [activeTab, setActiveTab] = useState('Projects')
   const [filter, setFilter] = useState('All')
-  const tags = ['All', 'WebDev', 'IoT', 'Enterprise', 'Personal']
+  const tags = ['All', 'WebDev', 'Academics', 'Personal', 'WorkBench', 'Others']
 
   const filtered = MOCK.filter((p) => {
-    if (p.id === 'proj-4') {
-      return filter === 'All' || filter === 'Personal';
-    }
-    if (p.id === 'proj-2') {
+    if (p.id === 'proj-1') {
       return filter === 'All' || filter === 'WebDev' || filter === 'Personal';
     }
-    if (p.id === 'proj-5' || p.id === 'proj-6') {
-      return filter === 'All' || filter === 'Enterprise';
+    if (p.id === 'proj-2') {
+      return filter === 'All' || filter==="WebDev" || filter === 'Personal' || filter === 'WorkBench';
+    }
+    if (p.id === 'proj-3') {
+      return filter === 'All' || filter === 'Academics';
+    }
+    if (p.id === 'proj-4') {
+      return filter === 'All' || filter === 'WorkBench' || filter === 'Personal';
+    }
+    if (p.id === 'proj-5') {
+      return filter === 'All' || filter === 'WebDev';
+    }
+    if (p.id === 'proj-6') {
+      return filter === 'All' || filter === 'WebDev';
+    }
+    if (p.id === 'proj-7') {
+      return filter === 'All' || filter === 'WebDev';
+    }
+    if (p.id === 'proj-8') {
+      return filter === 'All' || filter === 'Others';
+    }
+    if (p.id === 'proj-9') {
+      return filter === 'All' || filter === 'WebDev';
     }
     if (filter === 'All') return true;
-    if (filter === 'WebDev') {
-      return p.tech && p.tech.some(tech => tech.includes('HTML') || tech.includes('React')) && p.id !== 'proj-4';
-    }
     return p.tech && p.tech.some(tech => tech.includes(filter));
   })
 
@@ -213,15 +228,15 @@ export default function Showcase() {
                     style={{
                       backgroundImage: (() => {
                         switch (p.id) {
-                          case 'proj-1': return "url('/images/Marvel_Copy_Website.jpg')";
-                          case 'proj-2': return "url('/images/Portfolio_v1.jpg')";
-                          case 'proj-3': return "url('/images/IoT_&_Robotics.jpg')";
-                          case 'proj-4': return "url('/images/Personal_Project.jpg')";
-                          case 'proj-5': return "url('/images/4th_Sem_Project.jpg')";
-                          case 'proj-6': return "url('/images/School_Management_System.jpg')";
-                          case 'proj-7': return "url('/images/Portfolio_Sandhya.jpg')";
-                          case 'proj-8': return "url('/images/Portfolio_Sunil.jpg')";
-                          case 'proj-9': return "url('/images/Portfolio_Bishal.jpg')";
+                          case 'proj-1': return "url('/images/Portfolio_v1.jpg')";
+                          case 'proj-2': return "url('/images/Personal_Project.jpg')";
+                          case 'proj-3': return "url('/images/4th_Sem_Project.jpg')";
+                          case 'proj-4': return "url('/images/School_Management_System.jpg')";
+                          case 'proj-5': return "url('/images/Portfolio_Sandhya.jpg')";
+                          case 'proj-6': return "url('/images/Portfolio_Sunil.jpg')";
+                          case 'proj-7': return "url('/images/Portfolio_Bishal.jpg')";
+                          case 'proj-8': return "url('/images/IoT_&_Robotics.jpg')";
+                          case 'proj-9': return "url('/images/Marvel_Copy_Website.jpg')";
                           default: return undefined;
                         }
                       })(),
