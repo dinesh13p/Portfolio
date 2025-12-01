@@ -61,7 +61,8 @@ export default function Header() {
         {/* Header */}
         <div className="p-6 text-center border-b border-brand/10">
           <motion.h1 
-            className="text-xl font-bold text-brand mb-1"
+            className="text-xl font-bold text-brand mb-1 cursor-pointer hover:opacity-80 transition-opacity"
+            onClick={() => navigate('/')}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}

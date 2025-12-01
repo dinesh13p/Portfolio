@@ -75,7 +75,7 @@ const skills = [
     iconColor: 'text-blue-500'
   },
   {
-    name: 'SQL',
+    name: 'MySQL',
     icon: <SiMysql />,
     color: 'from-blue-500 to-blue-600',
     borderColor: 'border-blue-500/30',
@@ -158,7 +158,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             I am a BCA student from Tribhuvan University. I build responsive web applications using <strong className="text-white">React</strong> and modern tools.
-            Currently pursuing studies in backend development and system design, with emphasis on <strong className="text-white">Java</strong> and <strong className="text-white"></strong>Spring Boot.
+            Currently pursuing studies in backend development and system design, with emphasis on <strong className="text-white">Java</strong> and <strong className="text-white">Spring Boot. </strong>
             I have worked on front-end UI, small backend APIs, and IoT & robotics experiments as my projects.
           </motion.p>
 
