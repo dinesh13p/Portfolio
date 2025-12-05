@@ -1,0 +1,24 @@
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://dinesh-poudel.com.np/sitemap.xml
+
+# Crawl-delay (optional, helps prevent server overload)
+Crawl-delay: 1
+
+# Priority pages
+Allow: /Home
+Allow: /About
+Allow: /Showcase
+Allow: /Resume
+Allow: /Contact
+
+# Image files
+Allow: /Profile1.jpg
+Allow: /Profile4.jpg
+Allow: /Profile5.jpg
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.webp$
