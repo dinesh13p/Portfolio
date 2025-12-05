@@ -214,6 +214,7 @@ export default function Header() {
           <motion.button 
             onClick={() => navigate('/Home')} 
             className="text-lg sm:text-xl md:text-2xl font-extrabold text-brand hover:text-brand-dark transition-colors"
+            aria-label="Go to home page"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

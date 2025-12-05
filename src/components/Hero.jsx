@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import profileImage1 from '../assets/Profile1.jpg'
 import profileImage2 from '../assets/Profile2.jpg'
 import profileImage3 from '../assets/Profile3.jpg'
@@ -15,7 +16,7 @@ const TypewriterText = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
-  
+
   const texts = [
     'Student',
     'Front-end Developer',
@@ -27,16 +28,16 @@ const TypewriterText = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       const fullText = texts[currentTextIndex]
-      
+
       if (!isDeleting) {
         setCurrentText(fullText.substring(0, currentText.length + 1))
-        
+
         if (currentText === fullText) {
           setTimeout(() => setIsDeleting(true), 2000)
         }
       } else {
         setCurrentText(fullText.substring(0, currentText.length - 1))
-        
+
         if (currentText === '') {
           setIsDeleting(false)
           setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length)
@@ -79,7 +80,7 @@ const NetworkBackground = () => {
     const createParticles = () => {
       particles = []
       const particleCount = Math.floor((canvas.width * canvas.height) / 12000)
-      
+
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
@@ -147,7 +148,7 @@ const NetworkBackground = () => {
           const dx = particle.x - mouse.x
           const dy = particle.y - mouse.y
           const distance = Math.sqrt(dx * dx + dy * dy)
-          
+
           if (distance < 150) {
             const opacity = (150 - distance) / 150 * 0.6
             ctx.strokeStyle = `rgba(255, 60, 60, ${opacity})`
@@ -176,7 +177,7 @@ const NetworkBackground = () => {
           const dx = mouse.x - particle.x
           const dy = mouse.y - particle.y
           const distance = Math.sqrt(dx * dx + dy * dy)
-          
+
           if (distance < 200) {
             const force = (200 - distance) / 200 * 0.02
             particle.vx += (dx / distance) * force
@@ -186,9 +187,9 @@ const NetworkBackground = () => {
 
         particle.x += particle.vx
         particle.y += particle.vy
-        
+
         const margin = 50
-        
+
         if (particle.x < -margin) {
           particle.x = canvas.width + margin
           particle.vx = Math.abs(particle.vx) * -0.5
@@ -196,7 +197,7 @@ const NetworkBackground = () => {
           particle.x = -margin
           particle.vx = Math.abs(particle.vx) * 0.5
         }
-        
+
         if (particle.y < -margin) {
           particle.y = canvas.height + margin
           particle.vy = Math.abs(particle.vy) * -0.5
@@ -207,7 +208,7 @@ const NetworkBackground = () => {
 
         const dampening = 0.995
         const restoration = 0.005
-        
+
         particle.vx = particle.vx * dampening + particle.originalVx * restoration
         particle.vy = particle.vy * dampening + particle.originalVy * restoration
 
@@ -216,9 +217,9 @@ const NetworkBackground = () => {
           particle.vy += (Math.random() - 0.5) * 0.3
         }
 
-        const isNearEdge = particle.x < 100 || particle.x > canvas.width - 100 || 
-                          particle.y < 100 || particle.y > canvas.height - 100
-        
+        const isNearEdge = particle.x < 100 || particle.x > canvas.width - 100 ||
+          particle.y < 100 || particle.y > canvas.height - 100
+
         if (isNearEdge) {
           particle.repositionTimer++
           if (particle.repositionTimer > 300) {
@@ -263,7 +264,7 @@ const NetworkBackground = () => {
       mouse.x = e.clientX - rect.left
       mouse.y = e.clientY - rect.top
       mouse.isMoving = true
-      
+
       clearTimeout(mouse.timeout)
       mouse.timeout = setTimeout(() => {
         mouse.isMoving = false
@@ -351,7 +352,7 @@ export default function Hero() {
   const scheduleNext = () => {
     clearTimeout(timeoutRef.current)
     let delay
-    
+
     // If we're in reverse and at index 0 (Profile1.jpg), show it for 4 seconds
     if (isReverse && currentImageIndex === 0) {
       delay = 4000
@@ -376,7 +377,7 @@ export default function Hero() {
         // Otherwise continue in current direction
         return isReverse ? prevIndex - 1 : prevIndex + 1
       })
-      
+
       // Reset transition state after animation completes
       setTimeout(() => setIsTransitioning(false), isReverse ? 200 : 1000)
     }, delay)
@@ -398,107 +399,123 @@ export default function Hero() {
   }, [currentImageIndex, isReverse])
 
   return (
-    <div className="relative flex items-center justify-center min-h-full overflow-hidden px-4 sm:px-6 lg:px-8">
-      <div className="absolute inset-0 z-0">
-        <NetworkBackground />
-      </div>
-      
-      <div className="relative z-10 container grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="order-2 md:order-1 text-center md:text-left"
-        >
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            transition={{ duration: 0.6 }} 
-            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
-          >
-            Hi, it's me <span className="text-brand block">Dinesh Poudel</span>
-          </motion.h1>
+    <>
+      <Helmet>
+        <title>Dinesh Poudel - Frontend Developer & Full Stack Developer from Nepal</title>
+        <meta name="description" content="Hi, I'm Dinesh Poudel - Frontend Developer and Aspiring Full Stack Developer from Butwal, Nepal. Specializing in React.js, JavaScript, Java SpringBoot, IoT, and Robotics. View my portfolio and projects." />
+        <meta property="og:title" content="Dinesh Poudel - Frontend Developer Portfolio" />
+        <meta property="og:description" content="Frontend Developer and Aspiring Full Stack Developer from Nepal. Specializing in React.js, JavaScript, and modern web development." />
+        <link rel="canonical" href="https://dinesh-poudel.com.np/" />
+      </Helmet>
 
-          <motion.div 
-            initial={{ y: 12, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            transition={{ delay: 0.2, duration: 0.6 }} 
-            className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl lg:text-xl max-w-xl text-gray-300 mx-auto md:mx-0"
-          >
-            <TypewriterText />
-          </motion.div>
+      <div className="relative flex items-center justify-center min-h-full overflow-hidden px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 z-0">
+          <NetworkBackground />
+        </div>
 
-          <motion.div 
-            initial={{ y: 12, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start max-w-md mx-auto md:mx-0"
+        <div className="relative z-10 container grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="order-2 md:order-1 text-center md:text-left"
           >
-            <motion.button 
-              onClick={() => navigate('/Showcase')}
-              className="px-5 py-3 rounded-full btn-primary text-white font-semibold text-base md:text-base whitespace-nowrap"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
             >
-              View My Work
-            </motion.button>
-            <motion.button 
-              onClick={() => navigate('/Contact')}
-              className="px-5 py-3 rounded-full btn-secondary text-base md:text-base whitespace-nowrap"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Me
-            </motion.button>
-          </motion.div>
-        </motion.div>
+              Hi, it's me <span className="text-brand block">Dinesh Poudel</span>
+            </motion.h1>
 
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0, x: 50 }} 
-          animate={{ scale: 1, opacity: 1, x: 0 }} 
-          transition={{ delay: 0.3, duration: 0.8 }} 
-          className="order-1 md:order-2 flex justify-center"
-        >
-          <motion.div 
-            className="w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 md:w-88 md:h-88 lg:w-104 lg:h-104 xl:w-[28rem] xl:h-[28rem] rounded-full overflow-hidden border-4 border-white/10 relative z-10 flex-shrink-0"
-            whileHover={{ scale: 1.05, borderColor: 'rgba(255, 60, 60, 0.3)' }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div 
-              className="absolute inset-0 flex"
-              style={{ 
-                width: `${profileImages.length * 100}%`,
-                transform: `translateX(-${(currentImageIndex * 100) / profileImages.length}%)`,
-                transition: isTransitioning 
-                  ? `transform ${isReverse ? '0.2s' : '1.0s'} cubic-bezier(0.4, 0.0, 0.2, 1.0)`
-                  : 'none'
-              }}
+            <motion.div
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl lg:text-xl max-w-xl text-gray-300 mx-auto md:mx-0"
             >
-              {profileImages.map((src, idx) => (
-                <img
-                  key={idx}
-                  src={src}
-                  alt="Dinesh Poudel"
-                  className="object-cover h-full flex-none select-none pointer-events-none"
-                  style={{ 
-                    width: `${100 / profileImages.length}%`,
-                    backfaceVisibility: 'hidden',
-                    transform: 'translateZ(0)',
-                    WebkitFontSmoothing: 'antialiased'
-                  }}
-                  draggable={false}
-                  decoding="async"
-                  loading="eager"
-                  onError={(e) => {
-                    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
-                    console.log('Profile image failed to load, using placeholder')
-                  }}
-                />
-              ))}
+              <TypewriterText />
+            </motion.div>
+
+            <motion.div
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start max-w-md mx-auto md:mx-0"
+            >
+              <motion.button
+                onClick={() => navigate('/Showcase')}
+                className="px-5 py-3 rounded-full btn-primary text-white font-semibold text-base md:text-base whitespace-nowrap"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="View Dinesh Poudel's work and projects"
+              >
+                View My Work
+              </motion.button>
+              <motion.button
+                onClick={() => navigate('/Contact')}
+                className="px-5 py-3 rounded-full btn-secondary text-base md:text-base whitespace-nowrap"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Contact Dinesh Poudel"
+              >
+                Contact Me
+              </motion.button>
             </motion.div>
           </motion.div>
-        </motion.div>
+
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0, x: 50 }}
+            animate={{ scale: 1, opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="order-1 md:order-2 flex justify-center"
+          >
+            <motion.div
+              className="w-64 h-64 xs:w-72 xs:h-72 sm:w-80 sm:h-80 md:w-88 md:h-88 lg:w-104 lg:h-104 xl:w-[28rem] xl:h-[28rem] rounded-full overflow-hidden border-4 border-white/10 relative z-10 flex-shrink-0"
+              whileHover={{ scale: 1.05, borderColor: 'rgba(255, 60, 60, 0.3)' }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                className="absolute inset-0 flex"
+                style={{
+                  width: `${profileImages.length * 100}%`,
+                  transform: `translateX(-${(currentImageIndex * 100) / profileImages.length}%)`,
+                  transition: isTransitioning
+                    ? `transform ${isReverse ? '0.2s' : '1.0s'} cubic-bezier(0.4, 0.0, 0.2, 1.0)`
+                    : 'none'
+                }}
+              >
+                {profileImages.map((src, idx) => (
+                  <img
+                    key={idx}
+                    src={src}
+                    alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
+                      idx === 3 ? "Dinesh Poudel Professional Photo" :
+                        idx === 4 ? "Dinesh Poudel Portfolio Image" :
+                          "Dinesh Poudel"}
+                    className="object-cover h-full flex-none select-none pointer-events-none"
+                    style={{
+                      width: `${100 / profileImages.length}%`,
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)',
+                      WebkitFontSmoothing: 'antialiased'
+                    }}
+                    draggable={false}
+                    decoding="async"
+                    loading="eager"
+                    itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
+                      console.log('Profile image failed to load, using placeholder')
+                    }}
+                  />
+                ))}
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

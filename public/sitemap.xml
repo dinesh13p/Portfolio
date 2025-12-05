@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <!-- Homepage -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://dinesh-poudel.com.np/Profile1.jpg</image:loc>
+            <image:title>Dinesh Poudel - Frontend Developer</image:title>
+            <image:caption>Dinesh Poudel, Frontend Developer and Aspiring Full Stack Developer from Nepal</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://dinesh-poudel.com.np/Profile4.jpg</image:loc>
+            <image:title>Dinesh Poudel Professional Photo</image:title>
+            <image:caption>Professional photo of Dinesh Poudel</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://dinesh-poudel.com.np/Profile5.jpg</image:loc>
+            <image:title>Dinesh Poudel Portfolio Image</image:title>
+            <image:caption>Dinesh Poudel portfolio photograph</image:caption>
+        </image:image>
+    </url>
+    <!-- Home Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Home</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- About Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/About</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <!-- Showcase Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Showcase</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <!-- Showcase/Projects -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Showcase/Projects</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Showcase/Achievements -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Showcase/Achievements</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Resume Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Resume</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Contact Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Contact</loc>
+        <lastmod>2025-01-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>

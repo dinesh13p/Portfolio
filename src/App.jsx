@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { HelmetProvider } from 'react-helmet-async'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -8,19 +9,15 @@ import Showcase from './components/Showcase'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-// import Portal from './components/Portal'
 
 function AppContent() {
   const location = useLocation()
 
   return (
     <div className="min-h-screen flex bg-site-dark text-site-light">
-      {/* Vertical Sidebar for Desktop / Top Header for Mobile */}
       <Header />
       
-      {/* Main Content */}
       <main className="flex-1 lg:ml-80 lg:overflow-hidden">
-        {/* Mobile: Account for top header height and include Footer */}
         <div className="lg:hidden h-screen flex flex-col overflow-hidden" style={{ 
           paddingTop: 'clamp(64px, 15vh, 80px)', 
           paddingBottom: 'clamp(64px, 12vh, 80px)' 
@@ -38,6 +35,8 @@ function AppContent() {
                 <Route path="/Home" element={<Hero />} />
                 <Route path="/About" element={<About />} />
                 <Route path="/Showcase" element={<Showcase />} />
+                <Route path="/Showcase/Projects" element={<Showcase />} />
+                <Route path="/Showcase/Achievements" element={<Showcase />} />
                 <Route path="/Resume" element={<Resume />} />
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/" element={<Hero />} />
@@ -45,11 +44,9 @@ function AppContent() {
             </motion.div>
           </AnimatePresence>
           
-          {/* Footer only for mobile */}
           <Footer />
         </div>
 
-        {/* Desktop: Full height content */}
         <div className="hidden lg:block h-screen overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
@@ -68,6 +65,8 @@ function AppContent() {
                 <Route path="/Home" element={<Hero />} />
                 <Route path="/About" element={<About />} />
                 <Route path="/Showcase" element={<Showcase />} />
+                <Route path="/Showcase/Projects" element={<Showcase />} />
+                <Route path="/Showcase/Achievements" element={<Showcase />} />
                 <Route path="/Resume" element={<Resume />} />
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/" element={<Hero />} />
@@ -82,8 +81,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </HelmetProvider>
   )
 }
