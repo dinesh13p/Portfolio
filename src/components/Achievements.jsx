@@ -45,13 +45,13 @@ const CERTIFICATES = [
     },
     {
         id: 'cert-5',
-        title: 'Business Analytics with Excel',
-        institution: 'SimpliLearn',
+        title: 'Business Analytics with Excel powered by Microsoft',
+        institution: 'SimpliLearn & Microsoft',
         type: '2 hrs Course',
         description: 'Practical business analytics skills using Microsoft Excel including data analysis, pivot tables, and visualization techniques.',
         category: 'SimpliLearn',
         image: '/Achievements/simplilearn-excel.jpg',
-        verify: ''
+        verify: 'https://simpli-web.app.link/e/1EymVgBYRYb'
     },
     {
         id: 'cert-6',
@@ -99,7 +99,7 @@ const CERTIFICATES = [
 export default function Achievements() {
     const [filter, setFilter] = useState('All')
     const [selectedCert, setSelectedCert] = useState(null)
-    const categories = ['All', 'HackerRank', 'SimpliLearn', 'LinkedIn Learning', 'Others']
+    const categories = ['All', 'HackerRank', 'LinkedIn Learning', 'SimpliLearn', 'Others']
 
     const filtered = CERTIFICATES.filter(cert =>
         filter === 'All' || cert.category === filter

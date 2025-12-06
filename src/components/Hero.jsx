@@ -454,13 +454,13 @@ export default function Hero() {
                 View My Work
               </motion.button>
               <motion.button
-                onClick={() => navigate('/Contact')}
+                onClick={() => navigate('/About')}
                 className="px-5 py-3 rounded-full btn-secondary text-base md:text-base whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                aria-label="Contact Dinesh Poudel"
+                aria-label="About Dinesh Poudel"
               >
-                Contact Me
+                About Me
               </motion.button>
             </motion.div>
           </motion.div>
