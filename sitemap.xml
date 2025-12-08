@@ -9,18 +9,18 @@
         <priority>1.0</priority>
         <image:image>
             <image:loc>https://dinesh-poudel.com.np/Profile1.jpg</image:loc>
-            <image:title>Dinesh Poudel - Frontend Developer</image:title>
-            <image:caption>Dinesh Poudel, Frontend Developer and Aspiring Full Stack Developer from Nepal</image:caption>
+            <image:title>Dinesh Poudel</image:title>
+            <image:caption>Me</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://dinesh-poudel.com.np/Profile4.jpg</image:loc>
-            <image:title>Dinesh Poudel Professional Photo</image:title>
-            <image:caption>Professional photo of Dinesh Poudel</image:caption>
+            <image:title>Dinesh Poudel</image:title>
+            <image:caption>Me</image:caption>
         </image:image>
         <image:image>
             <image:loc>https://dinesh-poudel.com.np/Profile5.jpg</image:loc>
-            <image:title>Dinesh Poudel Portfolio Image</image:title>
-            <image:caption>Dinesh Poudel portfolio photograph</image:caption>
+            <image:title>Dinesh Poudel</image:title>
+            <image:caption>Me</image:caption>
         </image:image>
     </url>
     <!-- Home Page -->
