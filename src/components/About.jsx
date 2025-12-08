@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaHtml5, FaCss3Alt, FaReact, FaDatabase, FaJsSquare, FaJava, FaPython, FaGit, FaCloudflare } from 'react-icons/fa'
+import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaGit, FaCloudflare } from 'react-icons/fa'
 import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiFigma, SiPhp, SiMysql, SiPostgresql } from 'react-icons/si'
 
 const skills = [
@@ -116,13 +116,6 @@ const skills = [
     borderColor: 'border-pink-500/30',
     iconColor: 'text-pink-500'
   }
-  // {
-  //   name: 'Databases',
-  //   icon: <FaDatabase />,
-  //   color: 'from-green-500 to-green-600',
-  //   borderColor: 'border-green-500/30',
-  //   iconColor: 'text-green-500'
-  // }
 ]
 
 export default function About() {

@@ -2,20 +2,34 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import profileImage1 from '../assets/Profile1.jpg'
-import profileImage2 from '../assets/Profile2.jpg'
-import profileImage3 from '../assets/Profile3.jpg'
-import profileImage4 from '../assets/Profile4.jpg'
-import profileImage5 from '../assets/Profile5.jpg'
-import profileImage6 from '../assets/Profile6.jpg'
-import profileImage7 from '../assets/Profile7.jpg'
-import profileImage8 from '../assets/Profile8.jpg'
+
+// Lazy load images to optimize initial load - import only when needed
+const profileImages = [
+  { id: 1, src: () => import('../assets/Profile1.jpg').then(m => m.default) },
+  { id: 2, src: () => import('../assets/Profile2.jpg').then(m => m.default) },
+  { id: 3, src: () => import('../assets/Profile3.jpg').then(m => m.default) },
+  { id: 4, src: () => import('../assets/Profile4.jpg').then(m => m.default) },
+  { id: 5, src: () => import('../assets/Profile5.jpg').then(m => m.default) },
+  { id: 6, src: () => import('../assets/Profile6.jpg').then(m => m.default) },
+  { id: 7, src: () => import('../assets/Profile7.jpg').then(m => m.default) },
+  { id: 8, src: () => import('../assets/Profile8.jpg').then(m => m.default) },
+]
+
+// Cache loaded images in memory for smooth transitions
+let cachedImages = {}
+const preloadImage = async (index) => {
+  if (cachedImages[index]) return cachedImages[index]
+  const src = await profileImages[index].src()
+  cachedImages[index] = src
+  return src
+}
 
 // Typewriter Effect Component
 const TypewriterText = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [currentText, setCurrentText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+  const timeoutRef = useRef(null)
 
   const texts = [
     'Student',
@@ -26,7 +40,7 @@ const TypewriterText = () => {
   ]
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       const fullText = texts[currentTextIndex]
 
       if (!isDeleting) {
@@ -45,7 +59,9 @@ const TypewriterText = () => {
       }
     }, isDeleting ? 50 : 100)
 
-    return () => clearTimeout(timeout)
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
   }, [currentText, isDeleting, currentTextIndex, texts])
 
   return (
@@ -325,35 +341,36 @@ const NetworkBackground = () => {
 
 export default function Hero() {
   const navigate = useNavigate()
-  const profileImages = [
-    profileImage1,
-    profileImage2,
-    profileImage3,
-    profileImage4,
-    profileImage5,
-    profileImage6,
-    profileImage7,
-    profileImage8
-  ]
   const timeoutRef = useRef(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isReverse, setIsReverse] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [loadedImages, setLoadedImages] = useState([])
+  const [imagesLoaded, setImagesLoaded] = useState(false)
 
-  // Preload images to avoid flicker during transitions
+  // Load all images lazily on first render
   useEffect(() => {
-    profileImages.forEach((src) => {
-      const img = new Image()
-      img.src = src
-    })
+    const loadAllImages = async () => {
+      try {
+        const loaded = await Promise.all(
+          profileImages.map(img => preloadImage(profileImages.indexOf(img)))
+        )
+        setLoadedImages(loaded)
+        setImagesLoaded(true)
+      } catch (error) {
+        console.warn('Error loading profile images:', error)
+        setImagesLoaded(true)
+      }
+    }
+    loadAllImages()
   }, [])
 
-  // schedule next slide using timeout
+  // Schedule next slide using timeout
   const scheduleNext = () => {
     clearTimeout(timeoutRef.current)
     let delay
 
-    // If we're in reverse and at index 0 (Profile1.jpg), show it for 4 seconds
+    // If we're in reverse and at index 0, show it for 4 seconds
     if (isReverse && currentImageIndex === 0) {
       delay = 4000
     } else {
@@ -384,7 +401,7 @@ export default function Hero() {
   }
 
   useEffect(() => {
-    // start the automatic sliding
+    // Start the automatic sliding
     scheduleNext()
     return () => {
       clearTimeout(timeoutRef.current)
@@ -401,10 +418,10 @@ export default function Hero() {
   return (
     <>
       <Helmet>
-        <title>Dinesh Poudel - Frontend Developer & Full Stack Developer from Nepal</title>
-        <meta name="description" content="Hi, I'm Dinesh Poudel - Frontend Developer and Aspiring Full Stack Developer from Butwal, Nepal. Specializing in React.js, JavaScript, Java SpringBoot, IoT, and Robotics. View my portfolio and projects." />
-        <meta property="og:title" content="Dinesh Poudel - Frontend Developer Portfolio" />
-        <meta property="og:description" content="Frontend Developer and Aspiring Full Stack Developer from Nepal. Specializing in React.js, JavaScript, and modern web development." />
+        <title>Dinesh Poudel</title>
+        <meta name="description" content="Hi, I'm Dinesh Poudel - Frontend Developer and Aspiring Full Stack Developer from Nepal. View my projects, skills, achievements, and experience." />
+        <meta property="og:title" content="Dinesh Poudel - Portfolio" />
+        <meta property="og:description" content="Frontend Developer and Aspiring Full Stack Developer from Nepal. Specializing in React.js, JavaScript, Java, SpringBoot, MySQL, PostgreSQL, and modern web development." />
         <link rel="canonical" href="https://dinesh-poudel.com.np/" />
       </Helmet>
 
@@ -486,31 +503,39 @@ export default function Hero() {
                     : 'none'
                 }}
               >
-                {profileImages.map((src, idx) => (
-                  <img
-                    key={idx}
-                    src={src}
-                    alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
-                      idx === 3 ? "Dinesh Poudel Professional Photo" :
-                        idx === 4 ? "Dinesh Poudel Portfolio Image" :
-                          "Dinesh Poudel"}
-                    className="object-cover h-full flex-none select-none pointer-events-none"
-                    style={{
-                      width: `${100 / profileImages.length}%`,
-                      backfaceVisibility: 'hidden',
-                      transform: 'translateZ(0)',
-                      WebkitFontSmoothing: 'antialiased'
-                    }}
-                    draggable={false}
-                    decoding="async"
-                    loading="eager"
-                    itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
-                    onError={(e) => {
-                      e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmZjNjM2M7c3RvcC1vcGFjaXR5OjAuOCIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTMzNjM2O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYwIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CiAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI4MCIgcng9IjgwIiByeT0iNjAiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjM0MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC13ZWlnaHQ9IjYwMCI+RGluZXNoIFBvdWRlbDwvdGV4dD4KPC9zdmc+'
-                      console.log('Profile image failed to load, using placeholder')
-                    }}
-                  />
-                ))}
+                {imagesLoaded && loadedImages.length > 0 ? (
+                  loadedImages.map((src, idx) => (
+                    <motion.img
+                      key={idx}
+                      src={src}
+                      alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal." :
+                        idx === 3 ? "Dinesh Poudel Photo - Certified Frontend Developer from Nepal" :
+                          idx === 4 ? "Dinesh Poudel Picture - Certified Frontend Developer from Nepal" :
+                            `Dinesh Poudel Portfolio Photo ${idx + 1}`}
+                      className="object-cover h-full flex-none select-none pointer-events-none"
+                      style={{
+                        width: `${100 / profileImages.length}%`,
+                        backfaceVisibility: 'hidden',
+                        transform: 'translateZ(0)',
+                        WebkitFontSmoothing: 'antialiased'
+                      }}
+                      draggable={false}
+                      decoding="async"
+                      loading="lazy"
+                      itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
+                      itemScope={idx === 0 ? true : undefined}
+                      itemType={idx === 0 ? "https://schema.org/ImageObject" : undefined}
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
+                        console.log('Profile image failed to load')
+                      }}
+                    />
+                  ))
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                    <div className="text-gray-400">Loading...</div>
+                  </div>
+                )}
               </motion.div>
             </motion.div>
           </motion.div>

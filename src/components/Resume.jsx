@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FaDownload, FaEye, FaFileAlt } from 'react-icons/fa'
 
 export default function Resume() {
+  const [pdfLoading, setPdfLoading] = useState(false)
+  const pdfIframeRef = useRef(null)
   const handleDownload = () => {
     const link = document.createElement('a')
     link.href = '/resume.pdf'
@@ -12,10 +14,17 @@ export default function Resume() {
     document.body.removeChild(link)
   }
 
+  const handleViewOnline = () => {
+    setPdfLoading(true)
+    // Open in new tab instead of embedding to save memory and improve performance
+    window.open('/resume.pdf', '_blank')
+    setTimeout(() => setPdfLoading(false), 500)
+  }
+
   return (
-    <div className="container flex items-center justify-center min-h-full relative" style={{ 
-      paddingTop: 'clamp(16px, 4vh, 32px)', 
-      paddingBottom: 'clamp(16px, 4vh, 32px)' 
+    <div className="container flex items-center justify-center min-h-full relative" style={{
+      paddingTop: 'clamp(16px, 4vh, 32px)',
+      paddingBottom: 'clamp(16px, 4vh, 32px)'
     }}>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -29,7 +38,7 @@ export default function Resume() {
           transition={{ duration: 0.6 }}
           className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8"
         >
-          <motion.div 
+          <motion.div
             className="text-center lg:text-left"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -43,8 +52,8 @@ export default function Resume() {
             >
               <motion.div
                 className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-brand to-brand-dark rounded-xl sm:rounded-2xl flex items-center justify-center"
-                whileHover={{ 
-                  scale: 1.1, 
+                whileHover={{
+                  scale: 1.1,
                   rotate: 5,
                   boxShadow: '0 10px 25px rgba(255, 60, 60, 0.4)'
                 }}
@@ -53,7 +62,7 @@ export default function Resume() {
                 <FaFileAlt className="text-xl sm:text-2xl text-white" />
               </motion.div>
               <div>
-                <motion.h2 
+                <motion.h2
                   className="text-2xl sm:text-3xl md:text-4xl font-bold text-white"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -63,8 +72,8 @@ export default function Resume() {
                 </motion.h2>
               </div>
             </motion.div>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -74,20 +83,20 @@ export default function Resume() {
             </motion.p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
           >
-            <motion.button 
+            <motion.button
               onClick={handleDownload}
               className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 btn-primary text-white rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg shadow-lg w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 y: -3,
                 boxShadow: '0 15px 30px rgba(255, 60, 60, 0.4)'
               }}
@@ -101,29 +110,38 @@ export default function Resume() {
               </motion.div>
               Download PDF
             </motion.button>
-            
-            <motion.a 
+
+            <motion.a
               href="/resume.pdf"
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 btn-secondary rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg text-white w-full sm:w-auto"
+              onClick={(e) => {
+                e.preventDefault()
+                handleViewOnline()
+              }}
+              className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 btn-secondary rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg text-white w-full sm:w-auto disabled:opacity-50"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={pdfLoading ? {} : {
+                scale: 1.05,
                 y: -3,
                 borderColor: '#ff3c3c'
               }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={pdfLoading ? {} : { scale: 0.95 }}
             >
-              <FaEye />
-              View Online
+              <motion.div
+                animate={pdfLoading ? { rotate: 360 } : {}}
+                transition={{ duration: 1, repeat: Infinity }}
+              >
+                <FaEye />
+              </motion.div>
+              {pdfLoading ? 'Loading...' : 'View Online'}
             </motion.a>
           </motion.div>
         </motion.div>
 
-  {/* ...existing code... */}
+        {/* ...existing code... */}
       </motion.div>
     </div>
   )

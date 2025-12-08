@@ -1,21 +1,52 @@
-# Allow all search engines to crawl the site
+# Robots.txt for Dinesh Poudel Portfolio
+# Allow all search engines including Google Image Search to crawl the site
+
+# General Search Engines
 User-agent: *
 Allow: /
+Disallow: /node_modules
+Disallow: /.git
+Disallow: /dist
 
-# Sitemap location
+# Google-specific crawling rules
+User-agent: Googlebot
+Allow: /
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Crawl-delay: 0
+
+# Google Images crawler
+User-agent: Googlebot-Image
+Allow: /
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+
+# Bing crawler
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemap location - helps search engines discover all pages and images
 Sitemap: https://dinesh-poudel.com.np/sitemap.xml
 
-# Crawl-delay (optional, helps prevent server overload)
+# Crawl-delay for general bots (prevents server overload)
 Crawl-delay: 1
+
+# Request-rate (pages per second)
+Request-rate: 10/1s
 
 # Priority pages
 Allow: /Home
 Allow: /About
 Allow: /Showcase
+Allow: /Showcase/Projects
+Allow: /Showcase/Achievements
 Allow: /Resume
 Allow: /Contact
 
-# Image files
+# Image files - explicitly allow all profile images for search engines
 Allow: /Profile1.jpg
 Allow: /Profile4.jpg
 Allow: /Profile5.jpg

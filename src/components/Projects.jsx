@@ -1,6 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
+
+// Intersection Observer hook for lazy loading images
+const useIntersectionObserver = (ref, options = {}) => {
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        if (!ref.current) return
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsVisible(true)
+                observer.unobserve(entry.target)
+            }
+        }, {
+            threshold: 0.1,
+            ...options
+        })
+
+        observer.observe(ref.current)
+        return () => observer.disconnect()
+    }, [])
+
+    return isVisible
+}
 
 const MOCK = [
     {
@@ -77,6 +101,145 @@ const MOCK = [
     }
 ]
 
+// Separate component for project cards to enable lazy loading with intersection observer
+function ProjectCard({ project: p, index }) {
+    const ref = useRef(null)
+    const isVisible = useIntersectionObserver(ref)
+
+    const getBackgroundImage = () => {
+        const imageMap = {
+            'proj-1': '/Projects/Portfolio_v1.jpg',
+            'proj-2': '/Projects/Personal_Project.jpg',
+            'proj-3': '/Projects/4th_Sem_Project.jpg',
+            'proj-4': '/Projects/School_Management_System.jpg',
+            'proj-5': '/Projects/Portfolio_Sandhya.jpg',
+            'proj-6': '/Projects/Portfolio_Sunil.jpg',
+            'proj-7': '/Projects/Portfolio_Bishal.jpg',
+            'proj-8': '/Projects/IoT_&_Robotics.jpg',
+            'proj-9': '/Projects/Marvel_Copy_Website.jpg',
+        }
+        return imageMap[p.id] || undefined
+    }
+
+    return (
+        <div ref={ref}>
+            {isVisible && (
+                <motion.article
+                    initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{
+                        delay: index * 0.15 + 0.5,
+                        duration: 0.6,
+                        type: "spring",
+                        stiffness: 100
+                    }}
+                    className="project-card p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm flex-shrink-0 relative overflow-hidden group"
+                    whileHover={{
+                        y: window.innerWidth <= 768 ? -4 : -8,
+                        transition: { duration: 0.3 }
+                    }}
+                    style={{
+                        backgroundImage: `url('${getBackgroundImage()}')`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                >
+                    <div style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'rgba(15, 15, 15, 0.82)',
+                        zIndex: 1,
+                        pointerEvents: 'none',
+                    }} />
+                    <motion.div
+                        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand to-brand-dark"
+                        initial={{ scaleX: 0 }}
+                        whileHover={{ scaleX: 1 }}
+                        transition={{ duration: 0.4 }}
+                        style={{ zIndex: 2 }}
+                    />
+
+                    <div style={{ position: 'relative', zIndex: 3 }}>
+                        <motion.h3
+                            className="font-semibold text-lg sm:text-xl text-brand"
+                            whileHover={{ x: 5 }}
+                            transition={{ duration: 0.2 }}
+                        >
+                            {p.title}
+                        </motion.h3>
+
+                        <motion.p
+                            className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-300 leading-relaxed"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.15 + 0.7 }}
+                        >
+                            {p.desc}
+                        </motion.p>
+
+                        <motion.div
+                            className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.8 }}
+                        >
+                            {p.tech && p.tech.map((t, techIndex) => (
+                                <motion.span
+                                    key={t}
+                                    className="text-xs sm:text-sm bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.8 + techIndex * 0.1 }}
+                                >
+                                    {t}
+                                </motion.span>
+                            ))}
+                        </motion.div>
+
+                        <motion.div
+                            className="mt-4 sm:mt-6 flex gap-3"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.9 }}
+                        >
+                            {p.github && (
+                                <motion.a
+                                    href={p.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`View ${p.title} source code on GitHub`}
+                                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all"
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <Github size={16} />
+                                    Code
+                                </motion.a>
+                            )}
+
+                            {p.live && (
+                                <motion.a
+                                    href={p.live}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`View ${p.title} live demo`}
+                                    className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm btn-primary text-white rounded-lg"
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    <ExternalLink size={16} />
+                                    Live Demo
+                                </motion.a>
+                            )}
+                        </motion.div>
+                    </div>
+                </motion.article>
+            )}
+        </div>
+    )
+}
+
 export default function Projects() {
     const [filter, setFilter] = useState('All')
     const tags = ['All', 'WebDev', 'WorkBench', 'Academics', 'Others']
@@ -107,7 +270,7 @@ export default function Projects() {
             return filter === 'All' || filter === 'Others';
         }
         if (p.id === 'proj-9') {
-            return filter === 'All' || filter === 'WebDev';
+            return filter === 'All' || filter === 'WebDev' || filter === 'Academics';
         }
         if (filter === 'All') return true;
         return p.tech && p.tech.some(tech => tech.includes(filter));
@@ -126,8 +289,8 @@ export default function Projects() {
                         key={t}
                         onClick={() => setFilter(t)}
                         className={`px-3 sm:px-4 py-2 rounded-full transition-all text-sm sm:text-base ${filter === t
-                                ? 'bg-brand text-white shadow-lg'
-                                : 'bg-white/5 hover:bg-white/10'
+                            ? 'bg-brand text-white shadow-lg'
+                            : 'bg-white/5 hover:bg-white/10'
                             }`}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -147,131 +310,7 @@ export default function Projects() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pb-4 mt-6">
                 {filtered.map((p, index) => (
-                    <motion.article
-                        key={`${p.id}-${filter}`}
-                        initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{
-                            delay: index * 0.15 + 0.5,
-                            duration: 0.6,
-                            type: "spring",
-                            stiffness: 100
-                        }}
-                        className="project-card p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm flex-shrink-0 relative overflow-hidden group"
-                        whileHover={{
-                            y: window.innerWidth <= 768 ? -4 : -8,
-                            transition: { duration: 0.3 }
-                        }}
-                        style={{
-                            backgroundImage: (() => {
-                                switch (p.id) {
-                                    case 'proj-1': return "url('/Projects/Portfolio_v1.jpg')";
-                                    case 'proj-2': return "url('/Projects/Personal_Project.jpg')";
-                                    case 'proj-3': return "url('/Projects/4th_Sem_Project.jpg')";
-                                    case 'proj-4': return "url('/Projects/School_Management_System.jpg')";
-                                    case 'proj-5': return "url('/Projects/Portfolio_Sandhya.jpg')";
-                                    case 'proj-6': return "url('/Projects/Portfolio_Sunil.jpg')";
-                                    case 'proj-7': return "url('/Projects/Portfolio_Bishal.jpg')";
-                                    case 'proj-8': return "url('/Projects/IoT_&_Robotics.jpg')";
-                                    case 'proj-9': return "url('/Projects/Marvel_Copy_Website.jpg')";
-                                    default: return undefined;
-                                }
-                            })(),
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                        }}
-                    >
-                        <div style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'rgba(15, 15, 15, 0.82)',
-                            zIndex: 1,
-                            pointerEvents: 'none',
-                        }} />
-                        <motion.div
-                            className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand to-brand-dark"
-                            initial={{ scaleX: 0 }}
-                            whileHover={{ scaleX: 1 }}
-                            transition={{ duration: 0.4 }}
-                            style={{ zIndex: 2 }}
-                        />
-
-                        <div style={{ position: 'relative', zIndex: 3 }}>
-                            <motion.h3
-                                className="font-semibold text-lg sm:text-xl text-brand"
-                                whileHover={{ x: 5 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                {p.title}
-                            </motion.h3>
-
-                            <motion.p
-                                className="mt-2 sm:mt-3 text-sm sm:text-base text-gray-300 leading-relaxed"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: index * 0.15 + 0.7 }}
-                            >
-                                {p.desc}
-                            </motion.p>
-
-                            <motion.div
-                                className="mt-3 sm:mt-4 flex items-center gap-2 flex-wrap"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.15 + 0.8 }}
-                            >
-                                {p.tech && p.tech.map((t, techIndex) => (
-                                    <motion.span
-                                        key={t}
-                                        className="text-xs sm:text-sm bg-white/10 px-2 sm:px-3 py-1 rounded-full border border-white/20"
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: index * 0.15 + 0.8 + techIndex * 0.1 }}
-                                    >
-                                        {t}
-                                    </motion.span>
-                                ))}
-                            </motion.div>
-
-                            <motion.div
-                                className="mt-4 sm:mt-6 flex gap-3"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.15 + 0.9 }}
-                            >
-                                {p.github && (
-                                    <motion.a
-                                        href={p.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label={`View ${p.title} source code on GitHub`}
-                                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-all"
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <Github size={16} />
-                                        Code
-                                    </motion.a>
-                                )}
-
-                                {p.live && (
-                                    <motion.a
-                                        href={p.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label={`View ${p.title} live demo`}
-                                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm btn-primary text-white rounded-lg"
-                                        whileHover={{ scale: 1.05, y: -2 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <ExternalLink size={16} />
-                                        Live Demo
-                                    </motion.a>
-                                )}
-                            </motion.div>
-                        </div>
-                    </motion.article>
+                    <ProjectCard key={`${p.id}-${filter}`} project={p} index={index} />
                 ))}
             </div>
         </>
