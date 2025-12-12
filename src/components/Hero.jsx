@@ -3,26 +3,26 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-// Lazy load images to optimize initial load - import only when needed
-const profileImages = [
-  { id: 1, src: () => import('../assets/Profile1.jpg').then(m => m.default) },
-  { id: 2, src: () => import('../assets/Profile2.jpg').then(m => m.default) },
-  { id: 3, src: () => import('../assets/Profile3.jpg').then(m => m.default) },
-  { id: 4, src: () => import('../assets/Profile4.jpg').then(m => m.default) },
-  { id: 5, src: () => import('../assets/Profile5.jpg').then(m => m.default) },
-  { id: 6, src: () => import('../assets/Profile6.jpg').then(m => m.default) },
-  { id: 7, src: () => import('../assets/Profile7.jpg').then(m => m.default) },
-  { id: 8, src: () => import('../assets/Profile8.jpg').then(m => m.default) },
-]
+// Direct static imports for immediate image loading
+import Profile1 from '../assets/Profile1.jpg'
+import Profile2 from '../assets/Profile2.jpg'
+import Profile3 from '../assets/Profile3.jpg'
+import Profile4 from '../assets/Profile4.jpg'
+import Profile5 from '../assets/Profile5.jpg'
+import Profile6 from '../assets/Profile6.jpg'
+import Profile7 from '../assets/Profile7.jpg'
+import Profile8 from '../assets/Profile8.jpg'
 
-// Cache loaded images in memory for smooth transitions
-let cachedImages = {}
-const preloadImage = async (index) => {
-  if (cachedImages[index]) return cachedImages[index]
-  const src = await profileImages[index].src()
-  cachedImages[index] = src
-  return src
-}
+const profileImages = [
+  { id: 1, src: Profile1 },
+  { id: 2, src: Profile2 },
+  { id: 3, src: Profile3 },
+  { id: 4, src: Profile4 },
+  { id: 5, src: Profile5 },
+  { id: 6, src: Profile6 },
+  { id: 7, src: Profile7 },
+  { id: 8, src: Profile8 },
+]
 
 // Typewriter Effect Component
 const TypewriterText = () => {
@@ -345,25 +345,6 @@ export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isReverse, setIsReverse] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [loadedImages, setLoadedImages] = useState([])
-  const [imagesLoaded, setImagesLoaded] = useState(false)
-
-  // Load all images lazily on first render
-  useEffect(() => {
-    const loadAllImages = async () => {
-      try {
-        const loaded = await Promise.all(
-          profileImages.map(img => preloadImage(profileImages.indexOf(img)))
-        )
-        setLoadedImages(loaded)
-        setImagesLoaded(true)
-      } catch (error) {
-        console.warn('Error loading profile images:', error)
-        setImagesLoaded(true)
-      }
-    }
-    loadAllImages()
-  }, [])
 
   // Schedule next slide using timeout
   const scheduleNext = () => {
@@ -503,39 +484,34 @@ export default function Hero() {
                     : 'none'
                 }}
               >
-                {imagesLoaded && loadedImages.length > 0 ? (
-                  loadedImages.map((src, idx) => (
-                    <motion.img
-                      key={idx}
-                      src={src}
-                      alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal." :
-                        idx === 3 ? "Dinesh Poudel Photo - Certified Frontend Developer from Nepal" :
-                          idx === 4 ? "Dinesh Poudel Picture - Certified Frontend Developer from Nepal" :
-                            `Dinesh Poudel Portfolio Photo ${idx + 1}`}
-                      className="object-cover h-full flex-none select-none pointer-events-none"
-                      style={{
-                        width: `${100 / profileImages.length}%`,
-                        backfaceVisibility: 'hidden',
-                        transform: 'translateZ(0)',
-                        WebkitFontSmoothing: 'antialiased'
-                      }}
-                      draggable={false}
-                      decoding="async"
-                      loading="lazy"
-                      itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
-                      itemScope={idx === 0 ? true : undefined}
-                      itemType={idx === 0 ? "https://schema.org/ImageObject" : undefined}
-                      onError={(e) => {
-                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
-                        console.log('Profile image failed to load')
-                      }}
-                    />
-                  ))
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                    <div className="text-gray-400">Loading...</div>
-                  </div>
-                )}
+                {profileImages.map((img, idx) => (
+                  <motion.img
+                    key={idx}
+                    src={img.src}
+                    alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal." :
+                      idx === 3 ? "Dinesh Poudel Photo - Certified Frontend Developer from Nepal" :
+                        idx === 4 ? "Dinesh Poudel Picture - Certified Frontend Developer from Nepal" :
+                          `Dinesh Poudel Portfolio Photo ${idx + 1}`}
+                    className="object-cover h-full flex-none select-none pointer-events-none"
+                    style={{
+                      width: `${100 / profileImages.length}%`,
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)',
+                      WebkitFontSmoothing: 'antialiased'
+                    }}
+                    draggable={false}
+                    decoding="async"
+                    loading="eager"
+                    fetchPriority="high"
+                    itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
+                    itemScope={idx === 0 ? true : undefined}
+                    itemType={idx === 0 ? "https://schema.org/ImageObject" : undefined}
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
+                      console.log('Profile image failed to load')
+                    }}
+                  />
+                ))}
               </motion.div>
             </motion.div>
           </motion.div>
