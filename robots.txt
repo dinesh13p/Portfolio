@@ -46,10 +46,10 @@ Allow: /Showcase/Achievements
 Allow: /Resume
 Allow: /Contact
 
-# Image files - explicitly allow all profile images for search engines
-Allow: /Profile1.jpg
-Allow: /Profile4.jpg
-Allow: /Profile5.jpg
+# Image files - explicitly allow specific profile images for search engines
+Allow: /Dinesh-Poudel_Profile1.jpg
+Allow: /Dinesh-Poudel_Profile2.jpg
+Disallow: /Profile*.jpg
 Allow: /*.jpg$
 Allow: /*.png$
 Allow: /*.webp$

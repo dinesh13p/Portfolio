@@ -8,17 +8,12 @@
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://dinesh-poudel.com.np/Profile1.jpg</image:loc>
+            <image:loc>https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg</image:loc>
             <image:title>Dinesh Poudel</image:title>
             <image:caption>Me</image:caption>
         </image:image>
         <image:image>
-            <image:loc>https://dinesh-poudel.com.np/Profile4.jpg</image:loc>
-            <image:title>Dinesh Poudel</image:title>
-            <image:caption>Me</image:caption>
-        </image:image>
-        <image:image>
-            <image:loc>https://dinesh-poudel.com.np/Profile5.jpg</image:loc>
+            <image:loc>https://dinesh-poudel.com.np/Dinesh-Poudel_Profile2.jpg</image:loc>
             <image:title>Dinesh Poudel</image:title>
             <image:caption>Me</image:caption>
         </image:image>
