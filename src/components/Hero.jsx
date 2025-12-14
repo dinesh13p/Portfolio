@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
 // Direct static imports for immediate image loading
-import Profile1 from '../assets/Profile1.jpg'
-import Profile2 from '../assets/Profile2.jpg'
+import Profile1 from '../assets/Dinesh-Poudel_Profile1.jpg'
+import Profile2 from '../assets/Dinesh-Poudel_Profile2.jpg'
 import Profile3 from '../assets/Profile3.jpg'
 import Profile4 from '../assets/Profile4.jpg'
 import Profile5 from '../assets/Profile5.jpg'
@@ -36,7 +36,6 @@ const TypewriterText = () => {
     'Front-end Developer',
     'Aspiring Full Stack Developer',
     'IoT & Robotics Enthusiast',
-    'UI/UX Enthusiast'
   ]
 
   useEffect(() => {
@@ -488,10 +487,11 @@ export default function Hero() {
                   <motion.img
                     key={idx}
                     src={img.src}
-                    alt={idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal." :
-                      idx === 3 ? "Dinesh Poudel Photo - Certified Frontend Developer from Nepal" :
-                        idx === 4 ? "Dinesh Poudel Picture - Certified Frontend Developer from Nepal" :
-                          `Dinesh Poudel Portfolio Photo ${idx + 1}`}
+                    alt={
+                      idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
+                        idx === 1 ? "Dinesh Poudel - Aspiring Full Stack Developer" :
+                          "Portfolio Showcase Image - Frontend Development Project"
+                    }
                     className="object-cover h-full flex-none select-none pointer-events-none"
                     style={{
                       width: `${100 / profileImages.length}%`,
@@ -503,9 +503,9 @@ export default function Hero() {
                     decoding="async"
                     loading="eager"
                     fetchPriority="high"
-                    itemProp={idx === 0 || idx === 3 || idx === 4 ? "image" : undefined}
-                    itemScope={idx === 0 ? true : undefined}
-                    itemType={idx === 0 ? "https://schema.org/ImageObject" : undefined}
+                    itemProp={(idx === 0 || idx === 1) ? "image" : undefined}
+                    itemScope={(idx === 0 || idx === 1) ? true : undefined}
+                    itemType={(idx === 0 || idx === 1) ? "https://schema.org/ImageObject" : undefined}
                     onError={(e) => {
                       e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
                       console.log('Profile image failed to load')

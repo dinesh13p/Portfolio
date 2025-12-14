@@ -96,26 +96,26 @@ const skills = [
     iconColor: 'text-gray-500'
   },
   {
+    name: 'Cloudflare',
+    icon: <FaCloudflare />,
+    color: 'from-orange-500 to-orange-600',
+    borderColor: 'border-orange-500/30',
+    iconColor: 'text-orange-500'
+  },
+  {
     name: 'Github',
     icon: <SiGithub />,
     color: 'from-gray-600 to-gray-700',
     borderColor: 'border-gray-600/30',
     iconColor: 'text-gray-600'
   },
-  {
-    name: 'Cloudflare',
-    icon: <FaCloudflare />,
-    color: 'from-blue-500 to-blue-600',
-    borderColor: 'border-blue-500/30',
-    iconColor: 'text-blue-500'
-  },
-  {
-    name: 'Figma',
-    icon: <SiFigma />,
-    color: 'from-pink-500 to-pink-600',
-    borderColor: 'border-pink-500/30',
-    iconColor: 'text-pink-500'
-  }
+  // {
+  //   name: 'Figma',
+  //   icon: <SiFigma />,
+  //   color: 'from-pink-500 to-pink-600',
+  //   borderColor: 'border-pink-500/30',
+  //   iconColor: 'text-pink-500'
+  // }
 ]
 
 export default function About() {

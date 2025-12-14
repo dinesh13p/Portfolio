@@ -211,14 +211,14 @@ function ProjectCard({ project: p, index }) {
 
 export default function Projects() {
     const [filter, setFilter] = useState('All')
-    const tags = ['All', 'WebDev', 'WorkBench', 'Academics', 'Others']
+    const tags = ['All', 'Web', 'WorkBench', 'Academics', 'Others']
 
     const filtered = MOCK.filter((p) => {
         if (p.id === 'proj-1') {
-            return filter === 'All' || filter === 'WebDev';
+            return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-2') {
-            return filter === 'All' || filter === "WebDev" || filter === 'WorkBench';
+            return filter === 'All' || filter === 'WorkBench';
         }
         if (p.id === 'proj-3') {
             return filter === 'All' || filter === 'Academics' || filter === 'WorkBench';
@@ -227,19 +227,19 @@ export default function Projects() {
             return filter === 'All' || filter === 'WorkBench';
         }
         if (p.id === 'proj-5') {
-            return filter === 'All' || filter === 'WebDev';
+            return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-6') {
-            return filter === 'All' || filter === 'WebDev';
+            return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-7') {
-            return filter === 'All' || filter === 'WebDev';
+            return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-8') {
             return filter === 'All' || filter === 'Others';
         }
         if (p.id === 'proj-9') {
-            return filter === 'All' || filter === 'WebDev' || filter === 'Academics';
+            return filter === 'All' || filter === 'Web' || filter === 'Academics';
         }
         if (filter === 'All') return true;
         return p.tech && p.tech.some(tech => tech.includes(filter));
