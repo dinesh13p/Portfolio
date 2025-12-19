@@ -30,7 +30,7 @@ const MOCK = [
     {
         id: 'proj-4',
         title: 'Self improvement project',
-        desc: 'Academics related personal project',
+        desc: 'Academics related personal project. Contact for more info.',
         tech: ['Java', 'Spring Boot', 'pgAdmin4'],
         github: null,
         live: null
@@ -40,7 +40,7 @@ const MOCK = [
         title: 'Portfolio_Website->Sandhya',
         desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Developed entirely by myself.',
         tech: ['React', 'Tailwind'],
-        github: 'https://github.com/paudelsandhya/Portfolio',
+        github: 'https://www.paudel-sandhya.com.np',
         live: 'https://paudelsandhya.github.io/Portfolio/'
     },
     {

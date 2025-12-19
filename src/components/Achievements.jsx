@@ -197,6 +197,26 @@ const CERTIFICATES = [
     },
     {
         id: 'cert-9',
+        title: 'Technical Tournament 2017',
+        institution: 'Rotary International',
+        type: 'Inter Valley Technical Tournament 2017',
+        description: 'Participation in Inter Valley Technical Tournament 2017 sponsored by Rotary International and coordinated by RC The Himalayan Gurkhas',
+        category: 'Others',
+        image: '/Achievements/Technical-Tournament-2017.jpg',
+        verify: null
+    },
+    {
+        id: 'cert-10',
+        title: 'Technical Tournament 2018',
+        institution: 'Rotary International',
+        type: 'Inter Valley Technical Tournament (2nd Season) 2018',
+        description: 'Participation in Inter Valley Technical Tournament Season-2 2018 sponsored by Rotary International and coordinated by RC The Himalayan Gurkhas.',
+        category: 'Others',
+        image: '/Achievements/Technical-Tournament-2018.jpg',
+        verify: null
+    },
+    {
+        id: 'cert-11',
         title: 'Robo Soccer - Participant',
         institution: 'Nepathya College',
         type: 'IoT & Robotics Competition',
