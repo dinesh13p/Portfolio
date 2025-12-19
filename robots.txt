@@ -49,7 +49,16 @@ Allow: /Contact
 # Image files - explicitly allow specific profile images for search engines
 Allow: /Dinesh-Poudel_Profile1.jpg
 Allow: /Dinesh-Poudel_Profile2.jpg
-Disallow: /Profile*.jpg
+
+# Disallow other profile images (Profile3-8) from being indexed
+Disallow: /Profile3.jpg
+Disallow: /Profile4.jpg
+Disallow: /Profile5.jpg
+Disallow: /Profile6.jpg
+Disallow: /Profile7.jpg
+Disallow: /Profile8.jpg
+
+# Allow other images
 Allow: /*.jpg$
 Allow: /*.png$
 Allow: /*.webp$
