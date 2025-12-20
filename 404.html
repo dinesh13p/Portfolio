@@ -1,284 +1,199 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 - Page Not Found | Dinesh Poudel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Dinesh Poudel</title>
+  <meta name="title" content="Dinesh Poudel | Frontend Developer & Aspiring Full Stack Developer" />
   <meta name="description"
-    content="The page you're looking for doesn't exist. Return to Dinesh Poudel's portfolio homepage.">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    content="Hi! I am Dinesh Poudel. A Frontend Developer and Aspiring Full Stack Developer from Nepal. Explore my projects, skills, achievements, and experience." />
+  <meta name="keywords"
+    content="Dinesh Poudel, Dinesh Poudel Nepal, Frontend Developer Nepal, React Developer, Aspiring Full Stack Developer, JavaScript, Java SpringBoot, IoT Robotics, Web Developer Portfolio, Dinesh Poudel Portfolio, Dinesh Poudel GitHub, Dinesh Poudel LinkedIn" />
+  <meta name="author" content="Dinesh Poudel" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #111111 0%, #1f1f1f 50%, #0a0a0a 100%);
-      color: #f5f5f5;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      overflow: hidden;
-      position: relative;
-    }
+  <!-- Geographic Meta Tags -->
+  <meta name="geo.region" content="NP-5" />
+  <meta name="geo.placename" content="Butwal, Lumbini Province" />
+  <meta name="geo.position" content="27.7000;83.4500" />
+  <meta name="ICBM" content="27.7000, 83.4500" />
 
-    /* Animated background particles */
-    .particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dinesh-poudel.com.np/" />
+  <meta property="og:title" content="Dinesh Poudel | Frontend Developer & Aspiring Full Stack Developer" />
+  <meta property="og:description"
+    content="Hi! I am a Frontend Developer and Aspiring Full Stack Developer from Nepal. Explore my projects, skills, achievements, and experience." />
+  <meta property="og:image" content="https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg" />
+  <meta property="og:image:secure_url" content="https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Dinesh Poudel | Certified Frontend Developer from Nepal" />
+  <meta property="og:site_name" content="Dinesh Poudel Portfolio" />
+  <meta property="og:locale" content="en_US" />
 
-    .particle {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      animation: float 20s infinite;
-    }
 
-    @keyframes float {
 
-      0%,
-      100% {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 0;
-      }
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://dinesh-poudel.com.np/" />
+  <meta property="twitter:title" content="Dinesh Poudel | Frontend Developer & Aspiring Full Stack Developer" />
+  <meta property="twitter:description" content="Frontend Developer and Aspiring Full Stack Developer from Nepal." />
+  <meta property="twitter:image" content="https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg" />
+  <meta property="twitter:image:alt" content="Dinesh Poudel | Frontend Developer" />
+  <meta property="twitter:creator" content="@Dinesh2061" />
+  <meta property="twitter:site" content="@Dinesh2061" />
 
-      10% {
-        opacity: 1;
-      }
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <meta name="theme-color" content="#ff3c3c" />
 
-      90% {
-        opacity: 1;
-      }
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://dinesh-poudel.com.np/" />
+  <meta name="google-site-verification" content="FDecMMzDbSbu94Zk3RMxV8DtE9ot1a4UoqIuiaP55w8" />
 
-      100% {
-        transform: translate(100px, -1000px) rotate(360deg);
-        opacity: 0;
-      }
-    }
+  <!-- Preload Critical Images for Faster Initial Load -->
+  <link rel="preload" as="image" href="/Dinesh-Poudel_Profile1.jpg" fetchpriority="high" />
 
-    .container {
-      max-width: 600px;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-      animation: fadeIn 0.8s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .error-code {
-      font-size: clamp(5rem, 15vw, 12rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, #ff3c3c 0%, #e33636 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 80px rgba(255, 60, 60, 0.5);
-      animation: glitch 3s infinite;
-    }
-
-    @keyframes glitch {
-
-      0%,
-      90%,
-      100% {
-        transform: translate(0);
-      }
-
-      92% {
-        transform: translate(-2px, 2px);
-      }
-
-      94% {
-        transform: translate(2px, -2px);
-      }
-
-      96% {
-        transform: translate(-2px, -2px);
+  <!-- Structured Data - Person Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dinesh Poudel",
+      "url": "https://dinesh-poudel.com.np",
+      "image": [
+        {
+          "@type": "ImageObject",
+          "url": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+          "name": "Dinesh Poudel Profile"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile2.jpg",
+          "name": "Dinesh Poudel Photo"
+        }
+      ],
+      "jobTitle": "Frontend Developer",
+      "description": "Certified Frontend Developer and Aspiring Full Stack Developer specializing in React.js, JavaScript, Java, SpringBoot, MySQL, and PostgreSQL.",
+      "knowsAbout": [
+        "JavaScript",
+        "React.js",
+        "Java",
+        "SpringBoot",
+        "Frontend Development",
+        "IoT",
+        "Robotics",
+        "Web Development",
+        "UI/UX Design"
+      ],
+      "sameAs": [
+        "https://github.com/dinesh13p",
+        "https://www.linkedin.com/in/dinesh-poudel-3a4b10331/",
+        "https://x.com/Dinesh2061",
+        "https://www.instagram.com/_d_nesh_/",
+        "https://www.facebook.com/dinesh.poudel.319452"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bardaghat",
+        "addressDistrict": "Nawalparasi",
+        "addressProvence": "Lumbini Province",
+        "addressCountry": "NP"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Nepal"
       }
     }
+    </script>
 
-    h1 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: #ffffff;
+  <!-- Structured Data - Professional Service Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Dinesh Poudel - Web Development Services",
+      "image": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+      "url": "https://dinesh-poudel.com.np",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bardaghat",
+        "addressDistrict": "Nawalparasi",
+        "addressProvence": "Lumbini Province",
+        "addressCountry": "NP"
+      },
     }
+    </script>
 
-    p {
-      font-size: clamp(1rem, 2.5vw, 1.125rem);
-      color: #9ca3af;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.875rem 2rem;
-      border-radius: 9999px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ff3c3c 0%, #e33636 100%);
-      color: white;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #e33636 0%, #cc2b2b 100%);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255, 60, 60, 0.4);
-    }
-
-    .btn-secondary {
-      border: 2px solid rgba(255, 60, 60, 0.5);
-      color: #ffffff;
-      background: transparent;
-    }
-
-    .btn-secondary:hover {
-      border-color: #ff3c3c;
-      background: rgba(255, 60, 60, 0.1);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(255, 60, 60, 0.2);
-    }
-
-    .icon {
-      margin-right: 0.5rem;
-      font-size: 1.25rem;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 640px) {
-      .button-group {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .btn-primary:hover,
-      .btn-secondary:hover {
-        transform: translateY(-1px);
+  <!-- Structured Data - Website Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Dinesh Poudel Portfolio",
+      "url": "https://dinesh-poudel.com.np",
+      "description": "Professional portfolio of Dinesh Poudel. Certified Frontend Developer and Aspiring Full Stack Developer",
+      "author": {
+        "@type": "Person",
+        "name": "Dinesh Poudel"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://dinesh-poudel.com.np/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     }
+    </script>
 
-    /* Glowing effect */
-    .glow {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(255, 60, 60, 0.2) 0%, transparent 70%);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: pulse 4s ease-in-out infinite;
-      pointer-events: none;
+  <!-- Structured Data - ImageObject for Profile Images -->
+  <!-- Profile1 Image Schema -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "contentUrl": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+      "url": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+      "name": "Dinesh Poudel",
+      "author": {
+        "@type": "Person",
+        "name": "Dinesh Poudel",
+        "url": "https://dinesh-poudel.com.np"
+      },
+      "copyrightHolder": {
+        "@type": "Person",
+        "name": "Dinesh Poudel",
+        "url": "https://dinesh-poudel.com.np"
+      },
+      "uploadDate": "2025-01-05T00:00:00Z",
+      "thumbnail": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+      "thumbnailUrl": "https://dinesh-poudel.com.np/Dinesh-Poudel_Profile1.jpg",
+      "representativeOfPage": true,
+      "keywords": "Dinesh Poudel, Frontend Developer, React Developer, Nepal, Portfolio, Profile"
     }
+    </script>
 
-    @keyframes pulse {
 
-      0%,
-      100% {
-        opacity: 0.5;
-        transform: translate(-50%, -50%) scale(1);
-      }
-
-      50% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-    }
-  </style>
+  <script type="module" crossorigin src="/assets/index-LylkQE9n.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/vendor-core-CrUQXlRh.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-utils-BQvmHT-Z.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-ui-BHCCrfkB.js">
+  <link rel="modulepreload" crossorigin href="/assets/vendor-animation-DccGFqn0.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DHW_ukkl.css">
 </head>
 
-<body>
-  <!-- Animated particles background -->
-  <div class="particles" id="particles"></div>
-
-  <!-- Glowing effect -->
-  <div class="glow"></div>
-
-  <!-- Main content -->
-  <div class="container">
-    <div class="error-code">404</div>
-    <h1>Oops! Page Not Found</h1>
-    <p>The page you're looking for seems to have wandered off into the digital void. Let's get you back on track!</p>
-
-    <div class="button-group">
-      <a href="/" class="btn btn-primary">
-        Back to Home
-      </a>
-      <a href="/Showcase" class="btn btn-secondary">
-        View My Work
-      </a>
-    </div>
-  </div>
-
-  <script>
-    // Create animated particles
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = window.innerWidth < 768 ? 30 : 50;
-
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.top = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 20 + 's';
-      particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-      particlesContainer.appendChild(particle);
-    }
-
-    // Handle client-side routing redirect (for SPA)
-    // Removed to prevent infinite redirect loop - React Router handles SPA routing
-
-  </script>
+<body class="bg-site-dark text-site-light antialiased">
+  <div id="root"></div>
 </body>
 
 </html>
