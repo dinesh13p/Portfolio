@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HelmetProvider } from 'react-helmet-async'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import NotFound from './components/NotFound'
 
 // Lazy load route components to reduce initial bundle size
 const Hero = React.lazy(() => import('./components/Hero'))
@@ -54,6 +55,7 @@ function AppContent() {
                   <Route path="/Resume" element={<Resume />} />
                   <Route path="/Contact" element={<Contact />} />
                   <Route path="/" element={<Hero />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </motion.div>
             </AnimatePresence>
@@ -84,6 +86,7 @@ function AppContent() {
                   <Route path="/Resume" element={<Resume />} />
                   <Route path="/Contact" element={<Contact />} />
                   <Route path="/" element={<Hero />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </motion.div>
             </AnimatePresence>
