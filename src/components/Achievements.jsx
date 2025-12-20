@@ -207,7 +207,7 @@ const CERTIFICATES = [
     },
     {
         id: 'cert-10',
-        title: 'Technical Tournament 2018',
+        title: 'Technical Tournament 2018 - 2nd Runner Up',
         institution: 'Rotary International',
         type: 'Inter Valley Technical Tournament (2nd Season) 2018',
         description: 'Participation in Inter Valley Technical Tournament Season-2 2018 sponsored by Rotary International and coordinated by RC The Himalayan Gurkhas.',
