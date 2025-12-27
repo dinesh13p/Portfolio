@@ -29,7 +29,7 @@ const MOCK = [
     },
     {
         id: 'proj-4',
-        title: 'Self improvement project',
+        title: 'ERP - Campus Management System',
         desc: 'Academics related personal project. Contact for more info.',
         tech: ['Java', 'Spring Boot', 'pgAdmin4'],
         github: null,
@@ -39,7 +39,7 @@ const MOCK = [
         id: 'proj-5',
         title: 'Portfolio_Website->Sandhya',
         desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Developed entirely by myself.',
-        tech: ['React', 'Tailwind'],
+        tech: ['React.js', 'Tailwind', 'css'],
         github: 'https://www.paudel-sandhya.com.np',
         live: 'https://paudelsandhya.github.io/Portfolio/'
     },
@@ -47,7 +47,7 @@ const MOCK = [
         id: 'proj-6',
         title: 'Portfolio_Website->Sunil',
         desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-        tech: ['React', 'Tailwind'],
+        tech: ['React.js', 'Tailwind', 'css'],
         github: 'https://github.com/Sunil5566/Portfolio',
         live: 'https://sunil5566.github.io/Portfolio/'
     },
@@ -55,12 +55,20 @@ const MOCK = [
         id: 'proj-7',
         title: 'Portfolio_Website->Bishal',
         desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-        tech: ['React', 'Tailwind'],
+        tech: ['React.js', 'Tailwind', 'css'],
         github: 'https://github.com/bixal127/Portfolio',
         live: 'https://bixal127.github.io/Portfolio/'
     },
     {
         id: 'proj-8',
+        title: 'Portfolio_Website->Niraj',
+        desc: 'Portfolio website of Niraj Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
+        tech: ['React.js', 'Tailwind', 'css'],
+        github: 'https://github.com/NirajBaniya/Website',
+        live: 'https://www.nirajbaniya.com.np/'
+    },
+    {
+        id: 'proj-9',
         title: 'IoT & Robotics Projects',
         desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
         tech: ['IoT', 'Arduino IDE'],
@@ -68,7 +76,7 @@ const MOCK = [
         live: null
     },
     {
-        id: 'proj-9',
+        id: 'proj-10',
         title: 'Marvel Copy Website',
         desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
         tech: ['HTML', 'CSS', 'Bootstrap'],
@@ -88,8 +96,9 @@ function ProjectCard({ project: p, index }) {
             'proj-5': '/Projects/Portfolio_Sandhya.jpg',
             'proj-6': '/Projects/Portfolio_Sunil.jpg',
             'proj-7': '/Projects/Portfolio_Bishal.jpg',
-            'proj-8': '/Projects/IoT_&_Robotics.jpg',
-            'proj-9': '/Projects/Marvel_Copy_Website.jpg',
+            'proj-8': '/Projects/Portfolio_Niraj.jpg',
+            'proj-9': '/Projects/IoT_&_Robotics.jpg',
+            'proj-10': '/Projects/Marvel_Copy_Website.jpg',
         }
         return imageMap[p.id] || undefined
     }
@@ -236,9 +245,12 @@ export default function Projects() {
             return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-8') {
-            return filter === 'All' || filter === 'Others';
+            return filter === 'All' || filter === 'Web';
         }
         if (p.id === 'proj-9') {
+            return filter === 'All' || filter === 'Others';
+        }
+        if (p.id === 'proj-10') {
             return filter === 'All' || filter === 'Web' || filter === 'Academics';
         }
         if (filter === 'All') return true;
