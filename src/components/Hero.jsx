@@ -3,25 +3,17 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
-// Direct static imports for immediate image loading
-import Profile1 from '../assets/Dinesh-Poudel_Profile1.jpg'
-import Profile2 from '../assets/Dinesh-Poudel_Profile2.jpg'
-import Profile3 from '../assets/Profile3.jpg'
-import Profile4 from '../assets/Profile4.jpg'
-import Profile5 from '../assets/Profile5.jpg'
-import Profile6 from '../assets/Profile6.jpg'
-import Profile7 from '../assets/Profile7.jpg'
-import Profile8 from '../assets/Profile8.jpg'
-
+// ALL images from /public folder for consistent, non-hashed URLs
+// This ensures robots.txt can reliably block specific images
 const profileImages = [
-  { id: 1, src: Profile1 },
-  { id: 2, src: Profile2 },
-  { id: 3, src: Profile3 },
-  { id: 4, src: Profile4 },
-  { id: 5, src: Profile5 },
-  { id: 6, src: Profile6 },
-  { id: 7, src: Profile7 },
-  { id: 8, src: Profile8 },
+  { id: 1, src: '/Dinesh-Poudel_Profile1.jpg', indexable: true, name: 'Profile1' },
+  { id: 2, src: '/Dinesh-Poudel_Profile2.jpg', indexable: true, name: 'Profile2' },
+  { id: 3, src: '/Profile3.jpg', indexable: false, name: 'Profile3' },
+  { id: 4, src: '/Profile4.jpg', indexable: false, name: 'Profile4' },
+  { id: 5, src: '/Profile5.jpg', indexable: false, name: 'Profile5' },
+  { id: 6, src: '/Profile6.jpg', indexable: false, name: 'Profile6' },
+  { id: 7, src: '/Profile7.jpg', indexable: false, name: 'Profile7' },
+  { id: 8, src: '/Profile8.jpg', indexable: false, name: 'Profile8' },
 ]
 
 // Typewriter Effect Component
@@ -345,43 +337,35 @@ export default function Hero() {
   const [isReverse, setIsReverse] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
 
-  // Schedule next slide using timeout
   const scheduleNext = () => {
     clearTimeout(timeoutRef.current)
     let delay
 
-    // If we're in reverse and at index 0, show it for 4 seconds
     if (isReverse && currentImageIndex === 0) {
       delay = 4000
     } else {
-      // Otherwise use normal timing (0.2s reverse, 4s forward)
       delay = isReverse ? 200 : 4000
     }
 
     timeoutRef.current = setTimeout(() => {
       setIsTransitioning(true)
       setCurrentImageIndex((prevIndex) => {
-        // If going forward and reached the end, start moving backward
         if (!isReverse && prevIndex >= profileImages.length - 1) {
           setIsReverse(true)
           return prevIndex - 1
         }
-        // If going backward and reached the start, start moving forward
         if (isReverse && prevIndex <= 0) {
           setIsReverse(false)
           return prevIndex + 1
         }
-        // Otherwise continue in current direction
         return isReverse ? prevIndex - 1 : prevIndex + 1
       })
 
-      // Reset transition state after animation completes
       setTimeout(() => setIsTransitioning(false), isReverse ? 200 : 1000)
     }, delay)
   }
 
   useEffect(() => {
-    // Start the automatic sliding
     scheduleNext()
     return () => {
       clearTimeout(timeoutRef.current)
@@ -390,7 +374,6 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    // Continue sliding in current direction
     scheduleNext()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentImageIndex, isReverse])
@@ -488,9 +471,9 @@ export default function Hero() {
                     key={idx}
                     src={img.src}
                     alt={
-                      idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
-                        idx === 1 ? "Dinesh Poudel - Aspiring Full Stack Developer" :
-                          ""
+                      img.indexable && idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
+                      img.indexable && idx === 1 ? "Dinesh Poudel - Aspiring Full Stack Developer" :
+                      "" // Empty alt for non-indexable decorative images
                     }
                     className="object-cover h-full flex-none select-none pointer-events-none"
                     style={{
@@ -501,15 +484,22 @@ export default function Hero() {
                     }}
                     draggable={false}
                     decoding="async"
-                    loading={idx === 0 ? "eager" : "lazy"}
-                    fetchPriority={idx === 0 ? "high" : "auto"}
-                    itemProp={(idx === 0 || idx === 1) ? "image" : undefined}
-                    itemScope={(idx === 0 || idx === 1) ? true : undefined}
-                    itemType={(idx === 0 || idx === 1) ? "https://schema.org/ImageObject" : undefined}
-                    data-noindex={idx >= 2 ? "true" : undefined}
+                    loading={img.indexable ? "eager" : "lazy"}
+                    fetchPriority={img.indexable ? "high" : "low"}
+                    // Only add structured data attributes for indexable images
+                    {...(img.indexable && {
+                      itemProp: "image",
+                      itemScope: true,
+                      itemType: "https://schema.org/ImageObject"
+                    })}
+                    // Mark non-indexable images explicitly
+                    {...(!img.indexable && {
+                      'data-noindex': 'true',
+                      'role': 'presentation' // Indicates decorative image
+                    })}
                     onError={(e) => {
                       e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
-                      console.log('Profile image failed to load')
+                      console.log(`Profile image ${img.name} failed to load`)
                     }}
                   />
                 ))}
