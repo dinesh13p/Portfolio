@@ -490,7 +490,7 @@ export default function Hero() {
                     alt={
                       idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
                         idx === 1 ? "Dinesh Poudel - Aspiring Full Stack Developer" :
-                          "Portfolio Showcase Image - Frontend Development Project"
+                          ""
                     }
                     className="object-cover h-full flex-none select-none pointer-events-none"
                     style={{
@@ -501,11 +501,12 @@ export default function Hero() {
                     }}
                     draggable={false}
                     decoding="async"
-                    loading="eager"
-                    fetchPriority="high"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    fetchPriority={idx === 0 ? "high" : "auto"}
                     itemProp={(idx === 0 || idx === 1) ? "image" : undefined}
                     itemScope={(idx === 0 || idx === 1) ? true : undefined}
                     itemType={(idx === 0 || idx === 1) ? "https://schema.org/ImageObject" : undefined}
+                    data-noindex={idx >= 2 ? "true" : undefined}
                     onError={(e) => {
                       e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAKICAGPC9zdmc='
                       console.log('Profile image failed to load')
