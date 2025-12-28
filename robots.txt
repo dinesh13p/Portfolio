@@ -1,56 +1,13 @@
 # Robots.txt for Dinesh Poudel Portfolio
-# Allow all search engines including Google Image Search to crawl the site
+# dinesh-poudel.com.np
 
-# General Search Engines
+# General Search Engines - Allow everything except slider images
 User-agent: *
 Allow: /
-Disallow: /node_modules
-Disallow: /.git
-Disallow: /dist
-
-# Google-specific crawling rules
-User-agent: Googlebot
-Allow: /
-Allow: /*.jpg
-Allow: /*.jpeg
-Allow: /*.png
-Crawl-delay: 0
-
-# Google Images crawler
-User-agent: Googlebot-Image
-Allow: /
-Allow: *.jpg
-Allow: *.jpeg
-Allow: *.png
-
-# Bing crawler
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Sitemap location - helps search engines discover all pages and images
-Sitemap: https://dinesh-poudel.com.np/sitemap.xml
-
-# Crawl-delay for general bots (prevents server overload)
-Crawl-delay: 1
-
-# Request-rate (pages per second)
-Request-rate: 10/1s
-
-# Priority pages
-Allow: /Home
-Allow: /About
-Allow: /Showcase
-Allow: /Showcase/Projects
-Allow: /Showcase/Achievements
-Allow: /Resume
-Allow: /Contact
-
-# Image files - explicitly allow specific profile images for search engines
-Allow: /Dinesh-Poudel_Profile1.jpg
-Allow: /Dinesh-Poudel_Profile2.jpg
-
-# Disallow other profile images (Profile3-8) from being indexed
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+# Block Profile3-8 (slider images only, not the main profile images)
 Disallow: /Profile3.jpg
 Disallow: /Profile4.jpg
 Disallow: /Profile5.jpg
@@ -58,7 +15,44 @@ Disallow: /Profile6.jpg
 Disallow: /Profile7.jpg
 Disallow: /Profile8.jpg
 
-# Allow other images
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.webp$
+# Google Images - STRICT: Only allow the two main profile images
+User-agent: Googlebot-Image
+# ALLOW only these two images
+Allow: /Dinesh-Poudel_Profile1.jpg$
+Allow: /Dinesh-Poudel_Profile2.jpg$
+# DISALLOW all slider images (Profile3-8)
+Disallow: /Profile3.jpg
+Disallow: /Profile4.jpg
+Disallow: /Profile5.jpg
+Disallow: /Profile6.jpg
+Disallow: /Profile7.jpg
+Disallow: /Profile8.jpg
+
+# Google Web Crawler - Allow pages but block slider images
+User-agent: Googlebot
+Allow: /
+Allow: /Dinesh-Poudel_Profile1.jpg
+Allow: /Dinesh-Poudel_Profile2.jpg
+Disallow: /Profile3.jpg
+Disallow: /Profile4.jpg
+Disallow: /Profile5.jpg
+Disallow: /Profile6.jpg
+Disallow: /Profile7.jpg
+Disallow: /Profile8.jpg
+
+# Bing crawler
+User-agent: Bingbot
+Allow: /
+Disallow: /Profile3.jpg
+Disallow: /Profile4.jpg
+Disallow: /Profile5.jpg
+Disallow: /Profile6.jpg
+Disallow: /Profile7.jpg
+Disallow: /Profile8.jpg
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://dinesh-poudel.com.np/sitemap.xml
+
+# General crawl settings
+Crawl-delay: 1
