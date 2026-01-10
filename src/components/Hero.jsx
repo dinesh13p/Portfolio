@@ -13,7 +13,6 @@ const profileImages = [
   { id: 5, src: '/Profile5.jpg', indexable: false, name: 'Profile5' },
   { id: 6, src: '/Profile6.jpg', indexable: false, name: 'Profile6' },
   { id: 7, src: '/Profile7.jpg', indexable: false, name: 'Profile7' },
-  { id: 8, src: '/Profile8.jpg', indexable: false, name: 'Profile8' },
 ]
 
 // Typewriter Effect Component
@@ -25,9 +24,9 @@ const TypewriterText = () => {
 
   const texts = [
     'Student',
-    'Front-end Developer',
-    'Aspiring Full Stack Developer',
-    'IoT & Robotics Enthusiast',
+    'Frontend developer',
+    'Aspiring Full Stack developer',
+    'IoT & Robotics enthusiast',
   ]
 
   useEffect(() => {
@@ -382,7 +381,7 @@ export default function Hero() {
     <>
       <Helmet>
         <title>Dinesh Poudel</title>
-        <meta name="description" content="Hi, I'm Dinesh Poudel - Frontend Developer and Aspiring Full Stack Developer from Nepal. View my projects, skills, achievements, and experience." />
+        <meta name="description" content="Hi, I'm Dinesh Poudel - Frontend Developer and Aspiring Full Stack Developer from Nepal. View my projects, skills, achievements, experience, and more." />
         <meta property="og:title" content="Dinesh Poudel - Portfolio" />
         <meta property="og:description" content="Frontend Developer and Aspiring Full Stack Developer from Nepal. Specializing in React.js, JavaScript, Java, SpringBoot, MySQL, PostgreSQL, and modern web development." />
         <link rel="canonical" href="https://dinesh-poudel.com.np/" />
@@ -471,8 +470,8 @@ export default function Hero() {
                     key={idx}
                     src={img.src}
                     alt={
-                      img.indexable && idx === 0 ? "Dinesh Poudel - Frontend Developer from Nepal" :
-                      img.indexable && idx === 1 ? "Dinesh Poudel - Aspiring Full Stack Developer" :
+                      img.indexable && idx === 0 ? "Dinesh Poudel - Aspiring Full Stack Developer from Nepal" :
+                      img.indexable && idx === 1 ? "Dinesh Poudel - Frontend Developer from Nepal" :
                       "" // Empty alt for non-indexable decorative images
                     }
                     className="object-cover h-full flex-none select-none pointer-events-none"

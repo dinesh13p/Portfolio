@@ -46,6 +46,9 @@ export default function Header() {
     if (path === '/Home') {
       return location.pathname === '/Home' || location.pathname === '/'
     }
+    if (path === '/Showcase') {
+      return location.pathname.startsWith('/Showcase')
+    }
     return location.pathname === path
   }
 

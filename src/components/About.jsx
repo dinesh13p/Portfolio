@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaGit, FaCloudflare } from 'react-icons/fa'
+import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaGit, FaCloudflare, FaDocker } from 'react-icons/fa'
 import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiPhp, SiMysql, SiPostgresql } from 'react-icons/si'
 
 const skillCategories = [
@@ -52,6 +52,25 @@ const skillCategories = [
     ]
   },
   {
+    category: 'Programming Language',
+    skills: [
+      {
+        name: 'C',
+        icon: <SiC />,
+        color: 'from-blue-600 to-blue-700',
+        borderColor: 'border-blue-600/30',
+        iconColor: 'text-blue-600'
+      },
+      {
+        name: 'Java',
+        icon: <FaJava />,
+        color: 'from-red-500 to-red-600',
+        borderColor: 'border-red-500/30',
+        iconColor: 'text-red-500'
+      }
+    ]
+  },
+  {
     category: 'Backend',
     skills: [
       {
@@ -90,25 +109,6 @@ const skillCategories = [
     ]
   },
   {
-    category: 'Programming Languages',
-    skills: [
-      {
-        name: 'C',
-        icon: <SiC />,
-        color: 'from-blue-600 to-blue-700',
-        borderColor: 'border-blue-600/30',
-        iconColor: 'text-blue-600'
-      },
-      {
-        name: 'Java',
-        icon: <FaJava />,
-        color: 'from-red-500 to-red-600',
-        borderColor: 'border-red-500/30',
-        iconColor: 'text-red-500'
-      }
-    ]
-  },
-  {
     category: 'Tools',
     skills: [
       {
@@ -131,6 +131,13 @@ const skillCategories = [
         color: 'from-orange-500 to-orange-600',
         borderColor: 'border-orange-500/30',
         iconColor: 'text-orange-500'
+      },
+      {
+        name: 'Docker',
+        icon: <FaDocker />,
+        color: 'from-sky-400 to-sky-500',
+        borderColor: 'border-sky-400/30',
+        iconColor: 'text-sky-400'
       }
     ]
   }

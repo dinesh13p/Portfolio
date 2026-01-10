@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaInstagram, FaTwitter, FaFacebook } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa'
 import { SiX } from 'react-icons/si'
 
 export default function Footer(){

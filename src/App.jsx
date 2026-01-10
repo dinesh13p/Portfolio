@@ -6,14 +6,12 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import NotFound from './components/NotFound'
 
-// Lazy load route components to reduce initial bundle size
 const Hero = React.lazy(() => import('./components/Hero'))
 const About = React.lazy(() => import('./components/About'))
 const Showcase = React.lazy(() => import('./components/Showcase'))
 const Resume = React.lazy(() => import('./components/Resume'))
 const Contact = React.lazy(() => import('./components/Contact'))
 
-// Loading fallback component
 const LoadingFallback = () => (
   <div className="flex items-center justify-center h-full">
     <motion.div
@@ -24,6 +22,13 @@ const LoadingFallback = () => (
   </div>
 )
 
+const pageTransition = {
+  initial: { opacity: 0, x: 12 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -12 },
+  transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] }
+}
+
 function AppContent() {
   const location = useLocation()
 
@@ -32,20 +37,20 @@ function AppContent() {
       <Header />
 
       <main className="flex-1 lg:ml-80 lg:overflow-hidden">
-        <Suspense fallback={<LoadingFallback />}>
-          <div className="lg:hidden h-screen flex flex-col overflow-hidden" style={{
-            paddingTop: 'clamp(64px, 15vh, 80px)',
-            paddingBottom: 'clamp(64px, 12vh, 80px)'
-          }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="h-full"
-              >
+        <div className="lg:hidden h-screen flex flex-col overflow-hidden" style={{
+          paddingTop: 'clamp(64px, 15vh, 80px)',
+          paddingBottom: 'clamp(64px, 12vh, 80px)'
+        }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={pageTransition.initial}
+              animate={pageTransition.animate}
+              exit={pageTransition.exit}
+              transition={pageTransition.transition}
+              className="h-full page-transition"
+            >
+              <Suspense fallback={<LoadingFallback />}>
                 <Routes location={location}>
                   <Route path="/Home" element={<Hero />} />
                   <Route path="/About" element={<About />} />
@@ -57,26 +62,28 @@ function AppContent() {
                   <Route path="/" element={<Hero />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </motion.div>
-            </AnimatePresence>
+              </Suspense>
+            </motion.div>
+          </AnimatePresence>
 
-            <Footer />
-          </div>
+          <Footer />
+        </div>
 
-          <div className="hidden lg:block h-screen overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="h-full"
-                style={{
-                  paddingTop: 'clamp(16px, 4vh, 32px)',
-                  paddingBottom: 'clamp(16px, 4vh, 32px)'
-                }}
-              >
+        <div className="hidden lg:block h-screen overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={pageTransition.initial}
+              animate={pageTransition.animate}
+              exit={pageTransition.exit}
+              transition={pageTransition.transition}
+              className="h-full page-transition"
+              style={{
+                paddingTop: 'clamp(16px, 4vh, 32px)',
+                paddingBottom: 'clamp(16px, 4vh, 32px)'
+              }}
+            >
+              <Suspense fallback={<LoadingFallback />}>
                 <Routes location={location}>
                   <Route path="/Home" element={<Hero />} />
                   <Route path="/About" element={<About />} />
@@ -88,10 +95,10 @@ function AppContent() {
                   <Route path="/" element={<Hero />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </Suspense>
+              </Suspense>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </main>
     </div>
   )

@@ -45,7 +45,7 @@ export default function Showcase() {
                   setActiveTab('Projects')
                   navigate('/Showcase/Projects')
                 }}
-                className={`text-2xl sm:text-3xl font-bold cursor-pointer transition-all ${activeTab === 'Projects' ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+                className={`text-2xl sm:text-3xl font-bold cursor-pointer transition-all ${activeTab === 'Projects' ? 'bg-gradient-to-r from-brand/20 to-brand-dark/20 text-brand border border-brand/30 shadow-lg px-4 py-2 rounded-lg' : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 Projects
@@ -61,7 +61,7 @@ export default function Showcase() {
                   setActiveTab('Achievements')
                   navigate('/Showcase/Achievements')
                 }}
-                className={`text-2xl sm:text-3xl font-bold cursor-pointer transition-all ${activeTab === 'Achievements' ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+                className={`text-2xl sm:text-3xl font-bold cursor-pointer transition-all ${activeTab === 'Achievements' ? 'bg-gradient-to-r from-brand/20 to-brand-dark/20 text-brand border border-brand/30 shadow-lg px-4 py-2 rounded-lg' : 'text-gray-500 hover:text-gray-300'
                   }`}
               >
                 Achievements
