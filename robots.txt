@@ -13,7 +13,6 @@ Disallow: /Profile4.jpg
 Disallow: /Profile5.jpg
 Disallow: /Profile6.jpg
 Disallow: /Profile7.jpg
-Disallow: /Profile8.jpg
 
 # Google Images - STRICT: Only allow the two main profile images
 User-agent: Googlebot-Image
@@ -26,7 +25,6 @@ Disallow: /Profile4.jpg
 Disallow: /Profile5.jpg
 Disallow: /Profile6.jpg
 Disallow: /Profile7.jpg
-Disallow: /Profile8.jpg
 
 # Google Web Crawler - Allow pages but block slider images
 User-agent: Googlebot
@@ -38,7 +36,6 @@ Disallow: /Profile4.jpg
 Disallow: /Profile5.jpg
 Disallow: /Profile6.jpg
 Disallow: /Profile7.jpg
-Disallow: /Profile8.jpg
 
 # Bing crawler
 User-agent: Bingbot
@@ -48,7 +45,6 @@ Disallow: /Profile4.jpg
 Disallow: /Profile5.jpg
 Disallow: /Profile6.jpg
 Disallow: /Profile7.jpg
-Disallow: /Profile8.jpg
 Crawl-delay: 1
 
 # Sitemap location
