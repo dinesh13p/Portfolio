@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HelmetProvider } from 'react-helmet-async'
 import Header from './components/Header'
@@ -8,6 +8,7 @@ import NotFound from './components/NotFound'
 
 const Hero = React.lazy(() => import('./components/Hero'))
 const About = React.lazy(() => import('./components/About'))
+const Projects = React.lazy(() => import('./components/Projects'))
 const Showcase = React.lazy(() => import('./components/Showcase'))
 const Resume = React.lazy(() => import('./components/Resume'))
 const Contact = React.lazy(() => import('./components/Contact'))
@@ -31,6 +32,34 @@ const pageTransition = {
 
 function AppContent() {
   const location = useLocation()
+  const navigate = useNavigate()
+
+  function SwipeWrapper({ children, onSwipeLeft, onSwipeRight }) {
+    const touchStartX = React.useRef(null)
+
+    const handleTouchStart = (e) => {
+      touchStartX.current = e.touches[0].clientX
+    }
+
+    const handleTouchEnd = (e) => {
+      if (touchStartX.current == null) return
+      const endX = e.changedTouches[0].clientX
+      const diff = touchStartX.current - endX
+      const threshold = 50
+      if (diff > threshold && typeof onSwipeLeft === 'function') {
+        onSwipeLeft()
+      } else if (diff < -threshold && typeof onSwipeRight === 'function') {
+        onSwipeRight()
+      }
+      touchStartX.current = null
+    }
+
+    return (
+      <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} className="h-full">
+        {children}
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen flex bg-site-dark text-site-light">
@@ -55,8 +84,17 @@ function AppContent() {
                   <Route path="/Home" element={<Hero />} />
                   <Route path="/About" element={<About />} />
                   <Route path="/Showcase" element={<Showcase />} />
-                  <Route path="/Showcase/Projects" element={<Showcase />} />
-                  <Route path="/Showcase/Achievements" element={<Showcase />} />
+                  <Route
+                    path="/Projects"
+                    element={
+                      <SwipeWrapper
+                        onSwipeLeft={() => navigate('/Showcase')}
+                        onSwipeRight={() => navigate('/About')}
+                      >
+                        <Projects />
+                      </SwipeWrapper>
+                    }
+                  />
                   <Route path="/Resume" element={<Resume />} />
                   <Route path="/Contact" element={<Contact />} />
                   <Route path="/" element={<Hero />} />
@@ -88,8 +126,17 @@ function AppContent() {
                   <Route path="/Home" element={<Hero />} />
                   <Route path="/About" element={<About />} />
                   <Route path="/Showcase" element={<Showcase />} />
-                  <Route path="/Showcase/Projects" element={<Showcase />} />
-                  <Route path="/Showcase/Achievements" element={<Showcase />} />
+                  <Route
+                    path="/Projects"
+                    element={
+                      <SwipeWrapper
+                        onSwipeLeft={() => navigate('/Showcase')}
+                        onSwipeRight={() => navigate('/About')}
+                      >
+                        <Projects />
+                      </SwipeWrapper>
+                    }
+                  />
                   <Route path="/Resume" element={<Resume />} />
                   <Route path="/Contact" element={<Contact />} />
                   <Route path="/" element={<Hero />} />

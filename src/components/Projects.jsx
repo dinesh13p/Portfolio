@@ -22,53 +22,29 @@ const MOCK = [
     {
         id: 'proj-3',
         title: '4th semester project',
-        desc: '4th Semester Project --> Development in Progress.',
-        tech: ['Java', 'Spring Boot', 'Thymeleaf', 'pgAdmin4'],
-        github: null,
+        desc: '4th Semester Project. Fully Complete Blood Donation Platform. Contact for more info.',
+        tech: ['Java', 'Spring Boot', 'Thymeleaf', 'Postgresql'],
+        github: 'https://github.com/dinesh13p/BloodDonationPlatform',
         live: null
     },
     {
         id: 'proj-4',
         title: 'ERP - Campus Management System',
-        desc: 'Academics related personal project. Contact for more info.',
-        tech: ['Java', 'Spring Boot', 'pgAdmin4'],
+        desc: 'Backend only. Contact for more info.',
+        tech: ['Java', 'Spring Boot', 'Postgresql'],
         github: null,
         live: null
     },
     {
         id: 'proj-5',
-        title: 'Portfolio_Website->Sandhya',
-        desc: 'Portfolio website of Sandhya Paudel, built with React.js and Tailwind CSS with responsive design. Helped in designing. Developed entirely by myself.',
-        tech: ['React.js', 'Tailwind', 'css'],
-        github: 'https://www.paudel-sandhya.com.np',
-        live: 'https://paudelsandhya.github.io/Portfolio/'
+        title: 'Cooperative organization management system',
+        desc: 'Project for managing cooperative organizations. Developmet in Progress.',
+        tech: ['Java', 'SpringBoot', 'React', 'Postgresql'],
+        github: null,
+        live: null
     },
     {
         id: 'proj-6',
-        title: 'Portfolio_Website->Sunil',
-        desc: 'Portfolio website of Sunil Bhattarai, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-        tech: ['React.js', 'Tailwind', 'css'],
-        github: 'https://github.com/Sunil5566/Portfolio',
-        live: 'https://sunil5566.github.io/Portfolio/'
-    },
-    {
-        id: 'proj-7',
-        title: 'Portfolio_Website->Bishal',
-        desc: 'Portfolio website of Bishal Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-        tech: ['React.js', 'Tailwind', 'css'],
-        github: 'https://github.com/bixal127/Portfolio',
-        live: 'https://bixal127.github.io/Portfolio/'
-    },
-    {
-        id: 'proj-8',
-        title: 'Portfolio_Website->Niraj',
-        desc: 'Portfolio website of Niraj Lamichhane, built with React.js and Tailwind CSS with responsive design. Helped in designing, building, hosting & deploying the website.',
-        tech: ['React.js', 'Tailwind', 'css'],
-        github: 'https://github.com/NirajBaniya/Website',
-        live: 'https://www.nirajbaniya.com.np/'
-    },
-    {
-        id: 'proj-9',
         title: 'IoT & Robotics Projects',
         desc: 'Remote controlled car (Bluetooth Arduino) | Remote controlled car (ESP) | Smart Dustbin.',
         tech: ['IoT', 'Arduino IDE'],
@@ -76,7 +52,7 @@ const MOCK = [
         live: null
     },
     {
-        id: 'proj-10',
+        id: 'proj-7',
         title: 'Marvel Copy Website',
         desc: 'Copy website of Marvel Entertainment. Made as the training project in first semester, built with html, css and bootstrap.',
         tech: ['HTML', 'CSS', 'Bootstrap'],
@@ -93,12 +69,9 @@ function ProjectCard({ project: p, index }) {
             'proj-2': '/Projects/Personal_Project.jpg',
             'proj-3': '/Projects/4th_Sem_Project.jpg',
             'proj-4': '/Projects/School_Management_System.jpg',
-            'proj-5': '/Projects/Portfolio_Sandhya.jpg',
-            'proj-6': '/Projects/Portfolio_Sunil.jpg',
-            'proj-7': '/Projects/Portfolio_Bishal.jpg',
-            'proj-8': '/Projects/Portfolio_Niraj.jpg',
-            'proj-9': '/Projects/IoT_&_Robotics.jpg',
-            'proj-10': '/Projects/Marvel_Copy_Website.jpg',
+            'proj-5': null,
+            'proj-6': '/Projects/IoT_&_Robotics.jpg',
+            'proj-7': '/Projects/Marvel_Copy_Website.jpg',
         }
         return imageMap[p.id] || undefined
     }
@@ -219,46 +192,47 @@ function ProjectCard({ project: p, index }) {
 }
 
 export default function Projects() {
-    const [filter, setFilter] = useState('All')
-    const tags = ['All', 'Web', 'WorkBench', 'Academics', 'Others']
+    const [filter, setFilter] = useState('Workbench')
+    const tags = ['Workbench', 'Academics', 'Web', 'Others']
 
     const filtered = MOCK.filter((p) => {
         if (p.id === 'proj-1') {
-            return filter === 'All' || filter === 'Web';
+            return filter === 'Web';
         }
         if (p.id === 'proj-2') {
-            return filter === 'All' || filter === 'WorkBench';
+            return filter === 'Workbench' || filter === 'Web';
         }
         if (p.id === 'proj-3') {
-            return filter === 'All' || filter === 'Academics' || filter === 'WorkBench';
+            return filter === 'Academics' || filter === 'Workbench';
         }
         if (p.id === 'proj-4') {
-            return filter === 'All' || filter === 'WorkBench';
+            return filter === 'Workbench';
         }
         if (p.id === 'proj-5') {
-            return filter === 'All' || filter === 'Web';
+            return filter === 'Workbench';
         }
         if (p.id === 'proj-6') {
-            return filter === 'All' || filter === 'Web';
+            return filter === 'Workbench' || filter === 'Others';
         }
         if (p.id === 'proj-7') {
-            return filter === 'All' || filter === 'Web';
+            return filter === 'Web' || filter === 'Academics';
         }
-        if (p.id === 'proj-8') {
-            return filter === 'All' || filter === 'Web';
-        }
-        if (p.id === 'proj-9') {
-            return filter === 'All' || filter === 'Others';
-        }
-        if (p.id === 'proj-10') {
-            return filter === 'All' || filter === 'Web' || filter === 'Academics';
-        }
-        if (filter === 'All') return true;
-        return p.tech && p.tech.some(tech => tech.includes(filter));
     })
 
     return (
-        <>
+        <div
+            className="h-full overflow-y-auto"
+            style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}
+        >
+            <motion.h3
+                className="text-2xl sm:text-3xl font-bold text-white mt-4 sm:mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+            >
+                Some of my featured Projects
+            </motion.h3>
+
             <motion.div
                 className="mt-3 sm:mt-4 flex gap-2 items-center flex-wrap"
                 initial={{ opacity: 0, y: 20 }}
@@ -294,6 +268,6 @@ export default function Projects() {
                     <ProjectCard key={`${p.id}-${filter}`} project={p} index={index} />
                 ))}
             </div>
-        </>
+        </div>
     )
 }

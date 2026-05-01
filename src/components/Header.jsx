@@ -12,10 +12,10 @@ import { SiX } from 'react-icons/si'
 const NAV = [
   { id: 'home', label: 'Home', icon: <FaHome />, path: '/Home' },
   { id: 'about', label: 'About', icon: <FaUser />, path: '/About' },
-  { id: 'showcase', label: 'Showcase', icon: <FaProjectDiagram />, path: '/Showcase' },
+  { id: 'projects', label: 'Projects', icon: <FaProjectDiagram />, path: '/Projects' },
+  { id: 'showcase', label: 'Showcase', icon: <FaGlobe />, path: '/Showcase' },
   { id: 'resume', label: 'Resume', icon: <FaFileAlt />, path: '/Resume' },
   { id: 'contact', label: 'Contact', icon: <FaEnvelope />, path: '/Contact' },
-  // { id: 'portal', label: 'Portal', icon: <FaGlobe />, path: '/Portal' }
 ]
 
 const socialLinks = [

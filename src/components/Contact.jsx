@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'   // import EmailJS
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', honeypot: '' })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -21,16 +21,34 @@ export default function Contact() {
       return
     }
 
-    // Only allow verified Gmail addresses
-    const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-    if (!gmailRegex.test(form.email)) {
-      setError('Email or username not verified')
+    // Honeypot: if filled, treat as bot and stop
+    if (form.honeypot) return
+
+    // Broad email format validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(form.email)) {
+      setError('Please enter a valid email address')
       return
     }
 
     setLoading(true)
     setError('')
     setSent(false)
+
+    // Rate limiting: max 3 submissions per 10 minutes per browser
+    try {
+      const raw = localStorage.getItem('contact_submissions') || '[]'
+      const submissions = JSON.parse(raw)
+      const tenMinutes = 10 * 60 * 1000
+      const recent = submissions.filter(ts => Date.now() - ts < tenMinutes)
+      if (recent.length >= 3) {
+        setError('Too many messages sent. Please wait a few minutes before trying again.')
+        setLoading(false)
+        return
+      }
+    } catch (err) {
+      // If localStorage is not available or parse fails, proceed without blocking
+    }
 
     emailjs.send(
       'service_hq74kgj',
@@ -45,7 +63,18 @@ export default function Contact() {
     )
       .then(() => {
         setSent(true)
-        setForm({ name: '', email: '', subject: '', message: '' })
+        setForm({ name: '', email: '', subject: '', message: '', honeypot: '' })
+        // Record submission timestamp for rate limiting
+        try {
+          const raw = localStorage.getItem('contact_submissions') || '[]'
+          const submissions = JSON.parse(raw)
+          const tenMinutes = 10 * 60 * 1000
+          const recent = submissions.filter(ts => Date.now() - ts < tenMinutes)
+          recent.push(Date.now())
+          localStorage.setItem('contact_submissions', JSON.stringify(recent))
+        } catch (err) {
+          // ignore localStorage errors
+        }
       })
       .catch(() => {
         setError('Could not send message. Please try again later.')
@@ -114,6 +143,15 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             whileFocus={{ scale: 1.02, y: -2 }}
+          />
+          <input
+            name="honeypot"
+            value={form.honeypot}
+            onChange={handleChange}
+            style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
           />
           <motion.input 
             required 

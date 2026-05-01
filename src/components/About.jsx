@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaHtml5, FaCss3Alt, FaReact, FaJsSquare, FaJava, FaGit, FaCloudflare, FaDocker } from 'react-icons/fa'
-import { SiC, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiPhp, SiMysql, SiPostgresql } from 'react-icons/si'
+import { SiC, SiCsharp, SiDotnet, SiTailwindcss, SiSpringboot, SiBootstrap, SiGithub, SiPhp, SiMysql, SiPostgresql } from 'react-icons/si'
 
 const skillCategories = [
   {
@@ -67,6 +67,13 @@ const skillCategories = [
         color: 'from-red-500 to-red-600',
         borderColor: 'border-red-500/30',
         iconColor: 'text-red-500'
+      },
+      {
+        name: 'C#',
+        icon: <SiCsharp />,
+        color: 'from-green-500 to-green-600',
+        borderColor: 'border-green-500/30',
+        iconColor: 'text-green-500'
       }
     ]
   },
@@ -86,6 +93,13 @@ const skillCategories = [
         color: 'from-blue-500 to-blue-600',
         borderColor: 'border-blue-500/30',
         iconColor: 'text-blue-500'
+      },
+      {
+        name: '.net',
+        icon: <SiDotnet />,
+        color: 'from-gray-500 to-gray-600',
+        borderColor: 'border-gray-500/30',
+        iconColor: 'text-gray-500'
       }
     ]
   },

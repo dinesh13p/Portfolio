@@ -13,6 +13,10 @@ const profileImages = [
   { id: 5, src: '/Profile5.jpg', indexable: false, name: 'Profile5' },
   { id: 6, src: '/Profile6.jpg', indexable: false, name: 'Profile6' },
   { id: 7, src: '/Profile7.jpg', indexable: false, name: 'Profile7' },
+  { id: 8, src: '/Profile8.jpg', indexable: false, name: 'Profile8' },
+  { id: 9, src: '/Profile9.jpg', indexable: false, name: 'Profile9' },
+  { id: 10, src: '/Profile10.jpg', indexable: false, name: 'Profile10' },
+  { id: 11, src: '/Profile11.jpg', indexable: false, name: 'Profile11' },
 ]
 
 // Typewriter Effect Component
@@ -424,7 +428,7 @@ export default function Hero() {
               className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start max-w-md mx-auto md:mx-0"
             >
               <motion.button
-                onClick={() => navigate('/Showcase')}
+                onClick={() => navigate('/Projects')}
                 className="px-5 py-3 rounded-full btn-primary text-white font-semibold text-base md:text-base whitespace-nowrap"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
