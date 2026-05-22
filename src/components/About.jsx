@@ -195,7 +195,8 @@ export default function About() {
               I'm a web developer focused on building responsive applications with <strong className="text-white">React</strong> and modern tools. Currently exploring backend development and system design, working primarily with <strong className="text-white">Java</strong> and <strong className="text-white">Spring Boot</strong>.
             </p>
             <p>
-              I've built front-end interfaces, backend systems with REST APIs, and experimented with IoT and Robotics projects. I enjoy solving problems across the stack and continuously learning new technologies.            </p>
+              I've built front-end interfaces, backend systems with REST APIs, and experimented with IoT and Robotics projects. I enjoy solving problems across the stack and continuously learning new technologies. Visit my socials to know more about me.
+            </p>
           </motion.div>
 
           <motion.div

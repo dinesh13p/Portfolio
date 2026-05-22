@@ -223,7 +223,7 @@ const CERTIFICATES = [
         type: 'IoT & Robotics Competition',
         description: 'Participation in Robo Soccer competition by Nepathya College IoT & Robotics Union (Certificate lost – verification through college event records).',
         category: 'Others',
-        image: null,
+        image: '/Achievements/robo-soccer.jpg',
         verify: null,
         lost: true
     }

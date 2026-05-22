@@ -13,7 +13,7 @@ const profileImages = [
   { id: 5, src: '/Profile5.jpg', indexable: false, name: 'Profile5' },
   { id: 6, src: '/Profile6.jpg', indexable: false, name: 'Profile6' },
   { id: 7, src: '/Profile7.jpg', indexable: false, name: 'Profile7' },
-  { id: 8, src: '/Profile8.jpg', indexable: false, name: 'Profile8' },
+  // { id: 8, src: '/Profile8.jpg', indexable: false, name: 'Profile8' },
   { id: 9, src: '/Profile9.jpg', indexable: false, name: 'Profile9' },
   { id: 10, src: '/Profile10.jpg', indexable: false, name: 'Profile10' },
   { id: 11, src: '/Profile11.jpg', indexable: false, name: 'Profile11' },

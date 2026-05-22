@@ -40,7 +40,7 @@ const MOCK = [
         title: 'Cooperative organization management system',
         desc: 'Project for managing cooperative organizations. Developmet in Progress.',
         tech: ['Java', 'SpringBoot', 'React', 'Postgresql'],
-        github: null,
+        github: 'https://github.com/dinesh13p/SpringBoot-React_web-based-system',
         live: null
     },
     {
@@ -58,6 +58,48 @@ const MOCK = [
         tech: ['HTML', 'CSS', 'Bootstrap'],
         github: 'https://github.com/dinesh13p/First-sem_Project',
         live: 'https://dinesh13p.github.io/First-sem_Project/'
+    },
+
+    //The following are the projects that I helped my friends in. I have contributed in building and deploying these projects, but the main credit goes to them.
+    {
+        id: 'proj-8',
+        title: 'Secondary Website of Sandhya Paudel',
+        desc: 'Built using React.js, custom CSS, and Tailwind CSS. Built the entire website after receiving the design.',
+        tech: ['React', 'Tailwind', 'CSS'],
+        github: 'https://github.com/paudelsandhya/Portfolio',
+        live: 'https://paudelsandhya.github.io/Portfolio/'
+    },
+    {
+        id: 'proj-9',
+        title: 'Portfolio Website of Bishal Lamichhane',
+        desc: 'Built using React.js, custom CSS, and Tailwind CSS. Helped to build and deploy.',
+        tech: ['React', 'Tailwind', 'CSS'],
+        github: 'https://github.com/bixal127/Portfolio',
+        live: 'https://bixal127.github.io/Portfolio/'
+    },
+    {
+        id: 'proj-10',
+        title: 'Portfolio Website of Sunil Bhattarai',
+        desc: 'Built using React.js, custom CSS, and Tailwind CSS. Helped to build and deploy.',
+        tech: ['React', 'Tailwind', 'CSS'],
+        github: 'https://github.com/Sunil5566/Portfolio',
+        live: 'https://www.sunilbhattarai556.com.np/'
+    },
+    {
+        id: 'proj-11',
+        title: 'Portfolio Website of Niraj Baniya',
+        desc: 'Built using React.js, custom CSS, and Tailwind CSS. Helped to build and deploy.',
+        tech: ['React', 'Tailwind', 'CSS'],
+        github: 'https://github.com/NirajBaniya/Website',
+        live: 'https://www.nirajbaniya.com.np/'
+    },
+    {
+        id: 'proj-12',
+        title: 'Portfolio Website of Prajwal Sharma',
+        desc: 'Built using React.js, custom CSS, and Tailwind CSS. Helped to build and deploy.',
+        tech: ['React', 'Tailwind', 'CSS'],
+        github: 'https://github.com/prajwalsharmaa/portfolio-website',
+        live: 'https://prajwalsharma.com.np/'
     }
 ]
 
@@ -69,9 +111,15 @@ function ProjectCard({ project: p, index }) {
             'proj-2': '/Projects/Personal_Project.jpg',
             'proj-3': '/Projects/4th_Sem_Project.jpg',
             'proj-4': '/Projects/School_Management_System.jpg',
-            'proj-5': null,
+            'proj-5': '/Projects/Cooperative_organization.jpg',
             'proj-6': '/Projects/IoT_&_Robotics.jpg',
             'proj-7': '/Projects/Marvel_Copy_Website.jpg',
+            // 
+            'proj-8': '/Projects/Others/Sandhya.png',
+            'proj-9': '/Projects/Others/Bishal.png',
+            'proj-10': '/Projects/Others/Sunil.png',
+            'proj-11': '/Projects/Others/Niraj.png',
+            'proj-12': '/Projects/Others/Prajwal.png',
         }
         return imageMap[p.id] || undefined
     }
@@ -216,6 +264,9 @@ export default function Projects() {
         }
         if (p.id === 'proj-7') {
             return filter === 'Web' || filter === 'Academics';
+        }
+        if (p.id === 'proj-8' || p.id === 'proj-9' || p.id === 'proj-10' || p.id === 'proj-11' || p.id === 'proj-12') {
+            return filter === 'Others';
         }
     })
 

@@ -10,8 +10,6 @@
     padding: 1rem;
     overflow: hidden;
     position: relative;
-    /* Background is handled by the main app, or we can override here if needed */
-    /* The main app has bg-site-dark, which is roughly similar to the gradient */
 }
 
 /* Animated background particles */
