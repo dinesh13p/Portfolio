@@ -4,7 +4,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://dinesh-poudel.com.np/</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -21,49 +21,42 @@
     <!-- Home Page -->
     <url>
         <loc>https://dinesh-poudel.com.np/Home</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <!-- About Page -->
     <url>
         <loc>https://dinesh-poudel.com.np/About</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <!-- Projects Page -->
+    <url>
+        <loc>https://dinesh-poudel.com.np/Projects</loc>
+        <lastmod>2026-05-22</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <!-- Showcase Page -->
     <url>
         <loc>https://dinesh-poudel.com.np/Showcase</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-    </url>
-    <!-- Showcase/Projects -->
-    <url>
-        <loc>https://dinesh-poudel.com.np/Showcase/Projects</loc>
-        <lastmod>2025-01-05</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <!-- Showcase/Achievements -->
-    <url>
-        <loc>https://dinesh-poudel.com.np/Showcase/Achievements</loc>
-        <lastmod>2025-01-05</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
     </url>
     <!-- Resume Page -->
     <url>
         <loc>https://dinesh-poudel.com.np/Resume</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <!-- Contact Page -->
     <url>
         <loc>https://dinesh-poudel.com.np/Contact</loc>
-        <lastmod>2025-01-05</lastmod>
+        <lastmod>2026-05-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
